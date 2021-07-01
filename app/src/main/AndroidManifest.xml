@@ -20,7 +20,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.login.MainActivity">
+        <activity android:name=".ui.admin.beranda.MainActivity">
 
         </activity>
     </application>

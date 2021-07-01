@@ -5,14 +5,20 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import coil.ComponentRegistry
+import coil.ImageLoader
+import coil.decode.SvgDecoder
+import coil.imageLoader
+import coil.load
+import coil.request.ImageRequest
 import com.app.eei.R
 import com.app.eei.databinding.ActivitySplashSreenBinding
-import com.app.eei.ui.login.MainActivity
+import com.app.eei.ui.admin.beranda.MainActivity
 import com.app.eei.ui.splashscreen.viewmodel.InfoViewModel
 import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 import es.dmoral.toasty.Toasty
 
 class SplashSreenActivity : AppCompatActivity() {
@@ -35,20 +41,32 @@ class SplashSreenActivity : AppCompatActivity() {
             if (data.size==0){
                 Toasty.error(this, "No Internet Access.", Toast.LENGTH_SHORT, true).show();
             }
+            val imageLoader = ImageLoader.Builder(this)
+                .componentRegistry {
+                    add(SvgDecoder(applicationContext))
+                }
+                .build()
+            val request = ImageRequest.Builder(this)
+                .data(data[0].bgSplash)
+                .crossfade(true)
+                .target( binding.bg)
+                .build()
+            imageLoader.enqueue(request)
+
             Glide.with(this)
                 .load(data[0].icLogo)
                 .into(binding.icLogo)
 
-            Glide.with(this)
-                .load(data[0].bgSplash)
-                .into(binding.bg)
             Handler(Looper.getMainLooper()).postDelayed({ moveActivity() },TIME)
 
         })
     }
+
     private fun moveActivity() {
         startActivity(Intent(this, MainActivity::class.java))
         finish()
     }
 
 }
+
+

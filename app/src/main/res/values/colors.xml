@@ -7,4 +7,7 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="home">#C9379D</color>
+    <color name="akun">#E6A919</color>
+    <color name="setting_app">#5B37B7</color>
 </resources>

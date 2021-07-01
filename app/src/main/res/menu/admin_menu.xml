@@ -1,0 +1,19 @@
+<!-- bottom_menu.xml -->
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/home"
+        android:icon="@drawable/ic_home"
+        android:title="@string/beranda"
+        app:cnb_iconColor="@color/home"/>
+    <item
+        android:id="@+id/settings"
+        android:icon="@drawable/ic_app"
+        android:title="@string/pengaturan_app"
+        app:cnb_iconColor="@color/setting_app"/>
+    <item
+        android:id="@+id/akun"
+        android:icon="@drawable/ic_account"
+        android:title="@string/akun"
+        app:cnb_iconColor="@color/akun" />
+</menu>
