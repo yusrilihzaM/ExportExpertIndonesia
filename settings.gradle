@@ -1,0 +1,2 @@
+rootProject.name = "eei"
+include ':app'

@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "398013500525",
+    "project_id": "eei-project-b77e2",
+    "storage_bucket": "eei-project-b77e2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:398013500525:android:51d0412f88a143fa27c364",
+        "android_client_info": {
+          "package_name": "com.app.eei"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "398013500525-j01966iiatvs007sfns7j6opavqb549i.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.app.eei",
+            "certificate_hash": "2ffc5e88e137e8731436938f1cc10f99f3ebcda6"
+          }
+        },
+        {
+          "client_id": "398013500525-1b5d2jmkh8fjsu9jot1uer7vgq6pb3js.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDq5SYcsSRQYeckH2jyvGgCDwey84Sdsh4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "398013500525-1b5d2jmkh8fjsu9jot1uer7vgq6pb3js.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
