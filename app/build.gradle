@@ -2,6 +2,7 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-parcelize'
+    id 'kotlin-kapt'
     id 'com.google.gms.google-services'
 }
 
@@ -15,6 +16,7 @@ android {
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
+        vectorDrawables.useSupportLibrary = true
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -55,4 +57,13 @@ dependencies {
     implementation 'com.github.ybq:Android-SpinKit:1.4.0'
     implementation 'com.google.firebase:firebase-firestore:23.0.0'
     implementation platform('com.google.firebase:firebase-bom:28.0.1')
+
+    //architecture component
+    implementation "androidx.lifecycle:lifecycle-viewmodel:$archLifecycleVersion"
+    implementation "androidx.room:room-runtime:$roomRuntimeVersion"
+    kapt "androidx.room:room-compiler:$roomVersion"
+    implementation "androidx.paging:paging-runtime:$pagingVersion"
+    implementation 'com.sackcentury:shinebutton:1.0.0'
+    implementation 'com.github.GrenderG:Toasty:1.5.0'
+
 }
