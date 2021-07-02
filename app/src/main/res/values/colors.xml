@@ -10,4 +10,5 @@
     <color name="home">#C9379D</color>
     <color name="akun">#E6A919</color>
     <color name="setting_app">#5B37B7</color>
+    <color name="shimmer_color">#ced6e0</color>
 </resources>

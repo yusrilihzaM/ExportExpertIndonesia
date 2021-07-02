@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    app:cardCornerRadius="@dimen/m_16"
+    android:foreground="?android:attr/selectableItemBackground"
+    android:layout_marginLeft="@dimen/m_4"
+    android:layout_marginRight="@dimen/m_4"
+    android:layout_marginBottom="@dimen/m_8"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+        <androidx.cardview.widget.CardView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_margin="@dimen/m_8"
+            app:cardCornerRadius="@dimen/m_16">
+            <ImageView
+                android:id="@+id/imgNews"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:background="@color/black"
+                android:scaleType="fitXY"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.cardview.widget.CardView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/titleNews"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_medium"
+                android:textSize="14sp"
+                app:autoSizeTextType="uniform"
+                app:autoSizeMinTextSize="12sp"
+                app:autoSizeMaxTextSize="14sp"
+                app:autoSizeStepGranularity="2sp"
+                android:layout_marginLeft="@dimen/m_4"
+                android:layout_marginTop="@dimen/m_12"
+                android:layout_marginRight="@dimen/m_8"
+                android:text="Export Expert Talk #15"
+                android:textColor="@color/black"
+                app:layout_constraintStart_toEndOf="@+id/imgNews"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/contentNews"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginLeft="@dimen/m_4"
+                android:layout_marginRight="@dimen/m_8"
+                android:autoSizeMaxTextSize="10sp"
+                android:autoSizeMinTextSize="10sp"
+                android:fontFamily="@font/poppins_light"
+                android:inputType="textMultiLine"
+                android:scrollHorizontally="false"
+                android:singleLine="false"
+                android:text="But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects"
+                android:textColor="@color/black"
+                app:autoSizeTextType="uniform"
+                app:autoSizeStepGranularity="2sp"
+                app:layout_constraintStart_toEndOf="@+id/imgNews"
+                app:layout_constraintTop_toBottomOf="@+id/titleNews" />
+
+            <TextView
+                android:id="@+id/dateNews"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_light"
+                android:layout_marginLeft="@dimen/m_4"
+                android:layout_marginTop="@dimen/m_4"
+                android:layout_marginRight="@dimen/m_8"
+                android:text="Senin, 12 Juni 2021"
+                android:textColor="@color/black"
+                android:textSize="10sp"
+                app:layout_constraintStart_toEndOf="@+id/imgNews"
+                app:layout_constraintTop_toBottomOf="@+id/contentNews" />
+
+
+
+
+        </LinearLayout>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

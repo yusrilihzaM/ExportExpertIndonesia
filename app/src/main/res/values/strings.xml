@@ -5,4 +5,7 @@
     <string name="beranda">Beranda</string>
     <string name="pengaturan_app">Pengaturan App</string>
     <string name="akun">Akun</string>
+    <string name="ada_berita_baru_untuk_kami">Ada berita baru untuk kamu</string>
+    <string name="selamat_datang">Selamat Datang</string>
+    <string name="cari_berita">Cari berita</string>
 </resources>

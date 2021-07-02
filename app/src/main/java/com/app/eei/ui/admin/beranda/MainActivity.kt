@@ -1,10 +1,9 @@
 package com.app.eei.ui.admin.beranda
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.app.eei.R
-import com.app.eei.adapter.AdminViewPagerAdapter
 import com.app.eei.databinding.ActivityMainBinding
 import com.app.eei.ui.admin.akun.fragment.AdminAkunFragment
 import com.app.eei.ui.admin.beranda.fragment.BerandaFragment
@@ -12,7 +11,6 @@ import com.app.eei.ui.admin.settingapp.fragment.AdminSettingFragment
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
-    private lateinit var viewPagerAdapter: AdminViewPagerAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -20,7 +18,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        viewPagerAdapter=AdminViewPagerAdapter(this)
+
 
         val fragmentManager = supportFragmentManager
         val berandaFragment = BerandaFragment()
@@ -28,7 +26,7 @@ class MainActivity : AppCompatActivity() {
             .beginTransaction()
             .add(R.id.container, berandaFragment)
             .commit()
-
+        binding.bottomNavigation.setItemSelected(R.id.home,true)
         binding.bottomNavigation.setOnItemSelectedListener { id->
             when(id){
                 R.id.home ->{
@@ -40,7 +38,6 @@ class MainActivity : AppCompatActivity() {
                 }
                 R.id.settings->{
                     Toast.makeText(this, getString(R.string.pengaturan_app), Toast.LENGTH_SHORT).show()
-                    viewPagerAdapter.createFragment(1)
                     val adminSettingFragment = AdminSettingFragment()
                     fragmentManager
                         .beginTransaction()
@@ -49,7 +46,6 @@ class MainActivity : AppCompatActivity() {
                 }
                 R.id.akun->{
                     Toast.makeText(this, getString(R.string.akun), Toast.LENGTH_SHORT).show()
-                    viewPagerAdapter.createFragment(2)
                     val adminAkunFragment = AdminAkunFragment()
                     fragmentManager
                         .beginTransaction()
