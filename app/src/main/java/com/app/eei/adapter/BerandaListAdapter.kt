@@ -1,5 +1,6 @@
 package com.app.eei.adapter
 
+import android.text.Html
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -34,7 +35,7 @@ class BerandaListAdapter(private val List: ArrayList<News>): RecyclerView.Adapte
                 }
                 titleNews.text=news.title
                 dateNews.text=news.dateNews
-                contentNews.text=news.contentNews
+                contentNews.text= Html.fromHtml(news.contentNews)
                 itemView.setOnClickListener{
                     onItemClickCallback?.onItemClicked(news)
                 }

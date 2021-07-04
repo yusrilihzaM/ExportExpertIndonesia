@@ -8,4 +8,7 @@
     <string name="ada_berita_baru_untuk_kami">Ada berita baru untuk kamu</string>
     <string name="selamat_datang">Selamat Datang</string>
     <string name="cari_berita">Cari berita</string>
+    <string name="simpan">Simpan</string>
+    <string name="judul_postingan">Judul Postingan</string>
+    <string name="konten">Konten</string>
 </resources>

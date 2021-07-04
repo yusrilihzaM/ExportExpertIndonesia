@@ -1,5 +1,6 @@
 package com.app.eei.ui.admin.beranda.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.KeyEvent
 import android.view.LayoutInflater
@@ -14,7 +15,11 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.app.eei.R
 import com.app.eei.adapter.BerandaListAdapter
 import com.app.eei.databinding.FragmentBerandaBinding
+import com.app.eei.entity.News
+import com.app.eei.ui.admin.addform.AdminAddActivity
 import com.app.eei.ui.admin.beranda.viewmodel.NewsViewModel
+import com.app.eei.ui.admin.detail.AdminDetailActivity
+import com.app.eei.ui.admin.detail.AdminDetailActivity.Companion.EXTRA_DATA
 import com.facebook.shimmer.Shimmer
 
 
@@ -58,6 +63,9 @@ class BerandaFragment : Fragment() {
         swipeContainer.setOnRefreshListener {
             showData()
         }
+        binding.btnAdd.setOnClickListener {
+            startActivity(Intent(context,AdminAddActivity::class.java))
+        }
     }
     private fun showSearch(title:String){
         showShimmer(true)
@@ -85,6 +93,16 @@ class BerandaFragment : Fragment() {
             berandaListAdapter=BerandaListAdapter(data)
             recyclerView.adapter=berandaListAdapter
             swipeContainer.isRefreshing = false
+
+            berandaListAdapter.setOnItemClickCallback(object :BerandaListAdapter.OnItemClickCallback{
+                override fun onItemClicked(data: News) {
+                    Toast.makeText(context, data.title, Toast.LENGTH_SHORT).show()
+                    val intent= Intent(context, AdminDetailActivity::class.java)
+                    intent.putExtra(EXTRA_DATA,data)
+                    startActivity(intent)
+                }
+            })
+
         })
     }
 
