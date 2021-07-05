@@ -11,4 +11,8 @@
     <string name="simpan">Simpan</string>
     <string name="judul_postingan">Judul Postingan</string>
     <string name="konten">Konten</string>
+    <string name="personal">Personal</string>
+    <string name="tentang">Tentang</string>
+    <string name="masuk">Masuk</string>
+    <string name="keluar">Keluar</string>
 </resources>
