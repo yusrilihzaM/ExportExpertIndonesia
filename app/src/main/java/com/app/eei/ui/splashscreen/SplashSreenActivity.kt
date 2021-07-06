@@ -17,6 +17,7 @@ import coil.request.ImageRequest
 import com.app.eei.R
 import com.app.eei.databinding.ActivitySplashSreenBinding
 import com.app.eei.ui.admin.beranda.MainActivity
+import com.app.eei.ui.guest.GuestMainActivity
 import com.app.eei.ui.splashscreen.viewmodel.InfoViewModel
 import com.bumptech.glide.Glide
 import es.dmoral.toasty.Toasty
@@ -63,7 +64,7 @@ class SplashSreenActivity : AppCompatActivity() {
     }
 
     private fun moveActivity() {
-        startActivity(Intent(this, MainActivity::class.java))
+        startActivity(Intent(this, GuestMainActivity::class.java))
         finish()
     }
 
