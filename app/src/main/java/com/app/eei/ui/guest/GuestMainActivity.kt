@@ -32,7 +32,6 @@ class GuestMainActivity : AppCompatActivity() {
         binding.bottomNavigation.setOnItemSelectedListener { id ->
             when (id) {
                 R.id.home -> {
-                    Toast.makeText(this, getString(R.string.beranda), Toast.LENGTH_SHORT).show()
                     fragmentManager
                         .beginTransaction()
                         .replace(R.id.container, berandaFragment)
@@ -40,7 +39,6 @@ class GuestMainActivity : AppCompatActivity() {
                 }
 
                 R.id.akun -> {
-                    Toast.makeText(this, getString(R.string.akun), Toast.LENGTH_SHORT).show()
                     val guestAkunFragment = GuestAkunFragment()
                     fragmentManager
                         .beginTransaction()
