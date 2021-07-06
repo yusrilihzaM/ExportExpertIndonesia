@@ -1,34 +1,89 @@
 package com.app.eei.ui.admin.addform
 
+import android.app.ProgressDialog
+import android.content.Intent
 import android.graphics.Color
+import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.text.Html
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.webkit.MimeTypeMap
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import com.app.eei.R
 import com.app.eei.databinding.ActivityAdminAddBinding
+import com.app.eei.ui.admin.beranda.viewmodel.NewsViewModel
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
 import jp.wasabeef.richeditor.RichEditor
+import java.io.IOException
+import java.util.*
 
 class AdminAddActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAdminAddBinding
     private lateinit var mEditor:RichEditor
+    var Image_Request_Code = 7
+    var FilePathUri: Uri? = null
+    var storageReference: StorageReference? = null
+    var databaseReference: DatabaseReference? = null
+    var db: FirebaseFirestore? = null
+    var progressDialog: ProgressDialog? = null
+    var urlPathPublic: String? = null
+    var id:Int=0
+    private lateinit var viewmodel: NewsViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_admin_add)
         binding = ActivityAdminAddBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        viewmodel= ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(NewsViewModel::class.java)
 
+        viewmodel.setNews()
+        viewmodel.getNews().observe(this,{data->
+            id=data.size+1
+        })
         val upArrow =resources.getDrawable(R.drawable.ic_baseline_arrow_back_ios_24)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setHomeAsUpIndicator(upArrow)
         supportActionBar?.title = Html.fromHtml("<font color=\"black\">" + "Postingan Baru" + "</font>")
-
+        progressDialog = ProgressDialog(this)
         showFormContent()
+        storageReference = FirebaseStorage.getInstance().getReference("Images")
+        db = FirebaseFirestore.getInstance()
+        binding.btnBrowse.setOnClickListener {
+            val intent = Intent()
+            intent.type = "image/*"
+            intent.action = Intent.ACTION_GET_CONTENT
+            startActivityForResult(Intent.createChooser(intent, "Select Image"), Image_Request_Code)
+        }
+
+    }
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == Image_Request_Code && resultCode == RESULT_OK && data != null && data.data != null) {
+            FilePathUri = data.data
+            try {
+                val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, FilePathUri)
+                binding.imgNews.setImageBitmap(bitmap)
+                binding.imgNews.visibility=View.VISIBLE
+            } catch (e: IOException) {
+                e.printStackTrace()
+            }
+        }
     }
 
+    fun GetFileExtension(uri: Uri?): String? {
+        val contentResolver = contentResolver
+        val mimeTypeMap = MimeTypeMap.getSingleton()
+        return mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(uri!!))
+    }
     private fun showFormContent() {
         mEditor=binding.editor
         mEditor = findViewById<View>(R.id.editor) as RichEditor
@@ -123,6 +178,7 @@ class AdminAddActivity : AppCompatActivity() {
         return when (item.itemId) {
             R.id.submit->{
                 Toast.makeText(this, "Postingan Disimpan", Toast.LENGTH_SHORT).show()
+                Upload()
                 true
             }
             16908332->{
@@ -130,6 +186,72 @@ class AdminAddActivity : AppCompatActivity() {
                 true
             }
             else -> true
+        }
+    }
+
+
+    fun Upload() {
+        if (FilePathUri != null) {
+            progressDialog!!.setTitle("Image is Uploading...")
+            progressDialog!!.show()
+            val storageReference2 = storageReference!!.child(
+                System.currentTimeMillis().toString() + "." + GetFileExtension(FilePathUri)
+            )
+            val ref = storageReference!!.child(
+                System.currentTimeMillis().toString() + "." + GetFileExtension(FilePathUri)
+            )
+            ref.putFile(FilePathUri!!).addOnSuccessListener {
+                ref.downloadUrl.addOnSuccessListener { uri ->
+                    val url = uri.toString()
+                    urlPathPublic = url
+                    binding.urlpath.text=urlPathPublic
+                    val post: MutableMap<String, Any> = HashMap()
+                    if(url!=null){
+                        post["imgNews"] = urlPathPublic.toString()
+                        post["idNews"] = id
+                        post["titleNews"] = binding.edtTitleNews.getTextValue
+                        post["dateNews"] = ""
+                        post["contentNews"] = mEditor.html
+                        db!!.collection("news")
+                            .add(post)
+                            .addOnSuccessListener { documentReference ->
+                                Log.d(
+                                    "upload",
+                                    "DocumentSnapshot added with ID: " + documentReference.id
+                                )
+
+                            }
+                            .addOnFailureListener { e ->
+                                Log.w(
+                                    "upload",
+                                    "Error adding document",
+                                    e
+                                )
+                            }
+                        Log.d("imagePathDownload", urlPathPublic.toString())
+                    }
+                }
+            }
+            storageReference2.putFile(FilePathUri!!)
+                .addOnSuccessListener { taskSnapshot ->
+                    progressDialog!!.dismiss()
+                    Toast.makeText(
+                        applicationContext,
+                        "Image Uploaded Successfully ",
+                        Toast.LENGTH_LONG
+                    )
+                        .show()
+
+
+
+
+                }
+        } else {
+            Toast.makeText(
+                this,
+                "Please Select Image or Add Image Name",
+                Toast.LENGTH_LONG
+            ).show()
         }
     }
 }

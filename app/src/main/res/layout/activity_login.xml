@@ -1,9 +1,118 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#ECEAE8"
+    android:paddingBottom="@dimen/m_16"
     tools:context=".ui.login.LoginActivity">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_marginBottom="@dimen/m_16"
+        android:layout_height="match_parent">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <ImageView
+            android:id="@+id/icLogo"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_margin="@dimen/m_16"
+            android:layout_gravity="center" />
+
+        <TextView
+            android:id="@+id/tvLogin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/m_16"
+            android:layout_marginLeft="@dimen/m_16"
+            android:layout_marginRight="@dimen/m_16"
+            android:fontFamily="@font/poppins_medium"
+            android:text="@string/masuk"
+            android:textSize="32sp"
+            android:textStyle="bold"
+             />
+        <TextView
+            android:id="@+id/status"
+            android:visibility="gone"
+            android:padding="@dimen/m_8"
+            android:text="Email Kosong"
+            android:gravity="center"
+            android:fontFamily="@font/poppins"
+            android:textColor="@color/white"
+            android:layout_margin="@dimen/m_16"
+            android:background="@color/bg_del"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <com.simform.customcomponent.SSCustomEdittextOutlinedBorder
+            android:id="@+id/edtEmail"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_margin="@dimen/m_16"
+            android:inputType="textEmailAddress"
+            app:custom_component_border_color="@color/akun"
+            app:custom_component_border_error_color="@color/color_error"
+            app:custom_component_editText_hint="@string/email"
+            app:custom_component_maxline="1"
+            app:custom_component_minline="1"
+            app:custom_component_title="@string/email"
+            app:custom_component_title_color="@color/akun"
+            app:custom_component_title_error_color="@color/color_error"
+             />
+        <com.simform.customcomponent.SSCustomEdittextOutlinedBorder
+            android:id="@+id/edtPassword"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_margin="@dimen/m_16"
+            android:inputType="textPassword"
+            app:custom_component_border_color="@color/akun"
+            app:custom_component_border_error_color="@color/color_error"
+            app:custom_component_editText_hint="@string/password"
+            app:custom_component_maxline="1"
+            app:custom_component_minline="1"
+            app:custom_component_title="@string/password"
+            app:custom_component_title_color="@color/akun"
+            app:custom_component_title_error_color="@color/color_error"
+            />
+        <br.com.simplepass.loadingbutton.customViews.CircularProgressButton
+            android:id="@+id/btn_masuk"
+            android:textColor="@color/white"
+            android:text="@string/masuk"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_margin="@dimen/m_16"
+            android:textSize="16sp"
+            app:spinning_bar_color="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:background="@drawable/bg_btn_login" />
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/m_16"
+            android:gravity="center"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:textColor="@color/black"
+                android:fontFamily="@font/poppins_light"
+                android:text="@string/melanjutkan_sebagai_tamu"/>
+            <TextView
+                android:layout_marginLeft="@dimen/m_4"
+                android:id="@+id/btnTamu"
+                android:clickable="true"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textColor="#2c3e50"
+                android:textStyle="bold"
+                android:fontFamily="@font/poppins_medium"
+                android:text="Tamu"/>
+        </LinearLayout>
+    </LinearLayout>
+
+</ScrollView>

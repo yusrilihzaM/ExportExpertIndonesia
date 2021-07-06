@@ -68,6 +68,9 @@ class GuestBerandaFragment : Fragment() {
             false
         })
         swipeContainer.setOnRefreshListener {
+            berandaListAdapter.clear()
+            recyclerView.adapter=null
+//            showShimmer(true)
             showData()
         }
     }

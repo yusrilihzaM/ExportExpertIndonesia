@@ -1,266 +1,324 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
+
     android:layout_width="match_parent"
     android:padding="@dimen/m_16"
+    android:background="#ECEAE8"
     android:layout_height="match_parent">
-    <com.simform.customcomponent.SSCustomEdittextOutlinedBorder
-        android:id="@+id/edtAbout"
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:layout_marginTop="@dimen/m_16"
-        android:inputType="textMultiLine|textCapSentences"
-        app:custom_component_editText_hint="@string/judul_postingan"
-        app:custom_component_maxline="1"
-        app:custom_component_minline="1"
-        app:custom_component_maxLength="25"
+        android:layout_height="wrap_content">
+        <com.simform.customcomponent.SSCustomEdittextOutlinedBorder
+            android:id="@+id/edtTitleNews"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_marginTop="@dimen/m_16"
+            android:inputType="textMultiLine|textCapSentences"
+            app:custom_component_editText_hint="@string/judul_postingan"
+            app:custom_component_maxline="1"
+            app:custom_component_minline="1"
+            app:custom_component_maxLength="25"
 
-        app:custom_component_title_color="@color/akun"
-        app:custom_component_title_error_color="@color/color_error"
-        app:custom_component_border_color="@color/akun"
-        app:custom_component_border_error_color="@color/color_error"
-        app:custom_component_title="@string/judul_postingan"
-        />
-    <HorizontalScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/akun">
+            app:custom_component_title_color="@color/akun"
+            app:custom_component_title_error_color="@color/color_error"
+            app:custom_component_border_color="@color/akun"
+            app:custom_component_border_error_color="@color/color_error"
+            app:custom_component_title="@string/judul_postingan"
+            />
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/m_16"
+            android:padding="@dimen/m_8">
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="@string/gambar_poster"/>
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/btnBrowse"
+                    android:layout_width="match_parent"
+                    app:cardCornerRadius="@dimen/m_16"
+                    android:layout_marginLeft="@dimen/m_8"
+                    android:layout_marginRight="@dimen/m_8"
+                    android:layout_marginBottom="@dimen/m_16"
+                    app:cardBackgroundColor="@color/bg_floating"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:layout_height="50dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:textColor="@color/white"
+                        android:fontFamily="@font/poppins"
+                        android:text="@string/browse_poster"/>
+                </androidx.cardview.widget.CardView>
+                <ImageView
+                    android:id="@+id/imgNews"
+                    android:layout_width="match_parent"
+                    android:layout_marginBottom="@dimen/m_16"
+                    android:layout_height="250dp"
+                    android:visibility="gone"
+                    />
+            </LinearLayout>
 
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="wrap_content"
+        </androidx.cardview.widget.CardView>
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/m_16"
             android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="@string/konten_post"/>
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/akun">
 
-            <ImageButton
-                android:foreground="?android:attr/selectableItemBackground"
-                android:id="@+id/action_undo"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:background="@null"
-                android:contentDescription="@null"
-                android:src="@drawable/undo" />
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
 
-            <ImageButton
-                android:foreground="?android:attr/selectableItemBackground"
-                android:id="@+id/action_redo"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:background="@null"
-                android:contentDescription="@null"
-                android:src="@drawable/redo" />
+                        <ImageButton
+                            android:foreground="?android:attr/selectableItemBackground"
+                            android:id="@+id/action_undo"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:background="@null"
+                            android:contentDescription="@null"
+                            android:src="@drawable/undo" />
 
-            <ImageButton
-                android:foreground="?android:attr/selectableItemBackground"
-                android:id="@+id/action_bold"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:background="@null"
-                android:contentDescription="@null"
-                android:src="@drawable/bold" />
+                        <ImageButton
+                            android:foreground="?android:attr/selectableItemBackground"
+                            android:id="@+id/action_redo"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:background="@null"
+                            android:contentDescription="@null"
+                            android:src="@drawable/redo" />
 
-            <ImageButton
-                android:foreground="?android:attr/selectableItemBackground"
-                android:id="@+id/action_italic"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:background="@null"
-                android:contentDescription="@null"
-                android:src="@drawable/italic" />
+                        <ImageButton
+                            android:foreground="?android:attr/selectableItemBackground"
+                            android:id="@+id/action_bold"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:background="@null"
+                            android:contentDescription="@null"
+                            android:src="@drawable/bold" />
 
-            <ImageButton
-                android:foreground="?android:attr/selectableItemBackground"
-                android:id="@+id/action_subscript"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:background="@null"
-                android:contentDescription="@null"
-                android:src="@drawable/subscript" />
+                        <ImageButton
+                            android:foreground="?android:attr/selectableItemBackground"
+                            android:id="@+id/action_italic"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:background="@null"
+                            android:contentDescription="@null"
+                            android:src="@drawable/italic" />
 
-            <ImageButton
-                android:foreground="?android:attr/selectableItemBackground"
-                android:id="@+id/action_superscript"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:background="@null"
-                android:contentDescription="@null"
-                android:src="@drawable/superscript" />
+                        <ImageButton
+                            android:foreground="?android:attr/selectableItemBackground"
+                            android:id="@+id/action_subscript"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:background="@null"
+                            android:contentDescription="@null"
+                            android:src="@drawable/subscript" />
 
-            <ImageButton
-                android:foreground="?android:attr/selectableItemBackground"
-                android:id="@+id/action_strikethrough"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:background="@null"
-                android:contentDescription="@null"
-                android:src="@drawable/strikethrough" />
+                        <ImageButton
+                            android:foreground="?android:attr/selectableItemBackground"
+                            android:id="@+id/action_superscript"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:background="@null"
+                            android:contentDescription="@null"
+                            android:src="@drawable/superscript" />
 
-            <ImageButton
-                android:foreground="?android:attr/selectableItemBackground"
-                android:id="@+id/action_underline"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:background="@null"
-                android:contentDescription="@null"
-                android:src="@drawable/underline" />
+                        <ImageButton
+                            android:foreground="?android:attr/selectableItemBackground"
+                            android:id="@+id/action_strikethrough"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:background="@null"
+                            android:contentDescription="@null"
+                            android:src="@drawable/strikethrough" />
 
-            <ImageButton
-                android:foreground="?android:attr/selectableItemBackground"
-                android:id="@+id/action_heading1"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:background="@null"
-                android:contentDescription="@null"
-                android:src="@drawable/h1" />
+                        <ImageButton
+                            android:foreground="?android:attr/selectableItemBackground"
+                            android:id="@+id/action_underline"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:background="@null"
+                            android:contentDescription="@null"
+                            android:src="@drawable/underline" />
 
-            <ImageButton
-                android:foreground="?android:attr/selectableItemBackground"
-                android:id="@+id/action_heading2"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:background="@null"
-                android:contentDescription="@null"
-                android:src="@drawable/h2" />
+                        <ImageButton
+                            android:foreground="?android:attr/selectableItemBackground"
+                            android:id="@+id/action_heading1"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:background="@null"
+                            android:contentDescription="@null"
+                            android:src="@drawable/h1" />
 
-            <ImageButton
-                android:foreground="?android:attr/selectableItemBackground"
-                android:id="@+id/action_heading3"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:background="@null"
-                android:contentDescription="@null"
-                android:src="@drawable/h3" />
+                        <ImageButton
+                            android:foreground="?android:attr/selectableItemBackground"
+                            android:id="@+id/action_heading2"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:background="@null"
+                            android:contentDescription="@null"
+                            android:src="@drawable/h2" />
 
-            <ImageButton
-                android:foreground="?android:attr/selectableItemBackground"
-                android:id="@+id/action_heading4"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:background="@null"
-                android:contentDescription="@null"
-                android:src="@drawable/h4" />
+                        <ImageButton
+                            android:foreground="?android:attr/selectableItemBackground"
+                            android:id="@+id/action_heading3"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:background="@null"
+                            android:contentDescription="@null"
+                            android:src="@drawable/h3" />
 
-            <ImageButton
-                android:foreground="?android:attr/selectableItemBackground"
-                android:id="@+id/action_heading5"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:background="@null"
-                android:contentDescription="@null"
-                android:src="@drawable/h5" />
+                        <ImageButton
+                            android:foreground="?android:attr/selectableItemBackground"
+                            android:id="@+id/action_heading4"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:background="@null"
+                            android:contentDescription="@null"
+                            android:src="@drawable/h4" />
 
-            <ImageButton
-                android:foreground="?android:attr/selectableItemBackground"
-                android:id="@+id/action_heading6"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:background="@null"
-                android:contentDescription="@null"
-                android:src="@drawable/h6" />
+                        <ImageButton
+                            android:foreground="?android:attr/selectableItemBackground"
+                            android:id="@+id/action_heading5"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:background="@null"
+                            android:contentDescription="@null"
+                            android:src="@drawable/h5" />
 
-            <ImageButton
-                android:foreground="?android:attr/selectableItemBackground"
-                android:id="@+id/action_indent"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:background="@null"
-                android:contentDescription="@null"
-                android:src="@drawable/indent" />
+                        <ImageButton
+                            android:foreground="?android:attr/selectableItemBackground"
+                            android:id="@+id/action_heading6"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:background="@null"
+                            android:contentDescription="@null"
+                            android:src="@drawable/h6" />
 
-            <ImageButton
-                android:foreground="?android:attr/selectableItemBackground"
-                android:id="@+id/action_outdent"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:background="@null"
-                android:contentDescription="@null"
-                android:src="@drawable/outdent" />
+                        <ImageButton
+                            android:foreground="?android:attr/selectableItemBackground"
+                            android:id="@+id/action_indent"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:background="@null"
+                            android:contentDescription="@null"
+                            android:src="@drawable/indent" />
 
-            <ImageButton
-                android:foreground="?android:attr/selectableItemBackground"
-                android:id="@+id/action_align_left"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:background="@null"
-                android:contentDescription="@null"
-                android:src="@drawable/justify_left" />
+                        <ImageButton
+                            android:foreground="?android:attr/selectableItemBackground"
+                            android:id="@+id/action_outdent"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:background="@null"
+                            android:contentDescription="@null"
+                            android:src="@drawable/outdent" />
 
-            <ImageButton
-                android:foreground="?android:attr/selectableItemBackground"
-                android:id="@+id/action_align_center"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:background="@null"
-                android:contentDescription="@null"
-                android:src="@drawable/justify_center" />
+                        <ImageButton
+                            android:foreground="?android:attr/selectableItemBackground"
+                            android:id="@+id/action_align_left"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:background="@null"
+                            android:contentDescription="@null"
+                            android:src="@drawable/justify_left" />
 
-            <ImageButton
-                android:foreground="?android:attr/selectableItemBackground"
-                android:id="@+id/action_align_right"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:background="@null"
-                android:contentDescription="@null"
-                android:src="@drawable/justify_right" />
+                        <ImageButton
+                            android:foreground="?android:attr/selectableItemBackground"
+                            android:id="@+id/action_align_center"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:background="@null"
+                            android:contentDescription="@null"
+                            android:src="@drawable/justify_center" />
 
-            <ImageButton
-                android:foreground="?android:attr/selectableItemBackground"
-                android:id="@+id/action_insert_bullets"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:background="@null"
-                android:contentDescription="@null"
-                android:src="@drawable/bullets" />
+                        <ImageButton
+                            android:foreground="?android:attr/selectableItemBackground"
+                            android:id="@+id/action_align_right"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:background="@null"
+                            android:contentDescription="@null"
+                            android:src="@drawable/justify_right" />
 
-            <ImageButton
-                android:foreground="?android:attr/selectableItemBackground"
-                android:id="@+id/action_insert_numbers"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:background="@null"
-                android:contentDescription="@null"
-                android:src="@drawable/numbers" />
+                        <ImageButton
+                            android:foreground="?android:attr/selectableItemBackground"
+                            android:id="@+id/action_insert_bullets"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:background="@null"
+                            android:contentDescription="@null"
+                            android:src="@drawable/bullets" />
 
-            <ImageButton
-                android:foreground="?android:attr/selectableItemBackground"
-                android:id="@+id/action_blockquote"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:background="@null"
-                android:contentDescription="@null"
-                android:src="@drawable/blockquote" />
+                        <ImageButton
+                            android:foreground="?android:attr/selectableItemBackground"
+                            android:id="@+id/action_insert_numbers"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:background="@null"
+                            android:contentDescription="@null"
+                            android:src="@drawable/numbers" />
 
-            <ImageButton
-                android:foreground="?android:attr/selectableItemBackground"
-                android:id="@+id/action_insert_link"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:background="@null"
-                android:contentDescription="@null"
-                android:src="@drawable/insert_link" />
+                        <ImageButton
+                            android:foreground="?android:attr/selectableItemBackground"
+                            android:id="@+id/action_blockquote"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:background="@null"
+                            android:contentDescription="@null"
+                            android:src="@drawable/blockquote" />
 
-        </LinearLayout>
-    </HorizontalScrollView>
+                        <ImageButton
+                            android:foreground="?android:attr/selectableItemBackground"
+                            android:id="@+id/action_insert_link"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:background="@null"
+                            android:contentDescription="@null"
+                            android:src="@drawable/insert_link" />
 
-    <jp.wasabeef.richeditor.RichEditor
-        android:id="@+id/editor"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+                    </LinearLayout>
+                </HorizontalScrollView>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="HTML Preview"
-        android:textSize="12sp" />
+                <jp.wasabeef.richeditor.RichEditor
+                    android:id="@+id/editor"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
 
-    <TextView
-        android:id="@+id/preview"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp" />
-    <TextView
-        android:id="@+id/previewtotext"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp" />
-</LinearLayout>
+        <TextView
+            android:id="@+id/urlpath"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+
+
+
+</ScrollView>

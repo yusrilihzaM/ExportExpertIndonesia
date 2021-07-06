@@ -61,6 +61,11 @@ class BerandaFragment : Fragment() {
             false
         })
         swipeContainer.setOnRefreshListener {
+            swipeContainer.isRefreshing = true
+            berandaListAdapter.clear()
+            showShimmer(true)
+            recyclerView.adapter=berandaListAdapter
+
             showData()
         }
         binding.btnAdd.setOnClickListener {

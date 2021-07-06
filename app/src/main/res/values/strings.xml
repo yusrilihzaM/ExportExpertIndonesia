@@ -15,4 +15,12 @@
     <string name="tentang">Tentang</string>
     <string name="masuk">Masuk</string>
     <string name="keluar">Keluar</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="kosong_email">Email Kosong harus di isi</string>
+    <string name="kosong_password">Password harus di isi</string>
+    <string name="melanjutkan_sebagai_tamu">Melanjutkan Sebagai Tamu?</string>
+    <string name="browse_poster">Browse Poster</string>
+    <string name="konten_post">Konten Post</string>
+    <string name="gambar_poster">Gambar Poster</string>
 </resources>
