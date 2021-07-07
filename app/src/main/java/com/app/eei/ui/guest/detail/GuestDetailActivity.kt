@@ -1,5 +1,6 @@
 package com.app.eei.ui.guest.detail
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Html
@@ -8,7 +9,9 @@ import com.app.eei.R
 import com.app.eei.databinding.ActivityAdminDetailBinding
 import com.app.eei.databinding.ActivityGuestDetail2Binding
 import com.app.eei.entity.News
+import com.app.eei.ui.admin.beranda.MainActivity
 import com.app.eei.ui.admin.detail.AdminDetailActivity
+import com.app.eei.ui.guest.GuestMainActivity
 import com.bumptech.glide.Glide
 
 class GuestDetailActivity : AppCompatActivity() {
@@ -36,7 +39,12 @@ class GuestDetailActivity : AppCompatActivity() {
             .into(binding.imgNews)
 
         binding.btnBack.setOnClickListener {
-            finish()
+            startActivity(Intent(this, GuestMainActivity::class.java))
         }
+
+    }
+    override fun onBackPressed() {
+        super.onBackPressed()
+        startActivity(Intent(this, GuestMainActivity::class.java))
     }
 }

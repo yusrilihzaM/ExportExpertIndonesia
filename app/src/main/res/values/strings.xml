@@ -23,4 +23,14 @@
     <string name="browse_poster">Browse Poster</string>
     <string name="konten_post">Konten Post</string>
     <string name="gambar_poster">Gambar Poster</string>
+    <string name="update_success">Update Berhasil</string>
+    <string name="update_fail">Update Gagal</string>
+    <string name="hapus_data">Hapus Data</string>
+    <string name="yakin_batal_menghapus">Apakah anda ingin menghapus ?</string>
+    <string name="yakin_menghapus">Apakah anda yakin ingin menghapus postingan ini?</string>
+    <string name="hapus_datak">Hapus  postingan</string>
+    <string name="hapus_berhasil">Berhasil Dihapus</string>
+    <string name="data_berhasil_disimpan">Postingan berhasil di simpan</string>
+    <string name="batal">Batal</string>
+    <string name="tidak_ada_data">Tidak ada data</string>
 </resources>

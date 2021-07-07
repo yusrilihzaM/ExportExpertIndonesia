@@ -68,6 +68,10 @@
                 android:text="But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects"
                 android:textColor="@color/black"
                 app:autoSizeTextType="uniform"
+                android:minHeight="@dimen/m_8"
+                android:maxHeight="48dp"
+                android:minLines="1"
+                android:maxLines="2"
                 app:autoSizeStepGranularity="2sp"
                 app:layout_constraintStart_toEndOf="@+id/imgNews"
                 app:layout_constraintTop_toBottomOf="@+id/titleNews" />

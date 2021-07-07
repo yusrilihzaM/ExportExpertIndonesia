@@ -3,24 +3,28 @@ package com.app.eei.ui.guest.beranda
 import android.content.Intent
 import android.os.Bundle
 import android.view.KeyEvent
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.annotation.Nullable
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.app.eei.R
 import com.app.eei.adapter.BerandaListAdapter
-import com.app.eei.databinding.FragmentBerandaBinding
 import com.app.eei.databinding.FragmentGuestBerandaBinding
 import com.app.eei.entity.News
-import com.app.eei.ui.admin.addform.AdminAddActivity
 import com.app.eei.ui.admin.beranda.viewmodel.NewsViewModel
-import com.app.eei.ui.admin.detail.AdminDetailActivity
 import com.app.eei.ui.guest.detail.GuestDetailActivity
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.DataSource
+import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.load.resource.gif.GifDrawable
+import com.bumptech.glide.request.RequestListener
+import com.bumptech.glide.request.target.Target
 import com.facebook.shimmer.Shimmer
 
 
@@ -72,6 +76,7 @@ class GuestBerandaFragment : Fragment() {
             recyclerView.adapter=null
 //            showShimmer(true)
             showData()
+            berandaListAdapter.notifyDataSetChanged()
         }
     }
     private fun showSearch(title:String){
@@ -83,9 +88,25 @@ class GuestBerandaFragment : Fragment() {
         viewmodel.getNews().observe(viewLifecycleOwner,{data->
             showShimmer(false)
             berandaListAdapter=BerandaListAdapter(data)
+            berandaListAdapter.notifyDataSetChanged()
             recyclerView.adapter=berandaListAdapter
+
             swipeContainer.isRefreshing = false
+            berandaListAdapter.setOnItemClickCallback(object :BerandaListAdapter.OnItemClickCallback{
+                override fun onItemClicked(data: News) {
+                    Toast.makeText(context, data.title, Toast.LENGTH_SHORT).show()
+                    val intent= Intent(context, GuestDetailActivity::class.java)
+                    intent.putExtra(GuestDetailActivity.EXTRA_DATA,data)
+                    startActivity(intent)
+                    activity?.finish()
+                }
+            })
         })
+    }
+
+    override fun onPause() {
+        super.onPause()
+        berandaListAdapter.notifyDataSetChanged()
     }
     private fun showData(){
         showShimmer(true)
@@ -97,9 +118,43 @@ class GuestBerandaFragment : Fragment() {
         viewmodel.getNews().observe(viewLifecycleOwner,{data->
             showShimmer(false)
             berandaListAdapter=BerandaListAdapter(data)
-            berandaListAdapter=BerandaListAdapter(data)
             recyclerView.adapter=berandaListAdapter
+            berandaListAdapter.notifyDataSetChanged()
             swipeContainer.isRefreshing = false
+            if (data.size==0){
+                binding.linear.visibility=View.VISIBLE
+                binding.noData.visibility=View.VISIBLE
+                binding.tvnodata.visibility=View.VISIBLE
+                Glide.with(this)
+                    .asGif()
+                    .load(R.drawable.nodatagif) // Replace with a valid url
+                    .addListener(object : RequestListener<GifDrawable?> {
+                        override fun onLoadFailed(
+                            e: GlideException?,
+                            model: Any?,
+                            target: Target<GifDrawable?>?,
+                            isFirstResource: Boolean
+                        ): Boolean {
+                            return false
+                        }
+                        override fun onResourceReady(
+                            resource: GifDrawable?,
+                            model: Any?,
+                            target: Target<GifDrawable?>?,
+                            dataSource: DataSource?,
+                            isFirstResource: Boolean
+                        ): Boolean {
+                            resource?.setLoopCount(1)
+                            return false
+                        }
+
+                    })
+                    .into(binding.noData)
+
+            }else{
+                binding.noData.visibility=View.GONE
+                binding.tvnodata.visibility=View.GONE
+            }
 
             berandaListAdapter.setOnItemClickCallback(object :BerandaListAdapter.OnItemClickCallback{
                 override fun onItemClicked(data: News) {
@@ -107,11 +162,13 @@ class GuestBerandaFragment : Fragment() {
                     val intent= Intent(context, GuestDetailActivity::class.java)
                     intent.putExtra(GuestDetailActivity.EXTRA_DATA,data)
                     startActivity(intent)
+                    activity?.finish()
                 }
             })
 
         })
     }
+
 
     private fun showShimmer(boolean: Boolean){
         if(boolean){

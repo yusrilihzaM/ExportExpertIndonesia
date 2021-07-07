@@ -20,6 +20,12 @@ import com.app.eei.ui.admin.addform.AdminAddActivity
 import com.app.eei.ui.admin.beranda.viewmodel.NewsViewModel
 import com.app.eei.ui.admin.detail.AdminDetailActivity
 import com.app.eei.ui.admin.detail.AdminDetailActivity.Companion.EXTRA_DATA
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.DataSource
+import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.load.resource.gif.GifDrawable
+import com.bumptech.glide.request.RequestListener
+import com.bumptech.glide.request.target.Target
 import com.facebook.shimmer.Shimmer
 
 
@@ -70,6 +76,7 @@ class BerandaFragment : Fragment() {
         }
         binding.btnAdd.setOnClickListener {
             startActivity(Intent(context,AdminAddActivity::class.java))
+            activity?.finish()
         }
     }
     private fun showSearch(title:String){
@@ -81,8 +88,18 @@ class BerandaFragment : Fragment() {
         viewmodel.getNews().observe(viewLifecycleOwner,{data->
             showShimmer(false)
             berandaListAdapter=BerandaListAdapter(data)
+            berandaListAdapter.notifyDataSetChanged()
             recyclerView.adapter=berandaListAdapter
             swipeContainer.isRefreshing = false
+            berandaListAdapter.setOnItemClickCallback(object :BerandaListAdapter.OnItemClickCallback{
+                override fun onItemClicked(data: News) {
+                    Toast.makeText(context, data.title, Toast.LENGTH_SHORT).show()
+                    val intent= Intent(context, AdminDetailActivity::class.java)
+                    intent.putExtra(EXTRA_DATA,data)
+                    startActivity(intent)
+                    activity?.finish()
+                }
+            })
         })
     }
     private fun showData(){
@@ -95,16 +112,51 @@ class BerandaFragment : Fragment() {
         viewmodel.getNews().observe(viewLifecycleOwner,{data->
             showShimmer(false)
             berandaListAdapter=BerandaListAdapter(data)
-            berandaListAdapter=BerandaListAdapter(data)
+            berandaListAdapter.notifyDataSetChanged()
             recyclerView.adapter=berandaListAdapter
-            swipeContainer.isRefreshing = false
 
+            swipeContainer.isRefreshing = false
+            if (data.size==0){
+                binding.linear.visibility=View.VISIBLE
+                binding.noData.visibility=View.VISIBLE
+                binding.tvnodata.visibility=View.VISIBLE
+                Glide.with(this)
+                    .asGif()
+                    .load(R.drawable.nodatagif) // Replace with a valid url
+                    .addListener(object : RequestListener<GifDrawable?> {
+                        override fun onLoadFailed(
+                            e: GlideException?,
+                            model: Any?,
+                            target: Target<GifDrawable?>?,
+                            isFirstResource: Boolean
+                        ): Boolean {
+                            return false
+                        }
+                        override fun onResourceReady(
+                            resource: GifDrawable?,
+                            model: Any?,
+                            target: Target<GifDrawable?>?,
+                            dataSource: DataSource?,
+                            isFirstResource: Boolean
+                        ): Boolean {
+                            resource?.setLoopCount(1)
+                            return false
+                        }
+
+                    })
+                    .into(binding.noData)
+
+            }else{
+                binding.noData.visibility=View.GONE
+                binding.tvnodata.visibility=View.GONE
+            }
             berandaListAdapter.setOnItemClickCallback(object :BerandaListAdapter.OnItemClickCallback{
                 override fun onItemClicked(data: News) {
                     Toast.makeText(context, data.title, Toast.LENGTH_SHORT).show()
                     val intent= Intent(context, AdminDetailActivity::class.java)
                     intent.putExtra(EXTRA_DATA,data)
                     startActivity(intent)
+                    activity?.finish()
                 }
             })
 

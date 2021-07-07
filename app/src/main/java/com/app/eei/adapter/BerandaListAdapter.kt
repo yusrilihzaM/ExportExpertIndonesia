@@ -11,7 +11,6 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 
 class BerandaListAdapter(private val List: ArrayList<News>): RecyclerView.Adapter<BerandaListAdapter.ListViewHolder>() {
-
     private var onItemClickCallback: OnItemClickCallback? = null
 
     fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
