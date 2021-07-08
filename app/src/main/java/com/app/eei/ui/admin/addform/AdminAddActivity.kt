@@ -241,10 +241,6 @@ class AdminAddActivity : AppCompatActivity() {
                         Toast.LENGTH_LONG
                     )
                         .show()
-
-
-
-
                 }
         } else {
             Toast.makeText(

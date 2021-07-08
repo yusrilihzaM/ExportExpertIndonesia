@@ -1,16 +1,21 @@
 package com.app.eei.ui.guest
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import com.app.eei.R
 import com.app.eei.databinding.ActivityGuestMainBinding
 import com.app.eei.databinding.ActivityMainBinding
+import com.app.eei.extensions.Extensions.toast
 import com.app.eei.ui.admin.akun.fragment.AdminAkunFragment
+import com.app.eei.ui.admin.beranda.MainActivity
 import com.app.eei.ui.admin.beranda.fragment.BerandaFragment
 import com.app.eei.ui.admin.settingapp.fragment.AdminSettingFragment
 import com.app.eei.ui.guest.akun.GuestAkunFragment
 import com.app.eei.ui.guest.beranda.GuestBerandaFragment
+import com.app.eei.utils.FirebaseUtils.firebaseAuth
+import com.google.firebase.auth.FirebaseUser
 
 class GuestMainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityGuestMainBinding
@@ -48,4 +53,12 @@ class GuestMainActivity : AppCompatActivity() {
             }
         }
     }
+//    override fun onStart() {
+//        super.onStart()
+//        val user: FirebaseUser? = firebaseAuth.currentUser
+//        user?.let {
+//            startActivity(Intent(this, MainActivity::class.java))
+//            toast("Selamat datang kembali")
+//        }
+//    }
 }

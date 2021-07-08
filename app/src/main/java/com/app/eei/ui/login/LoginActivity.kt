@@ -10,15 +10,19 @@ import androidx.lifecycle.ViewModelProvider
 import com.app.eei.R
 import com.app.eei.databinding.ActivityLoginBinding
 import com.app.eei.databinding.ActivityTentangBinding
+import com.app.eei.extensions.Extensions.toast
 import com.app.eei.ui.admin.beranda.MainActivity
 import com.app.eei.ui.guest.GuestMainActivity
 import com.app.eei.ui.splashscreen.viewmodel.InfoViewModel
+import com.app.eei.utils.FirebaseUtils.firebaseAuth
 import com.bumptech.glide.Glide
 import es.dmoral.toasty.Toasty
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
     private lateinit var viewModel: InfoViewModel
+    lateinit var signInEmail: String
+    lateinit var signInPassword: String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
@@ -44,8 +48,12 @@ class LoginActivity : AppCompatActivity() {
         }
         binding.btnMasuk.setOnClickListener {
 
-
-            if (binding.edtEmail.getTextValue.isEmpty()){
+            if (binding.edtEmail.getTextValue.isEmpty() and binding.edtPassword.getTextValue.isEmpty() ){
+                binding.edtEmail.setIsErrorEnable(true)
+                binding.edtEmail.setIsErrorEnable(true)
+                status(true,"Email dan Password tidak boleh kosong.")
+            }
+            else if (binding.edtEmail.getTextValue.isEmpty()){
                 binding.edtEmail.setIsErrorEnable(true)
                 status(true,"Email tidak boleh kosong.")
             }
@@ -55,10 +63,21 @@ class LoginActivity : AppCompatActivity() {
 
             }
             else{
+                signInEmail = binding.edtEmail.getTextValue.toString().trim()
+                signInPassword = binding.edtPassword.getTextValue.toString().trim()
                 binding.btnMasuk.startAnimation()
-                startActivity(Intent(this,MainActivity::class.java))
+                firebaseAuth.signInWithEmailAndPassword(signInEmail, signInPassword)
+                    .addOnCompleteListener { signIn ->
+                        if (signIn.isSuccessful) {
+                            binding.btnMasuk.revertAnimation()
+                            startActivity(Intent(this,MainActivity::class.java))
+                            toast("signed in successfully")
+                            finish()
+                        } else {
+                            toast("sign in failed")
+                        }
+                    }
                 finish()
-                binding.btnMasuk.revertAnimation()
             }
 
 

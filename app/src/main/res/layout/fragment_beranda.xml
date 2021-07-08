@@ -87,32 +87,29 @@
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
-    <LinearLayout
-        android:id="@+id/linear"
-        android:orientation="vertical"
+    <ImageView
+        android:visibility="invisible"
+        android:id="@+id/noData"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="350dp"
+        android:layout_margin="@dimen/m_16"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView">
-        <ImageView
-            android:visibility="invisible"
-            android:id="@+id/noData"
+        app:layout_constraintTop_toBottomOf="@+id/cardView"
+        />
 
-            android:layout_width="match_parent"
-            android:layout_height="400dp"
-            android:layout_margin="@dimen/m_16"
-            />
-        <TextView
-            android:visibility="invisible"
-            android:id="@+id/tvnodata"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:fontFamily="@font/poppins"
-            android:text="@string/tidak_ada_data"/>
-    </LinearLayout>
+    <TextView
+        android:id="@+id/tvnodata"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:fontFamily="@font/poppins"
+        android:gravity="center"
+        android:text="@string/tidak_ada_data"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/noData" />
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         xmlns:android="http://schemas.android.com/apk/res/android"

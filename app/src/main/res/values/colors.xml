@@ -13,4 +13,6 @@
     <color name="shimmer_color">#ced6e0</color>
     <color name="bg_floating">#27ae60</color>
     <color name="bg_del">#c0392b</color>
+    <color name="bg">#FCFDF6</color>
+    <color name="bg_settings">#F6FAFD</color>
 </resources>

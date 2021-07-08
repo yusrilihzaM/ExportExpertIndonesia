@@ -68,11 +68,8 @@ class BerandaFragment : Fragment() {
         })
         swipeContainer.setOnRefreshListener {
             swipeContainer.isRefreshing = true
-            berandaListAdapter.clear()
-            showShimmer(true)
-            recyclerView.adapter=berandaListAdapter
-
             showData()
+            berandaListAdapter.notifyDataSetChanged()
         }
         binding.btnAdd.setOnClickListener {
             startActivity(Intent(context,AdminAddActivity::class.java))
@@ -117,12 +114,11 @@ class BerandaFragment : Fragment() {
 
             swipeContainer.isRefreshing = false
             if (data.size==0){
-                binding.linear.visibility=View.VISIBLE
                 binding.noData.visibility=View.VISIBLE
                 binding.tvnodata.visibility=View.VISIBLE
                 Glide.with(this)
                     .asGif()
-                    .load(R.drawable.nodatagif) // Replace with a valid url
+                    .load(R.drawable.nodatagif)
                     .addListener(object : RequestListener<GifDrawable?> {
                         override fun onLoadFailed(
                             e: GlideException?,

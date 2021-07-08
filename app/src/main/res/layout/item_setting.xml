@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="@dimen/m_8"
+    android:layout_marginRight="@dimen/m_4"
+    android:layout_marginLeft="@dimen/m_4"
+    android:foreground="?android:attr/selectableItemBackground"
+    android:background="@drawable/bg_btn1"
+    android:layout_width="match_parent"
+    android:layout_marginTop="@dimen/m_8"
+    android:layout_height="wrap_content">
+   <LinearLayout
+       android:layout_margin="@dimen/m_12"
+       android:orientation="horizontal"
+       android:gravity="center"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent">
+       <ImageView
+           android:id="@+id/icLogo"
+           android:layout_width="45dp"
+           android:src="@drawable/ic_baseline_chevron_right_24"
+           android:layout_height="45dp"/>
+       <TextView
+           android:id="@+id/titleMenu"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:layout_weight="3"
+           android:textSize="16sp"
+           android:layout_marginLeft="@dimen/m_8"
+           android:layout_marginRight="@dimen/m_8"
+           android:textColor="@color/black"
+           android:text="Nama Aplikasi"
+           android:fontFamily="@font/poppins"/>
+       <ImageView
+
+           android:layout_width="30dp"
+           android:src="@drawable/ic_baseline_chevron_right_24"
+           android:layout_height="50dp"/>
+   </LinearLayout>
+</androidx.cardview.widget.CardView>

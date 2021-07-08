@@ -30,14 +30,12 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNavigation.setOnItemSelectedListener { id->
             when(id){
                 R.id.home ->{
-                    Toast.makeText(this, getString(R.string.beranda), Toast.LENGTH_SHORT).show()
                     fragmentManager
                         .beginTransaction()
                         .replace(R.id.container, berandaFragment)
                         .commit()
                 }
                 R.id.settings->{
-                    Toast.makeText(this, getString(R.string.pengaturan_app), Toast.LENGTH_SHORT).show()
                     val adminSettingFragment = AdminSettingFragment()
                     fragmentManager
                         .beginTransaction()
@@ -45,7 +43,6 @@ class MainActivity : AppCompatActivity() {
                         .commit()
                 }
                 R.id.akun->{
-                    Toast.makeText(this, getString(R.string.akun), Toast.LENGTH_SHORT).show()
                     val adminAkunFragment = AdminAkunFragment()
                     fragmentManager
                         .beginTransaction()

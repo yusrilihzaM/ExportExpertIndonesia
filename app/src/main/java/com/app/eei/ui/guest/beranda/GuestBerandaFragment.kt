@@ -72,9 +72,7 @@ class GuestBerandaFragment : Fragment() {
             false
         })
         swipeContainer.setOnRefreshListener {
-            berandaListAdapter.clear()
-            recyclerView.adapter=null
-//            showShimmer(true)
+            swipeContainer.isRefreshing = true
             showData()
             berandaListAdapter.notifyDataSetChanged()
         }
@@ -122,7 +120,6 @@ class GuestBerandaFragment : Fragment() {
             berandaListAdapter.notifyDataSetChanged()
             swipeContainer.isRefreshing = false
             if (data.size==0){
-                binding.linear.visibility=View.VISIBLE
                 binding.noData.visibility=View.VISIBLE
                 binding.tvnodata.visibility=View.VISIBLE
                 Glide.with(this)

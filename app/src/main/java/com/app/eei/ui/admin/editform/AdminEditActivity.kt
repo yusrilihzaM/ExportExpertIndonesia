@@ -47,6 +47,7 @@ class AdminEditActivity : AppCompatActivity() {
     var id:Int=0
     var dokument:String=""
     var news =hashMapOf<String, Any?>()
+    var status:String=""
     private lateinit var viewmodel: NewsViewModel
     companion object {
         const val EXTRA_DATA_EDIT = "extra_data"
@@ -60,6 +61,7 @@ class AdminEditActivity : AppCompatActivity() {
         viewmodel= ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(NewsViewModel::class.java)
         val data=intent.getParcelableExtra<News>(EXTRA_DATA_EDIT) as News
         dokument=data.id.toString()
+        id=data.id
         binding.edtTitleNews.setTextValue(data.title)
         Glide.with(this)
             .load(data.imgNews)
@@ -196,15 +198,23 @@ class AdminEditActivity : AppCompatActivity() {
             R.id.submit->{
                 Toast.makeText(this, "Postingan Disimpan", Toast.LENGTH_SHORT).show()
                 Upload()
-                db?.collection("news")?.document(dokument)
-                    ?.update(news)
-                    ?.addOnSuccessListener {
-                        Log.d("edit", news.toString())
-                        startActivity(Intent(this,MainActivity::class.java))
-                        finish()
-
-                    }
-                    ?.addOnFailureListener { e -> Log.w("edit", "Error writing document", e) }
+//                if(status=="gambar berhasil"){
+//                    db?.collection("news")?.document(dokument)
+//                        ?.update(news)
+//                        ?.addOnSuccessListener {
+//                            Log.d("edit", news.toString())
+//                            startActivity(Intent(this,MainActivity::class.java))
+//                        }
+//                        ?.addOnFailureListener { e -> Log.w("edit", "Error writing document", e) }
+//                }else{
+//                    db?.collection("news")?.document(dokument)
+//                        ?.update(news)
+//                        ?.addOnSuccessListener {
+//                            Log.d("edit", news.toString())
+//                            startActivity(Intent(this,MainActivity::class.java))
+//                        }
+//                        ?.addOnFailureListener { e -> Log.w("edit", "Error writing document", e) }
+//                }
                 true
             }
             16908332->{
@@ -240,7 +250,15 @@ class AdminEditActivity : AppCompatActivity() {
                             "dateNews" to currentDate,
                             "contentNews" to mEditor.html
                         )
-
+                        db?.collection("news")?.document(dokument)
+                            ?.update(news)
+                            ?.addOnSuccessListener {
+                                Log.d("edit", news.toString())
+                                startActivity(Intent(this,MainActivity::class.java))
+                                finish()
+                            }
+                            ?.addOnFailureListener { e -> Log.w("edit", "Error writing document", e) }
+                        status="gambar berhasil"
                         Log.d("imagePathDownload", urlPathPublic.toString())
                     }
 
@@ -255,6 +273,7 @@ class AdminEditActivity : AppCompatActivity() {
                         Toast.LENGTH_LONG
                     )
                         .show()
+
                 }
         } else {
             val sdf = SimpleDateFormat("dd/M/yyyy hh:mm:ss")
@@ -263,6 +282,14 @@ class AdminEditActivity : AppCompatActivity() {
                 "titleNews" to binding.edtTitleNews.getTextValue,
                 "dateNews" to currentDate,
                 "contentNews" to mEditor.html)
+            db?.collection("news")?.document(dokument)
+                ?.update(news)
+                ?.addOnSuccessListener {
+                    Log.d("edit", news.toString())
+                    startActivity(Intent(this,MainActivity::class.java))
+                    finish()
+                }
+                ?.addOnFailureListener { e -> Log.w("edit", "Error writing document", e) }
         }
     }
     override fun onBackPressed() {

@@ -15,7 +15,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Eei">
-        <activity android:name=".ui.admin.editform.AdminEditActivity"></activity>
+        <activity android:name=".ui.admin.settingapp.fragment.bgsplashapp.BgSplashActivity"></activity>
+        <activity android:name=".ui.admin.settingapp.fragment.descapp.DescAppActivity" />
+        <activity android:name=".ui.admin.settingapp.fragment.logoapp.LogoAppActivity" />
+        <activity android:name=".ui.admin.settingapp.fragment.namaapp.NameAppActivity" />
+        <activity android:name=".ui.admin.editform.AdminEditActivity" />
         <activity android:name=".ui.tentang.TentangActivity" />
         <activity android:name=".ui.guest.detail.GuestDetailActivity" />
         <activity android:name=".ui.guest.GuestMainActivity" />

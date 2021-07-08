@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="#ECEAE8"
+    android:background="@color/bg"
     android:layout_height="match_parent"
     tools:context=".ui.admin.akun.fragment.AdminAkunFragment">
     <ImageView
@@ -152,25 +152,39 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
             <TextView
-                android:id="@+id/nameUser"
+                android:id="@+id/admin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/m_16"
+                android:layout_margin="@dimen/m_4"
                 android:fontFamily="@font/poppins_medium"
                 android:gravity="center"
-                android:text="Moh Yusril Ihza Maulana"
-                android:textColor="@color/akun"
+                android:text="Admin"
+                android:textColor="@color/black"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/ic_profile" />
+            <TextView
+                android:id="@+id/nameUser"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:fontFamily="@font/poppins_medium"
+                android:gravity="center"
+                android:text="Moh Yusril Ihza Maulana"
+                android:textColor="@color/akun"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/admin" />
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/ic_profile"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/yusril"
+                android:src="@drawable/ic_admin"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />

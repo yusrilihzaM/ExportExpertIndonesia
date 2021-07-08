@@ -1,7 +1,6 @@
 <resources>
-    <string name="app_name">eei</string>
+    <string name="app_name">Export-Expert Indonesia</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="beranda">Beranda</string>
     <string name="pengaturan_app">Pengaturan App</string>
     <string name="akun">Akun</string>
@@ -10,27 +9,39 @@
     <string name="cari_berita">Cari berita</string>
     <string name="simpan">Simpan</string>
     <string name="judul_postingan">Judul Postingan</string>
-    <string name="konten">Konten</string>
     <string name="personal">Personal</string>
     <string name="tentang">Tentang</string>
     <string name="masuk">Masuk</string>
     <string name="keluar">Keluar</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
-    <string name="kosong_email">Email Kosong harus di isi</string>
-    <string name="kosong_password">Password harus di isi</string>
     <string name="melanjutkan_sebagai_tamu">Melanjutkan Sebagai Tamu?</string>
     <string name="browse_poster">Browse Poster</string>
     <string name="konten_post">Konten Post</string>
     <string name="gambar_poster">Gambar Poster</string>
-    <string name="update_success">Update Berhasil</string>
-    <string name="update_fail">Update Gagal</string>
     <string name="hapus_data">Hapus Data</string>
     <string name="yakin_batal_menghapus">Apakah anda ingin menghapus ?</string>
     <string name="yakin_menghapus">Apakah anda yakin ingin menghapus postingan ini?</string>
-    <string name="hapus_datak">Hapus  postingan</string>
-    <string name="hapus_berhasil">Berhasil Dihapus</string>
-    <string name="data_berhasil_disimpan">Postingan berhasil di simpan</string>
     <string name="batal">Batal</string>
     <string name="tidak_ada_data">Tidak ada data</string>
+
+    <string name="bg_splash">Splash Screen</string>
+    <string name="nama_app">Nama Aplikasi</string>
+    <string name="desc_app">Deskripsi Aplikasi</string>
+    <string name="logo_aplikasi">Logo Aplikasi</string>
+
+    <string-array name="data_title">
+        <item>@string/nama_app</item>
+        <item>@string/logo_aplikasi</item>
+        <item>@string/desc_app</item>
+        <item>@string/bg_splash</item>
+    </string-array>
+
+
+    <array name="data_ic">
+        <item>@drawable/ic_sname</item>
+        <item>@drawable/ic_slogo</item>
+        <item>@drawable/ic_sdesc</item>
+        <item>@drawable/ic_sscreen</item>
+    </array>
 </resources>

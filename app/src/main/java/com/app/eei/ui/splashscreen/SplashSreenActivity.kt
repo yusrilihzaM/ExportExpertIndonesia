@@ -16,15 +16,18 @@ import coil.load
 import coil.request.ImageRequest
 import com.app.eei.R
 import com.app.eei.databinding.ActivitySplashSreenBinding
+import com.app.eei.extensions.Extensions.toast
 import com.app.eei.ui.admin.beranda.MainActivity
 import com.app.eei.ui.guest.GuestMainActivity
 import com.app.eei.ui.splashscreen.viewmodel.InfoViewModel
+import com.app.eei.utils.FirebaseUtils
 import com.bumptech.glide.Glide
+import com.google.firebase.auth.FirebaseUser
 import es.dmoral.toasty.Toasty
 
 class SplashSreenActivity : AppCompatActivity() {
     companion object{
-        const val TIME:Long=8000
+        const val TIME:Long=5000
     }
     private lateinit var binding: ActivitySplashSreenBinding
     private lateinit var viewModel: InfoViewModel
@@ -64,7 +67,15 @@ class SplashSreenActivity : AppCompatActivity() {
     }
 
     private fun moveActivity() {
-        startActivity(Intent(this, GuestMainActivity::class.java))
+        val user: FirebaseUser? = FirebaseUtils.firebaseAuth.currentUser
+        if(user!=null){
+            user?.let {
+                startActivity(Intent(this, MainActivity::class.java))
+                toast("Selamat datang kembali")
+            }
+        }else{
+            startActivity(Intent(this, GuestMainActivity::class.java))
+        }
         finish()
     }
 
