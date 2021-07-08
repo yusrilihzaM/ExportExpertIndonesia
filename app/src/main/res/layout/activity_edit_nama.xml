@@ -1,0 +1,53 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/bg_settings"
+    android:padding="@dimen/m_16">
+
+    <com.simform.customcomponent.SSCustomEdittextOutlinedBorder
+        android:id="@+id/edtTitleApp"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:inputType="text"
+        app:custom_component_border_color="@color/akun"
+        app:custom_component_border_error_color="@color/color_error"
+        app:custom_component_editText_hint="@string/nama_app"
+        app:custom_component_maxLength="25"
+        app:custom_component_maxline="1"
+        app:custom_component_minline="1"
+        app:custom_component_title="@string/nama_app"
+
+        app:custom_component_title_color="@color/akun"
+        app:custom_component_title_error_color="@color/color_error"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </com.simform.customcomponent.SSCustomEdittextOutlinedBorder>
+
+
+    <!--    <LinearLayout-->
+    <!--        android:orientation="vertical"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content">-->
+    <!--        <com.simform.customcomponent.SSCustomEdittextOutlinedBorder-->
+    <!--            android:id="@+id/edtTitleApp"-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="70dp"-->
+    <!--            android:layout_marginTop="@dimen/m_16"-->
+    <!--            android:inputType="text"-->
+    <!--            app:custom_component_editText_hint="@string/nama_app"-->
+    <!--            app:custom_component_maxline="1"-->
+    <!--            app:custom_component_minline="1"-->
+    <!--            app:custom_component_maxLength="25"-->
+
+    <!--            app:custom_component_title_color="@color/akun"-->
+    <!--            app:custom_component_title_error_color="@color/color_error"-->
+    <!--            app:custom_component_border_color="@color/akun"-->
+    <!--            app:custom_component_border_error_color="@color/color_error"-->
+    <!--            app:custom_component_title="@string/nama_app"-->
+    <!--            />-->
+    <!--    </LinearLayout>-->
+</androidx.constraintlayout.widget.ConstraintLayout>

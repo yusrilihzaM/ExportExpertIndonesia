@@ -5,10 +5,10 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.app.eei.databinding.ItemCardBinding
-import com.app.eei.databinding.ItemCardOneBinding
+
 import com.app.eei.entity.News
 import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
+
 
 class BerandaListAdapter(private val List: ArrayList<News>): RecyclerView.Adapter<BerandaListAdapter.ListViewHolder>() {
     private var onItemClickCallback: OnItemClickCallback? = null

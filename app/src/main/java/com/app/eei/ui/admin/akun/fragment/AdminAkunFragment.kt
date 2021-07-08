@@ -15,6 +15,7 @@ import com.app.eei.databinding.FragmentBerandaBinding
 import com.app.eei.extensions.Extensions.toast
 import com.app.eei.ui.admin.beranda.viewmodel.NewsViewModel
 import com.app.eei.ui.guest.GuestMainActivity
+import com.app.eei.ui.tentang.TentangActivity
 import com.app.eei.utils.FirebaseUtils.firebaseAuth
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
@@ -68,7 +69,7 @@ class AdminAkunFragment : Fragment() {
         }
 
         binding.btnTentang.setOnClickListener {
-            Toast.makeText(context, "Tentang", Toast.LENGTH_SHORT).show()
+            startActivity(Intent(context, TentangActivity::class.java))
         }
 
         binding.btnLogout.setOnClickListener {
