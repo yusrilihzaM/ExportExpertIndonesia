@@ -13,7 +13,9 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.webkit.MimeTypeMap
+import android.widget.EditText
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.app.eei.R
@@ -41,6 +43,11 @@ class AdminAddActivity : AppCompatActivity() {
     var urlPathPublic: String? = null
     var id:Int=0
     private lateinit var viewmodel: NewsViewModel
+    companion object {
+        const val EXTRA_DATA = "extra_data"
+        const val ALERT_DIALOG_CLOSE = 10
+        const val ALERT_DIALOG_DELETE = 20
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_admin_add)
@@ -170,7 +177,68 @@ class AdminAddActivity : AppCompatActivity() {
             mEditor.setNumbers()
         }
         binding.actionInsertLink.setOnClickListener {
-            mEditor.insertLink("www.google.com", "title")
+
+
+            val mBuilder = AlertDialog.Builder(this)
+            val customLayout=layoutInflater.inflate(R.layout.dialog_link,null)
+            mBuilder.setView(customLayout)
+            mBuilder.setTitle("Tambahkan HyperLink")
+
+            mBuilder
+                .setCancelable(false)
+                .setIcon(R.drawable.hyperlink)
+                .setPositiveButton("Simpan") { _, _ ->
+                    val judul=customLayout.findViewById<EditText>(R.id.titleLink)
+                    val url=customLayout.findViewById<EditText>(R.id.urlLink)
+
+                    if (judul.text.isEmpty() && url.text.isEmpty()){
+                        judul.error="Judul Hyperlink Harus Terisi"
+                        url.error="Judul Hyperlink Harus Terisi"
+                    }
+                    else if(judul.text.isEmpty()){
+                        judul.error="Judul Hyperlink Harus Terisi"
+                    }
+                    else if(url.text.isEmpty()){
+                        url.error="Judul Hyperlink Harus Terisi"
+                    }else{
+                        mEditor.insertLink( url.text.toString().trim(), judul.text.toString().trim())
+                    }
+                }
+                .setNegativeButton("Batal") { dialog, _ -> dialog.cancel() }
+            val alertDialog = mBuilder.create()
+            alertDialog.show()
+            alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(getColor(R.color.black))
+            alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(getColor(R.color.bg_del))
+
+        }
+        findViewById<View>(R.id.action_insert_youtube).setOnClickListener {
+
+            val mBuilder = AlertDialog.Builder(this)
+            val customLayout=layoutInflater.inflate(R.layout.dialog_youtube,null)
+            mBuilder.setView(customLayout)
+            mBuilder.setTitle("Tambahkan Video Youtube")
+
+            mBuilder
+                .setCancelable(false)
+                .setIcon(R.drawable.ic_utube)
+                .setPositiveButton("Simpan") { _, _ ->
+
+                    val url=customLayout.findViewById<EditText>(R.id.urlUtube)
+
+                    if(url.text.isEmpty()){
+                        url.error="Url Youtube Harus Terisi"
+                    }else{
+                        mEditor.insertYoutubeVideo(
+                            url.text.toString().trim()
+                        )
+                    }
+                }
+                .setNegativeButton("Batal") { dialog, _ -> dialog.cancel() }
+            val alertDialog = mBuilder.create()
+            alertDialog.show()
+            alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(getColor(R.color.black))
+            alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(getColor(R.color.bg_del))
+
         }
     }
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

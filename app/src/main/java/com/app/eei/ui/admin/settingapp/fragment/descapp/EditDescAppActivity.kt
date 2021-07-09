@@ -9,7 +9,9 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.EditText
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.ViewModelProvider
 import com.app.eei.R
 import com.app.eei.databinding.ActivityDescAppBinding
@@ -131,7 +133,39 @@ class EditDescAppActivity : AppCompatActivity() {
             mEditor.setNumbers()
         }
         binding.actionInsertLink.setOnClickListener {
-            mEditor.insertLink("www.google.com", "title")
+
+
+            val mBuilder = AlertDialog.Builder(this)
+            val customLayout=layoutInflater.inflate(R.layout.dialog_link,null)
+            mBuilder.setView(customLayout)
+            mBuilder.setTitle("Tambahkan HyperLink")
+
+            mBuilder
+                .setCancelable(false)
+                .setIcon(R.drawable.hyperlink)
+                .setPositiveButton("Simpan") { _, _ ->
+                    val judul=customLayout.findViewById<EditText>(R.id.titleLink)
+                    val url=customLayout.findViewById<EditText>(R.id.urlLink)
+
+                    if (judul.text.isEmpty() && url.text.isEmpty()){
+                        judul.error="Judul Hyperlink Harus Terisi"
+                        url.error="Judul Hyperlink Harus Terisi"
+                    }
+                    else if(judul.text.isEmpty()){
+                        judul.error="Judul Hyperlink Harus Terisi"
+                    }
+                    else if(url.text.isEmpty()){
+                        url.error="Judul Hyperlink Harus Terisi"
+                    }else{
+                        mEditor.insertLink( url.text.toString().trim(), judul.text.toString().trim())
+                    }
+                }
+                .setNegativeButton("Batal") { dialog, _ -> dialog.cancel() }
+            val alertDialog = mBuilder.create()
+            alertDialog.show()
+            alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(getColor(R.color.black))
+            alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(getColor(R.color.bg_del))
+
         }
     }
 
