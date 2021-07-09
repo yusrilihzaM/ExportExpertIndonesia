@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Html
 import android.util.Log
+import android.view.Gravity
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -21,6 +22,7 @@ import com.app.eei.ui.admin.beranda.MainActivity
 import com.app.eei.ui.admin.settingapp.fragment.namaapp.NameAppActivity
 import com.app.eei.ui.splashscreen.viewmodel.InfoViewModel
 import com.google.firebase.firestore.FirebaseFirestore
+import com.thecode.aestheticdialogs.*
 import es.dmoral.toasty.Toasty
 import jp.wasabeef.richeditor.RichEditor
 
@@ -193,9 +195,23 @@ class EditDescAppActivity : AppCompatActivity() {
             ?.update("deskripsiAplikasi",binding.editor.html)
             ?.addOnSuccessListener {
                 Log.d("edit", binding.editor.html)
-                toast("Deskripsi aplikasi berhasil di simpan")
-                startActivity(Intent(this, DescAppActivity::class.java))
-                finish()
+//                toast("Deskripsi aplikasi berhasil di simpan")
+                AestheticDialog.Builder(this@EditDescAppActivity, DialogStyle.FLAT, DialogType.SUCCESS)
+                    .setTitle("Deskripsi Aplikasi")
+                    .setMessage("Perubahan Berhasil Di Simpan")
+                    .setCancelable(false)
+                    .setDarkMode(false)
+                    .setGravity(Gravity.CENTER)
+                    .setAnimation(DialogAnimation.SHRINK)
+                    .setOnClickListener(object : OnDialogClickListener {
+                        override fun onClick(dialog: AestheticDialog.Builder) {
+                            dialog.dismiss()
+                            startActivity(Intent(this@EditDescAppActivity,DescAppActivity::class.java))
+                            finish()
+                            //actions...
+                        }
+                    })
+                    .show()
             }
             ?.addOnFailureListener { e -> Log.w("editNama", "Error writing document", e) }
     }

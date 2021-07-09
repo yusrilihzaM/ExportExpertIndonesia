@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.text.Html
 import android.util.Log
+import android.view.Gravity
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -23,6 +24,7 @@ import com.bumptech.glide.Glide
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
+import com.thecode.aestheticdialogs.*
 import es.dmoral.toasty.Toasty
 import java.io.IOException
 import java.text.SimpleDateFormat
@@ -125,6 +127,38 @@ class LogoAppActivity : AppCompatActivity() {
                             ?.update("icLogo",urlPathPublic)
                             ?.addOnSuccessListener {
                                 Log.d("edit", "berhasil")
+                                AestheticDialog.Builder(this, DialogStyle.FLAT, DialogType.SUCCESS)
+                                    .setTitle("Edit Postingan")
+                                    .setMessage("Berhasil Di Simpan")
+                                    .setCancelable(false)
+                                    .setDarkMode(false)
+                                    .setGravity(Gravity.CENTER)
+                                    .setAnimation(DialogAnimation.SHRINK)
+                                    .setOnClickListener(object : OnDialogClickListener {
+                                        override fun onClick(dialog: AestheticDialog.Builder) {
+                                            dialog.dismiss()
+                                            AestheticDialog.Builder(this@LogoAppActivity, DialogStyle.FLAT, DialogType.SUCCESS)
+                                                .setTitle("Logo Aplikasi")
+                                                .setMessage("Perubahan Berhasil Di Simpan")
+                                                .setCancelable(false)
+                                                .setDarkMode(false)
+                                                .setGravity(Gravity.CENTER)
+                                                .setAnimation(DialogAnimation.SHRINK)
+                                                .setOnClickListener(object : OnDialogClickListener {
+                                                    override fun onClick(dialog: AestheticDialog.Builder) {
+                                                        dialog.dismiss()
+                                                        startActivity(Intent(this@LogoAppActivity,MainActivity::class.java))
+                                                        finish()
+                                                        //actions...
+                                                    }
+                                                })
+                                                .show()
+//                                            startActivity(Intent(this@LogoAppActivity,LogoAppActivity::class.java))
+//                                            finish()
+                                            //actions...
+                                        }
+                                    })
+                                    .show()
 //                                startActivity(Intent(this,MainActivity::class.java))
 //                                finish()
                             }

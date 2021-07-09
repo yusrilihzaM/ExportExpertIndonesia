@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Html
 import android.util.Log
+import android.view.Gravity
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
@@ -18,6 +19,7 @@ import com.app.eei.extensions.Extensions.toast
 import com.app.eei.ui.admin.beranda.MainActivity
 import com.app.eei.ui.admin.editform.AdminEditActivity
 import com.google.firebase.firestore.FirebaseFirestore
+import com.thecode.aestheticdialogs.*
 
 class EditNamaActivity : AppCompatActivity() {
     private lateinit var binding: ActivityEditNamaBinding
@@ -55,8 +57,22 @@ class EditNamaActivity : AppCompatActivity() {
                     ?.addOnSuccessListener {
                         Log.d("edit", nama)
                         toast("Nama aplikasi berhasil di simpan")
-                        startActivity(Intent(this,NameAppActivity::class.java))
-                        finish()
+                        AestheticDialog.Builder(this@EditNamaActivity, DialogStyle.FLAT, DialogType.SUCCESS)
+                            .setTitle("Deskripsi Aplikasi")
+                            .setMessage("Perubahan Berhasil Di Simpan")
+                            .setCancelable(false)
+                            .setDarkMode(false)
+                            .setGravity(Gravity.CENTER)
+                            .setAnimation(DialogAnimation.SHRINK)
+                            .setOnClickListener(object : OnDialogClickListener {
+                                override fun onClick(dialog: AestheticDialog.Builder) {
+                                    dialog.dismiss()
+                                    startActivity(Intent(this@EditNamaActivity,NameAppActivity::class.java))
+                                    finish()
+                                    //actions...
+                                }
+                            })
+                            .show()
                     }
                     ?.addOnFailureListener { e -> Log.w("editNama", "Error writing document", e) }
                 true

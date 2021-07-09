@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Html
 import android.text.Spanned
+import android.view.Gravity
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -18,6 +19,7 @@ import com.app.eei.ui.admin.editform.AdminEditActivity.Companion.EXTRA_DATA_EDIT
 import com.bumptech.glide.Glide
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
+import com.thecode.aestheticdialogs.*
 
 class AdminDetailActivity : AppCompatActivity() {
     companion object {
@@ -90,10 +92,23 @@ class AdminDetailActivity : AppCompatActivity() {
                     finish()
                 } else {
                    viewmodel.delNews(id)
+                    AestheticDialog.Builder(this, DialogStyle.FLAT, DialogType.SUCCESS)
+                        .setTitle("Postingan")
+                        .setMessage("Berhasil Di Hapus")
+                        .setCancelable(false)
+                        .setDarkMode(false)
+                        .setGravity(Gravity.CENTER)
+                        .setAnimation(DialogAnimation.SHRINK)
+                        .setOnClickListener(object : OnDialogClickListener {
+                            override fun onClick(dialog: AestheticDialog.Builder) {
+                                dialog.dismiss()
+                                startActivity(Intent(this@AdminDetailActivity,MainActivity::class.java))
+                                finish()
+                                //actions...
+                            }
+                        })
+                        .show()
 
-                    Toast.makeText(this, "Hapus Berhasil", Toast.LENGTH_SHORT).show()
-                    startActivity(Intent(this,MainActivity::class.java))
-                    finish()
                 }
             }
             .setNegativeButton("Tidak") { dialog, _ -> dialog.cancel() }

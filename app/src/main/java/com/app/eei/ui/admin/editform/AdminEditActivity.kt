@@ -10,6 +10,7 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.text.Html
 import android.util.Log
+import android.view.Gravity
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -30,6 +31,7 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
+import com.thecode.aestheticdialogs.*
 import jp.wasabeef.richeditor.RichEditor
 import java.io.IOException
 import java.text.SimpleDateFormat
@@ -270,8 +272,23 @@ class AdminEditActivity : AppCompatActivity() {
                             ?.update(news)
                             ?.addOnSuccessListener {
                                 Log.d("edit", news.toString())
-                                startActivity(Intent(this,MainActivity::class.java))
-                                finish()
+                                AestheticDialog.Builder(this, DialogStyle.FLAT, DialogType.SUCCESS)
+                                    .setTitle("Postingan")
+                                    .setMessage("Perubahan Berhasil Di Simpan")
+                                    .setCancelable(false)
+                                    .setDarkMode(false)
+                                    .setGravity(Gravity.CENTER)
+                                    .setAnimation(DialogAnimation.SHRINK)
+                                    .setOnClickListener(object : OnDialogClickListener {
+                                        override fun onClick(dialog: AestheticDialog.Builder) {
+                                            dialog.dismiss()
+                                            startActivity(Intent(this@AdminEditActivity,MainActivity::class.java))
+                                            finish()
+                                            //actions...
+                                        }
+                                    })
+                                    .show()
+
                             }
                             ?.addOnFailureListener { e -> Log.w("edit", "Error writing document", e) }
                         status="gambar berhasil"

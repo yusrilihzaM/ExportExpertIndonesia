@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.text.Html
 import android.util.Log
+import android.view.Gravity
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -26,6 +27,7 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
+import com.thecode.aestheticdialogs.*
 import jp.wasabeef.richeditor.RichEditor
 import java.io.IOException
 import java.text.SimpleDateFormat
@@ -310,9 +312,22 @@ class AdminAddActivity : AppCompatActivity() {
                             ?.set(news)
                             ?.addOnSuccessListener {
                                 Log.d(TAG, "DocumentSnapshot successfully written!")
-                                startActivity(Intent(this,MainActivity::class.java))
-                                finish()
-
+                                AestheticDialog.Builder(this, DialogStyle.FLAT, DialogType.SUCCESS)
+                                    .setTitle("Tambah Postingan")
+                                    .setMessage("Berhasil Di Simpan")
+                                    .setCancelable(false)
+                                    .setDarkMode(false)
+                                    .setGravity(Gravity.CENTER)
+                                    .setAnimation(DialogAnimation.SHRINK)
+                                    .setOnClickListener(object : OnDialogClickListener {
+                                        override fun onClick(dialog: AestheticDialog.Builder) {
+                                            dialog.dismiss()
+                                            kembali()
+                                            finish()
+                                            //actions...
+                                        }
+                                    })
+                                    .show()
                             }
                             ?.addOnFailureListener { e -> Log.w(TAG, "Error writing document", e) }
                         Log.d("imagePathDownload", urlPathPublic.toString())
@@ -340,5 +355,8 @@ class AdminAddActivity : AppCompatActivity() {
     override fun onBackPressed() {
         super.onBackPressed()
         startActivity(Intent(this, MainActivity::class.java))
+    }
+    private fun kembali(){
+        startActivity(Intent(this@AdminAddActivity, MainActivity::class.java))
     }
 }

@@ -2,6 +2,7 @@ package com.app.eei.ui.admin.akun.fragment
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.Gravity
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +14,7 @@ import com.app.eei.R
 import com.app.eei.databinding.FragmentAdminAkunBinding
 import com.app.eei.databinding.FragmentBerandaBinding
 import com.app.eei.extensions.Extensions.toast
+import com.app.eei.ui.admin.beranda.MainActivity
 import com.app.eei.ui.admin.beranda.viewmodel.NewsViewModel
 import com.app.eei.ui.guest.GuestMainActivity
 import com.app.eei.ui.tentang.TentangActivity
@@ -25,6 +27,7 @@ import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.ktx.Firebase
+import com.thecode.aestheticdialogs.*
 
 
 class AdminAkunFragment : Fragment() {
@@ -74,9 +77,25 @@ class AdminAkunFragment : Fragment() {
 
         binding.btnLogout.setOnClickListener {
             firebaseAuth.signOut()
-            startActivity(Intent(context, GuestMainActivity::class.java))
-            activity?.toast("signed out")
-            activity?.finish()
+            AestheticDialog.Builder(requireActivity(), DialogStyle.TOASTER, DialogType.SUCCESS)
+                .setTitle("Keluar")
+                .setMessage("Berhasil")
+                .setCancelable(false)
+                .setDarkMode(false)
+                .setGravity(Gravity.CENTER)
+                .setAnimation(DialogAnimation.SHRINK)
+                .setOnClickListener(object : OnDialogClickListener {
+                    override fun onClick(dialog: AestheticDialog.Builder) {
+                        dialog.dismiss()
+                        startActivity(Intent(context, GuestMainActivity::class.java))
+                        activity?.finish()
+                        //actions...
+                    }
+                })
+                .show()
+//            startActivity(Intent(context, GuestMainActivity::class.java))
+//            activity?.toast("signed out")
+//            activity?.finish()
         }
     }
 }
