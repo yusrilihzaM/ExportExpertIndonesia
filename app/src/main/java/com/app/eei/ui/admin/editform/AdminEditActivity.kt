@@ -40,7 +40,6 @@ class AdminEditActivity : AppCompatActivity() {
     var Image_Request_Code = 7
     var FilePathUri: Uri? = null
     var storageReference: StorageReference? = null
-    var databaseReference: DatabaseReference? = null
     var db: FirebaseFirestore? = null
     var progressDialog: ProgressDialog? = null
     var urlPathPublic: String? = null
@@ -198,23 +197,6 @@ class AdminEditActivity : AppCompatActivity() {
             R.id.submit->{
                 Toast.makeText(this, "Postingan Disimpan", Toast.LENGTH_SHORT).show()
                 Upload()
-//                if(status=="gambar berhasil"){
-//                    db?.collection("news")?.document(dokument)
-//                        ?.update(news)
-//                        ?.addOnSuccessListener {
-//                            Log.d("edit", news.toString())
-//                            startActivity(Intent(this,MainActivity::class.java))
-//                        }
-//                        ?.addOnFailureListener { e -> Log.w("edit", "Error writing document", e) }
-//                }else{
-//                    db?.collection("news")?.document(dokument)
-//                        ?.update(news)
-//                        ?.addOnSuccessListener {
-//                            Log.d("edit", news.toString())
-//                            startActivity(Intent(this,MainActivity::class.java))
-//                        }
-//                        ?.addOnFailureListener { e -> Log.w("edit", "Error writing document", e) }
-//                }
                 true
             }
             16908332->{

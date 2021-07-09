@@ -180,8 +180,27 @@ class AdminAddActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.submit->{
-                Toast.makeText(this, "Postingan Disimpan", Toast.LENGTH_SHORT).show()
-                Upload()
+                if (binding.edtTitleNews.getTextValue=="" && mEditor.html==null && FilePathUri==null){
+                    binding.status.visibility=View.VISIBLE
+                    binding.status.text="Semua Form Harus Terisi"
+                }
+                else if (binding.edtTitleNews.getTextValue==""){
+                    binding.status.visibility=View.VISIBLE
+                    binding.status.text="Judul Postingan Harus Terisi"
+                    binding.edtTitleNews.setIsErrorEnable(true)
+                }
+                else if (mEditor.html==null){
+                    binding.status.visibility=View.VISIBLE
+                    binding.status.text="Isi Konten Postingan Harus Terisi"
+                }
+                else if (FilePathUri==null){
+                    binding.status.visibility=View.VISIBLE
+                    binding.status.text="Silakan Pilih Gambar atau Tambahkan Nama Gambar"
+                }
+                else{
+                    Upload()
+                }
+
                 true
             }
             16908332->{
@@ -245,7 +264,7 @@ class AdminAddActivity : AppCompatActivity() {
         } else {
             Toast.makeText(
                 this,
-                "Please Select Image or Add Image Name",
+                "Silakan Pilih Gambar atau Tambahkan Nama Gambar",
                 Toast.LENGTH_LONG
             ).show()
         }

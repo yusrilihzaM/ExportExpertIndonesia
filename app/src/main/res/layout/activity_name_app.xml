@@ -31,7 +31,7 @@
         android:id="@+id/judul"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Nama aplikasi saat ini"
+        android:text="@string/nama_aplikasi_saat_ini"
         android:fontFamily="@font/poppins"
         android:textColor="@color/black"
         android:textSize="@dimen/m_16"
@@ -64,7 +64,6 @@
                 android:layout_weight="1"
                 android:fontFamily="@font/poppins"
                 android:gravity="center"
-                android:text="@string/nama_app"
                 android:textColor="@color/black"
                 android:textSize="16sp" />
 
@@ -74,7 +73,7 @@
                 android:layout_height="35dp"
                 android:clickable="true"
                 android:foreground="?android:attr/selectableItemBackground"
-                android:src="@drawable/ic_baseline_edit_24" />
+                android:src="@drawable/ic_edit" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

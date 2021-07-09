@@ -29,6 +29,11 @@
     <string name="nama_app">Nama Aplikasi</string>
     <string name="desc_app">Deskripsi Aplikasi</string>
     <string name="logo_aplikasi">Logo Aplikasi</string>
+    <string name="browse_logo_baru">Browse logo baru</string>
+    <string name="browse_background_splash_screem">Browse background splash screen</string>
+    <string name="background_splash_screen">Background splash screen</string>
+    <string name="deskripsi_aplikasi">Deskripsi Aplikasi</string>
+    <string name="nama_aplikasi_saat_ini">Nama aplikasi saat ini</string>
 
     <string-array name="data_title">
         <item>@string/nama_app</item>

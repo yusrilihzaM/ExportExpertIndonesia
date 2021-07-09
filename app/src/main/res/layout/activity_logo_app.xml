@@ -1,9 +1,65 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.admin.settingapp.fragment.logoapp.LogoAppActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    android:layout_width="match_parent"
+    android:padding="@dimen/m_16"
+    android:background="@color/bg_settings"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/m_16"
+            android:padding="@dimen/m_8">
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="Logo Aplikasi"/>
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/btnBrowse"
+                    android:layout_width="match_parent"
+                    app:cardCornerRadius="@dimen/m_16"
+                    android:layout_marginLeft="@dimen/m_8"
+                    android:layout_marginRight="@dimen/m_8"
+                    android:layout_marginBottom="@dimen/m_16"
+                    app:cardBackgroundColor="@color/bg_floating"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:layout_height="50dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:textColor="@color/white"
+                        android:fontFamily="@font/poppins"
+                        android:text="@string/browse_logo_baru"/>
+                </androidx.cardview.widget.CardView>
+                <ImageView
+                    android:id="@+id/imgNews"
+                    android:layout_width="match_parent"
+                    android:layout_marginBottom="@dimen/m_16"
+                    android:layout_height="200dp"
+                    android:visibility="gone"
+                    />
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+
+    </LinearLayout>
+
+
+
+
+</ScrollView>

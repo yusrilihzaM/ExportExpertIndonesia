@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.text.Html
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import coil.ImageLoader
@@ -35,7 +36,7 @@ class TentangActivity : AppCompatActivity() {
                 Toasty.error(this, "No Internet Access.", Toast.LENGTH_SHORT, true).show();
             }
             binding.namaAplikasi.text=data[0].namaAplikasi
-            binding.deskripsiAplikasi.text=data[0].deskripsiAplikasi
+            binding.deskripsiAplikasi.text= Html.fromHtml(data[0].deskripsiAplikasi)
             Glide.with(this)
                 .load(data[0].icLogo)
                 .into(binding.icLogoogo)

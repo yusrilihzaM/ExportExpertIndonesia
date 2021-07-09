@@ -15,7 +15,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Eei">
-        <activity android:name=".ui.admin.settingapp.fragment.namaapp.EditNamaActivity"></activity>
+        <activity android:name=".ui.admin.settingapp.fragment.descapp.EditDescAppActivity"></activity>
+        <activity android:name=".ui.admin.settingapp.fragment.namaapp.EditNamaActivity" />
         <activity android:name=".ui.admin.settingapp.fragment.bgsplashapp.BgSplashActivity" />
         <activity android:name=".ui.admin.settingapp.fragment.descapp.DescAppActivity" />
         <activity android:name=".ui.admin.settingapp.fragment.logoapp.LogoAppActivity" />
