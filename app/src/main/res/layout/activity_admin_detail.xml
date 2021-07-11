@@ -123,21 +123,17 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/dateNews" />
-        <TextView
-            android:id="@+id/contentNews"
+
+
+        <WebView
+            android:id="@+id/webview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginRight="@dimen/m_16"
-            android:layout_marginLeft="@dimen/m_16"
-            android:layout_marginBottom="@dimen/m_4"
-            android:text="content"
-            android:linksClickable="true"
-            android:autoLink="web|email"
-            android:fontFamily="@font/poppins"
-            android:textSize="14sp"
-            android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginLeft="@dimen/m_12"
+            android:layout_marginRight="@dimen/m_12"
+            android:layout_marginBottom="@dimen/m_12"
             app:layout_constraintTop_toBottomOf="@+id/titleNews" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

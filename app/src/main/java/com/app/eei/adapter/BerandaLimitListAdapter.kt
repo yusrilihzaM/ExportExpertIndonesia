@@ -10,7 +10,7 @@ import com.app.eei.entity.News
 import com.bumptech.glide.Glide
 
 
-class BerandaListAdapter(private val List: ArrayList<News>): RecyclerView.Adapter<BerandaListAdapter.ListViewHolder>() {
+class BerandaLimitListAdapter(private val List: ArrayList<News>): RecyclerView.Adapter<BerandaLimitListAdapter.ListViewHolder>() {
     private var onItemClickCallback: OnItemClickCallback? = null
 
     fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
@@ -52,7 +52,7 @@ class BerandaListAdapter(private val List: ArrayList<News>): RecyclerView.Adapte
     }
 
     override fun getItemCount(): Int {
-        return List.size
+        return 3
 
     }
     interface OnItemClickCallback {

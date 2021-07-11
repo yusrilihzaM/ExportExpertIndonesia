@@ -37,6 +37,7 @@
     <string name="url_link">Url Link</string>
     <string name="judul_hyperlink">Judul HyperLink</string>
     <string name="link_url_video_youtube">Link URL Video Youtube</string>
+    <string name="lihat_semua">Lihat semua</string>
 
     <string-array name="data_title">
         <item>@string/nama_app</item>

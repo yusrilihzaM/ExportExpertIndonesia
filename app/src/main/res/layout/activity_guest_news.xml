@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.guest.news.GuestNewsActivity">
+
+    <ImageView
+        android:id="@+id/noData"
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
+        android:layout_margin="@dimen/m_16"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvnodata"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:fontFamily="@font/poppins"
+        android:gravity="center"
+        android:text="@string/tidak_ada_data"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/noData" />
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipeContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/m_16"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvNews"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/item_card" />
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmer"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="@dimen/m_16"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <include layout="@layout/shimmer_item_card" />
+
+            <include layout="@layout/shimmer_item_card" />
+
+            <include layout="@layout/shimmer_item_card" />
+
+            <include layout="@layout/shimmer_item_card" />
+
+            <include layout="@layout/shimmer_item_card" />
+
+            <include layout="@layout/shimmer_item_card" />
+
+            <include layout="@layout/shimmer_item_card" />
+
+            <include layout="@layout/shimmer_item_card" />
+
+            <include layout="@layout/shimmer_item_card" />
+
+            <include layout="@layout/shimmer_item_card" />
+
+            <include layout="@layout/shimmer_item_card" />
+
+            <include layout="@layout/shimmer_item_card" />
+
+            <include layout="@layout/shimmer_item_card" />
+
+            <include layout="@layout/shimmer_item_card" />
+
+            <include layout="@layout/shimmer_item_card" />
+        </LinearLayout>
+    </com.facebook.shimmer.ShimmerFrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

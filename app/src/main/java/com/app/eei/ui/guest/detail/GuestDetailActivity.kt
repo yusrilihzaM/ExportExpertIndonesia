@@ -33,10 +33,12 @@ class GuestDetailActivity : AppCompatActivity() {
         val htmlAsSpanned: Spanned = Html.fromHtml(contentString)
         binding.titleNews.text=data.title
         binding.dateNews.text=data.dateNews
-        binding.contentNews.text= htmlAsSpanned
+        binding.contentNews.loadData(data.contentNews, "text/html; charset=utf-8", "UTF-8")
+        binding.contentNews.settings.javaScriptEnabled=true
         Glide.with(this)
             .load(data.imgNews)
             .into(binding.imgNews)
+
 
         binding.btnBack.setOnClickListener {
             startActivity(Intent(this, GuestMainActivity::class.java))

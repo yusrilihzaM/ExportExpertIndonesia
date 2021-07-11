@@ -43,9 +43,12 @@ class AdminDetailActivity : AppCompatActivity() {
 
         val contentString=data.contentNews
         val htmlAsSpanned:Spanned=Html.fromHtml(contentString)
+
+        binding.webview.loadData(data.contentNews, "text/html; charset=utf-8", "UTF-8")
+        binding.webview.settings.javaScriptEnabled=true
         binding.titleNews.text=data.title
         binding.dateNews.text=data.dateNews
-        binding.contentNews.text= htmlAsSpanned
+//        binding.contentNews.text= htmlAsSpanned
         Glide.with(this)
             .load(data.imgNews)
             .into(binding.imgNews)

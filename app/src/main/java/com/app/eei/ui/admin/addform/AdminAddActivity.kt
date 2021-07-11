@@ -43,7 +43,7 @@ class AdminAddActivity : AppCompatActivity() {
     var db: FirebaseFirestore? = null
     var progressDialog: ProgressDialog? = null
     var urlPathPublic: String? = null
-    var id:Int=0
+    var id:Int=1
     private lateinit var viewmodel: NewsViewModel
     companion object {
         const val EXTRA_DATA = "extra_data"
@@ -60,6 +60,7 @@ class AdminAddActivity : AppCompatActivity() {
         viewmodel.setNews()
         viewmodel.getNews().observe(this,{data->
             id=data.size+1
+            Log.d("id",id.toString())
         })
         val upArrow =resources.getDrawable(R.drawable.ic_baseline_arrow_back_ios_24)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)

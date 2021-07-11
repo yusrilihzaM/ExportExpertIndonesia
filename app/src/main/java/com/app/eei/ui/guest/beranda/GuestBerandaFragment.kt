@@ -14,11 +14,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.app.eei.R
+import com.app.eei.adapter.BerandaLimitListAdapter
 import com.app.eei.adapter.BerandaListAdapter
 import com.app.eei.databinding.FragmentGuestBerandaBinding
 import com.app.eei.entity.News
 import com.app.eei.ui.admin.beranda.viewmodel.NewsViewModel
 import com.app.eei.ui.guest.detail.GuestDetailActivity
+import com.app.eei.ui.guest.news.GuestNewsActivity
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
@@ -32,10 +34,8 @@ class GuestBerandaFragment : Fragment() {
     private lateinit var binding: FragmentGuestBerandaBinding
     private lateinit var recyclerView: RecyclerView
     private lateinit var viewmodel: NewsViewModel
-    private lateinit var shimmer: Shimmer
-    private var username: String? = null
     private lateinit var swipeContainer: SwipeRefreshLayout
-    private lateinit var berandaListAdapter: BerandaListAdapter
+    private lateinit var berandaListAdapter: BerandaLimitListAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -76,6 +76,9 @@ class GuestBerandaFragment : Fragment() {
             showData()
             berandaListAdapter.notifyDataSetChanged()
         }
+        binding.btnLihata.setOnClickListener {
+            startActivity(Intent(context,GuestNewsActivity::class.java))
+        }
     }
     private fun showSearch(title:String){
         showShimmer(true)
@@ -85,12 +88,12 @@ class GuestBerandaFragment : Fragment() {
         viewmodel.setSearchNews(title)
         viewmodel.getNews().observe(viewLifecycleOwner,{data->
             showShimmer(false)
-            berandaListAdapter=BerandaListAdapter(data)
+            berandaListAdapter= BerandaLimitListAdapter(data)
             berandaListAdapter.notifyDataSetChanged()
             recyclerView.adapter=berandaListAdapter
 
             swipeContainer.isRefreshing = false
-            berandaListAdapter.setOnItemClickCallback(object :BerandaListAdapter.OnItemClickCallback{
+            berandaListAdapter.setOnItemClickCallback(object :BerandaLimitListAdapter.OnItemClickCallback{
                 override fun onItemClicked(data: News) {
                     Toast.makeText(context, data.title, Toast.LENGTH_SHORT).show()
                     val intent= Intent(context, GuestDetailActivity::class.java)
@@ -115,7 +118,7 @@ class GuestBerandaFragment : Fragment() {
         viewmodel.setNews()
         viewmodel.getNews().observe(viewLifecycleOwner,{data->
             showShimmer(false)
-            berandaListAdapter=BerandaListAdapter(data)
+            berandaListAdapter=BerandaLimitListAdapter(data)
             recyclerView.adapter=berandaListAdapter
             berandaListAdapter.notifyDataSetChanged()
             swipeContainer.isRefreshing = false
@@ -153,7 +156,7 @@ class GuestBerandaFragment : Fragment() {
                 binding.tvnodata.visibility=View.GONE
             }
 
-            berandaListAdapter.setOnItemClickCallback(object :BerandaListAdapter.OnItemClickCallback{
+            berandaListAdapter.setOnItemClickCallback(object :BerandaLimitListAdapter.OnItemClickCallback{
                 override fun onItemClicked(data: News) {
                     Toast.makeText(context, data.title, Toast.LENGTH_SHORT).show()
                     val intent= Intent(context, GuestDetailActivity::class.java)

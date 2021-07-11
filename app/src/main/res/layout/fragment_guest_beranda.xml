@@ -110,18 +110,39 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/noData" />
 
+    <TextView
+        android:id="@+id/btn_lihata"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins"
+        android:textColor="@color/black"
+        android:text="@string/lihat_semua"
+        android:gravity="right"
+        android:clickable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:layout_marginRight="@dimen/m_16"
+        android:layout_marginLeft="@dimen/m_16"
+        android:layout_marginTop="@dimen/m_16"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.187"
+        app:layout_constraintTop_toBottomOf="@+id/cardView"
+        app:layout_constraintVertical_bias="0.0"
 
+        />
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/swipeContainer"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_margin="@dimen/m_16"
+        android:layout_marginRight="@dimen/m_16"
+        android:layout_marginLeft="@dimen/m_16"
+        android:layout_marginTop="@dimen/m_4"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.187"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView"
+        app:layout_constraintTop_toBottomOf="@+id/btn_lihata"
         app:layout_constraintVertical_bias="0.0">
 
         <androidx.recyclerview.widget.RecyclerView
@@ -139,18 +160,22 @@
         android:id="@+id/shimmer"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_margin="@dimen/m_16"
+        android:layout_marginRight="@dimen/m_16"
+        android:layout_marginLeft="@dimen/m_16"
+        android:layout_marginTop="@dimen/m_4"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.187"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView"
+        app:layout_constraintTop_toBottomOf="@+id/btn_lihata"
         app:layout_constraintVertical_bias="0.0">
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-            <include layout="@layout/shimmer_item_card"/>
+
+            <include layout="@layout/shimmer_item_card" />
+
             <include layout="@layout/shimmer_item_card"/>
             <include layout="@layout/shimmer_item_card"/>
             <include layout="@layout/shimmer_item_card"/>
