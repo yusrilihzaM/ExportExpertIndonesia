@@ -49,6 +49,11 @@ class GuestNewsActivity : AppCompatActivity() {
         swipeContainer = binding.swipeContainer
 
         showData()
+        swipeContainer.setOnRefreshListener {
+            swipeContainer.isRefreshing = true
+            showData()
+            berandaListAdapter.notifyDataSetChanged()
+        }
     }
 
     override fun onPause() {

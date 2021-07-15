@@ -223,6 +223,36 @@ class AdminEditActivity : AppCompatActivity() {
             alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(getColor(R.color.bg_del))
 
         }
+
+        findViewById<View>(R.id.action_insert_youtube).setOnClickListener {
+
+            val mBuilder = AlertDialog.Builder(this)
+            val customLayout=layoutInflater.inflate(R.layout.dialog_youtube,null)
+            mBuilder.setView(customLayout)
+            mBuilder.setTitle("Tambahkan Video Youtube")
+
+            mBuilder
+                .setCancelable(false)
+                .setIcon(R.drawable.ic_utube)
+                .setPositiveButton("Simpan") { _, _ ->
+
+                    val url=customLayout.findViewById<EditText>(R.id.urlUtube)
+
+                    if(url.text.isEmpty()){
+                        url.error="Url Youtube Harus Terisi"
+                    }else{
+                        mEditor.insertYoutubeVideo(
+                            url.text.toString().trim()
+                        )
+                    }
+                }
+                .setNegativeButton("Batal") { dialog, _ -> dialog.cancel() }
+            val alertDialog = mBuilder.create()
+            alertDialog.show()
+            alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(getColor(R.color.black))
+            alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(getColor(R.color.bg_del))
+
+        }
     }
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.add_menu, menu)

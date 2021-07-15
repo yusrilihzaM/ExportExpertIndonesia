@@ -10,12 +10,19 @@
 
     <application
         android:allowBackup="true"
+        android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Eei">
-        <activity android:name=".ui.guest.news.GuestNewsActivity"></activity>
+        <activity android:name=".ui.admin.menu.tips.AdminTipsActivity"></activity>
+        <activity android:name=".ui.admin.menu.podcast.AdminPodcastActivity" />
+        <activity android:name=".ui.admin.menu.mitra.AdminMitraActivity" />
+        <activity android:name=".ui.admin.menu.komunitas.AdminKomunitasActivity" />
+        <activity android:name=".ui.admin.menu.event.AdminEventActivity" />
+        <activity android:name=".ui.admin.menu.berita.AdminNewsActivity" />
+        <activity android:name=".ui.guest.news.GuestNewsActivity" />
         <activity android:name=".ui.admin.settingapp.fragment.descapp.EditDescAppActivity" />
         <activity android:name=".ui.admin.settingapp.fragment.namaapp.EditNamaActivity" />
         <activity android:name=".ui.admin.settingapp.fragment.bgsplashapp.BgSplashActivity" />

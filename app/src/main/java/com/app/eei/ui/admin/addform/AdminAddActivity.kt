@@ -302,12 +302,14 @@ class AdminAddActivity : AppCompatActivity() {
                     if(url!=null){
                         val sdf = SimpleDateFormat("dd/M/yyyy hh:mm:ss")
                         val currentDate = sdf.format(Date())
+                        val titleSplit = binding.edtTitleNews.getTextValue.split(" ").toTypedArray().toList()
                         val news = hashMapOf(
                             "imgNews" to urlPathPublic.toString(),
                             "idNews" to id,
                             "titleNews" to binding.edtTitleNews.getTextValue,
                             "dateNews" to currentDate,
-                            "contentNews" to mEditor.html
+                            "contentNews" to mEditor.html,
+                            "titleSplit" to titleSplit
                         )
                         db?.collection("news")?.document(id.toString())
                             ?.set(news)

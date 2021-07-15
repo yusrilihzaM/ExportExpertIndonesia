@@ -6,28 +6,36 @@
     android:layout_height="match_parent"
     tools:context=".ui.admin.detail.AdminDetailActivity">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
-        <TextView
-            android:id="@+id/dateNews"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="@dimen/m_16"
-            android:layout_marginLeft="@dimen/m_16"
-            android:layout_marginBottom="@dimen/m_4"
-            android:layout_marginTop="@dimen/m_8"
-            android:text="14 Juni 2021"
-            android:fontFamily="@font/poppins_light"
-            android:textSize="12sp"
-            android:textColor="@color/black"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardView2" />
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+            <androidx.cardview.widget.CardView
+                android:id="@+id/btnBack"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/m_16"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                app:cardBackgroundColor="@color/akun"
+                app:cardCornerRadius="@dimen/m_12"
+                app:layout_constraintStart_toStartOf="parent"
 
+                app:layout_constraintTop_toTopOf="parent">
 
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_gravity="center"
+                    android:layout_margin="@dimen/m_8"
+                    android:src="@drawable/ic_baseline_arrow_back_24" />
+            </androidx.cardview.widget.CardView>
 
+        </androidx.constraintlayout.widget.ConstraintLayout>
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView2"
             android:layout_width="match_parent"
@@ -47,29 +55,21 @@
                 android:background="@color/akun"
                 android:scaleType="fitXY" />
         </androidx.cardview.widget.CardView>
-
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/btnBack"
-            android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/dateNews"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/m_16"
-            android:foreground="?android:attr/selectableItemBackground"
-            android:clickable="true"
-            app:cardBackgroundColor="@color/akun"
-            app:cardCornerRadius="@dimen/m_12"
+            android:layout_marginRight="@dimen/m_16"
+            android:layout_marginLeft="@dimen/m_16"
+            android:layout_marginBottom="@dimen/m_4"
+            android:layout_marginTop="@dimen/m_8"
+            android:text="14 Juni 2021"
+            android:fontFamily="@font/poppins_light"
+            android:textSize="12sp"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-
-            app:layout_constraintTop_toTopOf="parent">
-
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_gravity="center"
-                android:layout_margin="@dimen/m_8"
-                android:src="@drawable/ic_baseline_arrow_back_24" />
-        </androidx.cardview.widget.CardView>
-
+            app:layout_constraintTop_toBottomOf="@+id/cardView2" />
         <TextView
             android:id="@+id/titleNews"
             android:layout_width="match_parent"
@@ -84,21 +84,17 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/dateNews" />
+
+
         <WebView
-            android:id="@+id/contentNews"
+            android:id="@+id/webview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginRight="@dimen/m_16"
-            android:layout_marginLeft="@dimen/m_16"
-            android:layout_marginBottom="@dimen/m_4"
-            android:text="content"
-            android:linksClickable="true"
-            android:autoLink="web|email"
-            android:fontFamily="@font/poppins"
-            android:textSize="14sp"
-            android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginLeft="@dimen/m_12"
+            android:layout_marginRight="@dimen/m_12"
+            android:layout_marginBottom="@dimen/m_12"
             app:layout_constraintTop_toBottomOf="@+id/titleNews" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 </ScrollView>

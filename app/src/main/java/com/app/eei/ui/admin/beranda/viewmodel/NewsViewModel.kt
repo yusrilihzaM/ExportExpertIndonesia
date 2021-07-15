@@ -12,6 +12,7 @@ import com.google.firebase.firestore.Query
 
 class NewsViewModel:ViewModel() {
     val listNews = MutableLiveData<ArrayList<News>>()
+    val listNewsByType = MutableLiveData<ArrayList<News>>()
     fun delNews(id:String):Boolean{
         var boolean=false
         val db = FirebaseFirestore.getInstance()
@@ -100,5 +101,48 @@ class NewsViewModel:ViewModel() {
     //3 siap ditampilkan
     fun getNews(): LiveData<ArrayList<News>> {
         return listNews
+    }
+
+    fun setNewsByType(type:String){
+        val listItems = ArrayList<News>()
+        val db = FirebaseFirestore.getInstance()
+        FirebaseFirestore.setLoggingEnabled(true)
+        db.collection("news")
+            .whereEqualTo("type",type)
+            .get()
+            .addOnCompleteListener { task ->
+                Log.d("setNewsByType", "Suksess")
+                if (task.isSuccessful) {
+                    Log.d("setNewsByType", task.result?.documents.toString())
+                    var s:Int= task.result?.documents?.size?.toString()!!.toInt()-1
+                    Log.d("sss", s.toString())
+                    if (s != null) {
+                        for (document in s downTo 0) {
+                            Log.d("aaaa", document.toString())
+                            val idNews= task.result?.documents?.get(document)?.get("idNews").toString().toInt()
+                            val titleNews=task.result?.documents?.get(document)?.get("titleNews").toString()
+                            val imgNews=task.result?.documents?.get(document)?.get("imgNews").toString()
+                            val dateNews=task.result?.documents?.get(document)?.get("dateNews").toString()
+                            val contentNews=task.result?.documents?.get(document)?.get("contentNews").toString()
+
+                        val app= News(
+                            idNews,
+                            titleNews,
+                            imgNews,
+                            dateNews,
+                            contentNews
+                        )
+                        listItems.add(app)
+                        }
+                    }
+                    Log.d("setNewsByType", listItems.toString())
+                    listNewsByType.postValue(listItems)
+                } else {
+                    Log.w(ContentValues.TAG, "setNewsByType", task.exception)
+                }
+            }
+    }
+    fun getNewsByType(): LiveData<ArrayList<News>> {
+        return listNewsByType
     }
 }

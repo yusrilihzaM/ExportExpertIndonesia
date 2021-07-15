@@ -4,6 +4,7 @@ import android.text.Html
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.app.eei.databinding.ItemCardBigBinding
 import com.app.eei.databinding.ItemCardBinding
 
 import com.app.eei.entity.News
@@ -24,7 +25,7 @@ class BerandaListAdapter(private val List: ArrayList<News>): RecyclerView.Adapte
         List.addAll(tweetList)
         notifyDataSetChanged()
     }
-    inner class ListViewHolder(private val binding: ItemCardBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class ListViewHolder(private val binding: ItemCardBigBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(news: News){
             with(binding){
                 imgNews?.let {
@@ -34,7 +35,7 @@ class BerandaListAdapter(private val List: ArrayList<News>): RecyclerView.Adapte
                 }
                 titleNews.text=news.title
                 dateNews.text=news.dateNews
-                contentNews.text= Html.fromHtml(news.contentNews)
+//                contentNews.text= Html.fromHtml(news.contentNews)
                 itemView.setOnClickListener{
                     onItemClickCallback?.onItemClicked(news)
                 }
@@ -43,7 +44,7 @@ class BerandaListAdapter(private val List: ArrayList<News>): RecyclerView.Adapte
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
-        val binding=ItemCardBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding= ItemCardBigBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ListViewHolder(binding)
     }
 

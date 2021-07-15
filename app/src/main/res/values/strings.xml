@@ -4,7 +4,7 @@
     <string name="beranda">Beranda</string>
     <string name="pengaturan_app">Pengaturan App</string>
     <string name="akun">Akun</string>
-    <string name="ada_berita_baru_untuk_kami">Ada berita baru untuk kamu</string>
+    <string name="ada_berita_baru_untuk_kami">Mau belajar apa hari ini</string>
     <string name="selamat_datang">Selamat Datang</string>
     <string name="cari_berita">Cari berita</string>
     <string name="simpan">Simpan</string>
@@ -38,14 +38,38 @@
     <string name="judul_hyperlink">Judul HyperLink</string>
     <string name="link_url_video_youtube">Link URL Video Youtube</string>
     <string name="lihat_semua">Lihat semua</string>
+    <string name="apa_yang_terbaru">Apa yang terbaru.</string>
+    <string name="podcast">Podcast</string>
+    <string name="tipsdantricks">Tips dan Tricks</string>
+    <string name="event">Event</string>
+    <string name="mitra">Mitra</string>
+    <string name="berita">Berita</string>
+    <string name="komunitas">Komunitas</string>
 
+
+    <string-array name="data_title_menu">
+        <item>@string/podcast</item>
+        <item>@string/tipsdantricks</item>
+        <item>@string/event</item>
+        <item>@string/mitra</item>
+        <item>@string/berita</item>
+        <item>@string/komunitas</item>
+    </string-array>
+
+    <array name="data_ic_menu">
+        <item>@drawable/ic_podcast</item>
+        <item>@drawable/ic_tips</item>
+        <item>@drawable/ic_event</item>
+        <item>@drawable/ic_mitra</item>
+        <item>@drawable/ic_news</item>
+        <item>@drawable/ic_comunity</item>
+    </array>
     <string-array name="data_title">
         <item>@string/nama_app</item>
         <item>@string/logo_aplikasi</item>
         <item>@string/desc_app</item>
         <item>@string/bg_splash</item>
     </string-array>
-
 
     <array name="data_ic">
         <item>@drawable/ic_sname</item>

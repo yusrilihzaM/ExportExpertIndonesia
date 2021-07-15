@@ -27,7 +27,7 @@ import es.dmoral.toasty.Toasty
 
 class SplashSreenActivity : AppCompatActivity() {
     companion object{
-        const val TIME:Long=5000
+        const val TIME:Long=3000
     }
     private lateinit var binding: ActivitySplashSreenBinding
     private lateinit var viewModel: InfoViewModel

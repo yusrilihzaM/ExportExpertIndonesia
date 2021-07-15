@@ -34,7 +34,7 @@ class BerandaLimitListAdapter(private val List: ArrayList<News>): RecyclerView.A
                 }
                 titleNews.text=news.title
                 dateNews.text=news.dateNews
-                contentNews.text= Html.fromHtml(news.contentNews)
+//                contentNews.text= Html.fromHtml(news.contentNews)
                 itemView.setOnClickListener{
                     onItemClickCallback?.onItemClicked(news)
                 }

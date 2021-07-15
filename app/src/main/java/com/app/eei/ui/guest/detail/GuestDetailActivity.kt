@@ -5,6 +5,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Html
 import android.text.Spanned
+import android.util.Base64
+import android.webkit.WebChromeClient
+import android.webkit.WebSettings
 import com.app.eei.R
 import com.app.eei.databinding.ActivityAdminDetailBinding
 import com.app.eei.databinding.ActivityGuestDetail2Binding
@@ -33,8 +36,34 @@ class GuestDetailActivity : AppCompatActivity() {
         val htmlAsSpanned: Spanned = Html.fromHtml(contentString)
         binding.titleNews.text=data.title
         binding.dateNews.text=data.dateNews
-        binding.contentNews.loadData(data.contentNews, "text/html; charset=utf-8", "UTF-8")
-        binding.contentNews.settings.javaScriptEnabled=true
+        val unencodedHtml =
+            "<html><style>" +
+                    ".container {\n" +
+                    "  position: relative;\n" +
+                    "  overflow: hidden;\n" +
+                    "  width: 100%;\n" +
+                    " }" +
+                    "iframe {\n" +
+                    "  position: sticky;\n" +
+                    "  top: 0;\n" +
+                    "  left: 0;\n" +
+                    "  bottom: 0;\n" +
+                    "  right: 0;\n" +
+                    "  width: 100%;\n" +
+                    "  height: 30%;\n" +
+                    "}" +
+                    "</style><body ><div class=\"\">"+data.contentNews +"</div></body></html>";
+        val encodedHtml = Base64.encodeToString(unencodedHtml.toByteArray(), Base64.NO_PADDING)
+
+
+        binding.webview.webChromeClient = WebChromeClient()
+        binding.webview.settings.javaScriptEnabled=true
+        binding.webview.settings.javaScriptCanOpenWindowsAutomatically = true
+        binding.webview.settings.pluginState = WebSettings.PluginState.ON
+        binding.webview.settings.mediaPlaybackRequiresUserGesture = false
+
+        binding.webview.loadData(encodedHtml, "text/html", "base64")
+        binding.titleNews.text=data.title
         Glide.with(this)
             .load(data.imgNews)
             .into(binding.imgNews)
@@ -42,11 +71,13 @@ class GuestDetailActivity : AppCompatActivity() {
 
         binding.btnBack.setOnClickListener {
             startActivity(Intent(this, GuestMainActivity::class.java))
+            finish()
         }
 
     }
     override fun onBackPressed() {
         super.onBackPressed()
         startActivity(Intent(this, GuestMainActivity::class.java))
+        finish()
     }
 }

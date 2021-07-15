@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:padding="@dimen/m_16"
     android:layout_height="wrap_content">
+
     <EditText
         android:id="@+id/urlUtube"
         android:inputType="text"
@@ -13,5 +14,17 @@
         android:layout_marginRight="4dp"
         android:layout_marginBottom="4dp"
         android:hint="@string/link_url_video_youtube" />
-
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="Contoh URL:"
+        android:layout_height="wrap_content"></TextView>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:textColor="@color/red_connectify"
+        android:text="https://www.youtube.com/embed/kodevideo"
+        android:layout_height="wrap_content"></TextView>
 </LinearLayout>

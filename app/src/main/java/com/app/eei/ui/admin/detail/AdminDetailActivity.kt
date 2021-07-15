@@ -4,7 +4,10 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Html
 import android.text.Spanned
+import android.util.Base64
 import android.view.Gravity
+import android.webkit.WebChromeClient
+import android.webkit.WebSettings
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -26,6 +29,7 @@ class AdminDetailActivity : AppCompatActivity() {
         const val EXTRA_DATA = "extra_data"
         const val ALERT_DIALOG_CLOSE = 10
         const val ALERT_DIALOG_DELETE = 20
+        const val TYPE_DATA="type data"
     }
     private lateinit var binding: ActivityAdminDetailBinding
     private lateinit var viewmodel: NewsViewModel
@@ -44,17 +48,42 @@ class AdminDetailActivity : AppCompatActivity() {
         val contentString=data.contentNews
         val htmlAsSpanned:Spanned=Html.fromHtml(contentString)
 
-        binding.webview.loadData(data.contentNews, "text/html; charset=utf-8", "UTF-8")
+        val unencodedHtml =
+            "<html><style>" +
+                    ".container {\n" +
+                    "  position: relative;\n" +
+                    "  overflow: hidden;\n" +
+                    "  width: 100%;\n" +
+                    " }" +
+                    "iframe {\n" +
+                    "  position: sticky;\n" +
+                    "  top: 0;\n" +
+                    "  left: 0;\n" +
+                    "  bottom: 0;\n" +
+                    "  right: 0;\n" +
+                    "  width: 100%;\n" +
+                    "  height: 30%;\n" +
+                    "}" +
+                    "</style><body ><div class=\"\">"+data.contentNews +"</div></body></html>";
+        val encodedHtml = Base64.encodeToString(unencodedHtml.toByteArray(), Base64.NO_PADDING)
+
+
+        binding.webview.webChromeClient = WebChromeClient()
         binding.webview.settings.javaScriptEnabled=true
+        binding.webview.settings.javaScriptCanOpenWindowsAutomatically = true
+        binding.webview.settings.pluginState = WebSettings.PluginState.ON
+        binding.webview.settings.mediaPlaybackRequiresUserGesture = false
+
+        binding.webview.loadData(encodedHtml, "text/html", "base64")
         binding.titleNews.text=data.title
-        binding.dateNews.text=data.dateNews
-//        binding.contentNews.text= htmlAsSpanned
+
         Glide.with(this)
             .load(data.imgNews)
             .into(binding.imgNews)
 
         binding.btnBack.setOnClickListener {
-            startActivity(Intent(this, MainActivity::class.java))
+//            startActivity(Intent(this, MainActivity::class.java))
+            finish()
         }
         binding.btnEdit.setOnClickListener {
             val intent= Intent(this, AdminEditActivity::class.java)
@@ -70,6 +99,7 @@ class AdminDetailActivity : AppCompatActivity() {
     override fun onBackPressed() {
         super.onBackPressed()
         startActivity(Intent(this, MainActivity::class.java))
+        finish()
     }
     private fun delData(type: Int,id:String) {
         val isDialogClose = type == ALERT_DIALOG_CLOSE
