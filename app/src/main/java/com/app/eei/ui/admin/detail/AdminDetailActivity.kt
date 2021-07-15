@@ -29,7 +29,6 @@ class AdminDetailActivity : AppCompatActivity() {
         const val EXTRA_DATA = "extra_data"
         const val ALERT_DIALOG_CLOSE = 10
         const val ALERT_DIALOG_DELETE = 20
-        const val TYPE_DATA="type data"
     }
     private lateinit var binding: ActivityAdminDetailBinding
     private lateinit var viewmodel: NewsViewModel
@@ -44,7 +43,7 @@ class AdminDetailActivity : AppCompatActivity() {
         supportActionBar?.hide()
 
         val data=intent.getParcelableExtra<News>(EXTRA_DATA) as News
-
+        val typeForm=intent.getStringExtra(getString(R.string.berita))
         val contentString=data.contentNews
         val htmlAsSpanned:Spanned=Html.fromHtml(contentString)
 
@@ -76,7 +75,7 @@ class AdminDetailActivity : AppCompatActivity() {
 
         binding.webview.loadData(encodedHtml, "text/html", "base64")
         binding.titleNews.text=data.title
-
+        binding.dateNews.text=data.dateNews
         Glide.with(this)
             .load(data.imgNews)
             .into(binding.imgNews)

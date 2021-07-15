@@ -6,7 +6,7 @@ import java.sql.Timestamp
 
 @Parcelize
 data class News (
-        val id:Int,
+        val id:String,
         val title:String,
         val imgNews:String,
         val dateNews:String,

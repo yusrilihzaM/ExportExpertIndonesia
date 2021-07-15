@@ -12,7 +12,7 @@ import com.bumptech.glide.Glide
 
 class BerandaLimitListAdapter(private val List: ArrayList<News>): RecyclerView.Adapter<BerandaLimitListAdapter.ListViewHolder>() {
     private var onItemClickCallback: OnItemClickCallback? = null
-
+    private val limit=3
     fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
         this.onItemClickCallback = onItemClickCallback
     }
@@ -52,8 +52,11 @@ class BerandaLimitListAdapter(private val List: ArrayList<News>): RecyclerView.A
     }
 
     override fun getItemCount(): Int {
-        return 3
-
+        if (List.size>limit){
+            return  limit
+        }else{
+            return List.size
+        }
     }
     interface OnItemClickCallback {
         fun onItemClicked(data: News)

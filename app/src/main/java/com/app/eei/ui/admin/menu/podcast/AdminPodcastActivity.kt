@@ -43,7 +43,7 @@ class AdminPodcastActivity : AppCompatActivity() {
         val upArrow = resources.getDrawable(R.drawable.ic_baseline_arrow_back_ios_24)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setHomeAsUpIndicator(upArrow)
-        supportActionBar?.title = Html.fromHtml("<font color=\"black\">" + getString(R.string.komunitas) + "</font>")
+        supportActionBar?.title = Html.fromHtml("<font color=\"black\">" + getString(R.string.podcast) + "</font>")
 
         viewmodel = ViewModelProvider(
             this,
@@ -58,7 +58,9 @@ class AdminPodcastActivity : AppCompatActivity() {
             berandaListAdapter.notifyDataSetChanged()
         }
         binding.btnAdd.setOnClickListener {
-            startActivity(Intent(this, AdminAddActivity::class.java))
+            val intent = Intent(Intent(this, AdminAddActivity::class.java))
+            intent.putExtra("type",getString(R.string.podcast))
+            startActivity(intent)
             finish()
         }
     }

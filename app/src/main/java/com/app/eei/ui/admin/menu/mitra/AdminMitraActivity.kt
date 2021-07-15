@@ -42,7 +42,7 @@ class AdminMitraActivity : AppCompatActivity() {
         val upArrow = resources.getDrawable(R.drawable.ic_baseline_arrow_back_ios_24)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setHomeAsUpIndicator(upArrow)
-        supportActionBar?.title = Html.fromHtml("<font color=\"black\">" + getString(R.string.komunitas) + "</font>")
+        supportActionBar?.title = Html.fromHtml("<font color=\"black\">" + getString(R.string.mitra) + "</font>")
 
         viewmodel = ViewModelProvider(
             this,
@@ -57,7 +57,9 @@ class AdminMitraActivity : AppCompatActivity() {
             berandaListAdapter.notifyDataSetChanged()
         }
         binding.btnAdd.setOnClickListener {
-            startActivity(Intent(this, AdminAddActivity::class.java))
+            val intent = Intent(Intent(this, AdminAddActivity::class.java))
+            intent.putExtra("type",getString(R.string.mitra))
+            startActivity(intent)
             finish()
         }
     }

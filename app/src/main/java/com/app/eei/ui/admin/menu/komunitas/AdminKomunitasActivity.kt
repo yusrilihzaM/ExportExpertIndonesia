@@ -58,7 +58,9 @@ class AdminKomunitasActivity : AppCompatActivity() {
             berandaListAdapter.notifyDataSetChanged()
         }
         binding.btnAdd.setOnClickListener {
-            startActivity(Intent(this, AdminAddActivity::class.java))
+            val intent = Intent(Intent(this, AdminAddActivity::class.java))
+            intent.putExtra("type",getString(R.string.komunitas))
+            startActivity(intent)
             finish()
         }
     }

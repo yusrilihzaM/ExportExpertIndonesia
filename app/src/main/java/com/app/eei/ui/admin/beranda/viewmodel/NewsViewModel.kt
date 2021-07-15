@@ -41,7 +41,7 @@ class NewsViewModel:ViewModel() {
                     Log.d("news", task.result?.documents.toString())
                     for (document in task.result!!) {
                         
-                        val idNews=document["idNews"].toString().toInt()
+                        val idNews=document["idNews"].toString()
                         val titleNews=document["titleNews"].toString()
                         val imgNews=document["imgNews"].toString()
                         val dateNews=document["dateNews"].toString()
@@ -76,7 +76,7 @@ class NewsViewModel:ViewModel() {
                     Log.d("news", task.result?.documents.toString())
                     for (document in task.result!!) {
 
-                        val idNews=document["idNews"].toString().toInt()
+                        val idNews=document["idNews"].toString()
                         val titleNews=document["titleNews"].toString()
                         val imgNews=document["imgNews"].toString()
                         val dateNews=document["dateNews"].toString()
@@ -119,7 +119,7 @@ class NewsViewModel:ViewModel() {
                     if (s != null) {
                         for (document in s downTo 0) {
                             Log.d("aaaa", document.toString())
-                            val idNews= task.result?.documents?.get(document)?.get("idNews").toString().toInt()
+                            val idNews= task.result?.documents?.get(document)?.get("idNews").toString()
                             val titleNews=task.result?.documents?.get(document)?.get("titleNews").toString()
                             val imgNews=task.result?.documents?.get(document)?.get("imgNews").toString()
                             val dateNews=task.result?.documents?.get(document)?.get("dateNews").toString()

@@ -64,7 +64,7 @@ class AdminEditActivity : AppCompatActivity() {
         viewmodel= ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(NewsViewModel::class.java)
         val data=intent.getParcelableExtra<News>(EXTRA_DATA_EDIT) as News
         dokument=data.id.toString()
-        id=data.id
+
         binding.edtTitleNews.setTextValue(data.title)
         Glide.with(this)
             .load(data.imgNews)
@@ -293,7 +293,7 @@ class AdminEditActivity : AppCompatActivity() {
                         val currentDate = sdf.format(Date())
                         news = hashMapOf(
                             "imgNews" to urlPathPublic.toString(),
-                            "idNews" to id,
+                            "idNews" to dokument,
                             "titleNews" to binding.edtTitleNews.getTextValue,
                             "dateNews" to currentDate,
                             "contentNews" to mEditor.html

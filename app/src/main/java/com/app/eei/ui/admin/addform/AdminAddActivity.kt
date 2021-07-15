@@ -5,6 +5,7 @@ import android.content.ContentValues.TAG
 import android.content.Intent
 import android.graphics.Color
 import android.net.Uri
+import android.os.Build.ID
 import android.os.Bundle
 import android.provider.MediaStore
 import android.text.Html
@@ -44,6 +45,8 @@ class AdminAddActivity : AppCompatActivity() {
     var progressDialog: ProgressDialog? = null
     var urlPathPublic: String? = null
     var id:Int=1
+    var type:String=""
+    var dokument:String=""
     private lateinit var viewmodel: NewsViewModel
     companion object {
         const val EXTRA_DATA = "extra_data"
@@ -59,13 +62,29 @@ class AdminAddActivity : AppCompatActivity() {
 
         viewmodel.setNews()
         viewmodel.getNews().observe(this,{data->
-            id=data.size+1
-            Log.d("id",id.toString())
+//            id=data.size-1
+            val idTerakhir:Int=data.size.toInt()
+            Log.d("idTerakhir",idTerakhir.toString())
+            if(data.size==0){
+                dokument="a 1"
+            } else {
+                val dataSplit=data[idTerakhir-1].id.split(" ").toTypedArray().toList()
+                Log.d("dataSplit",dataSplit.toString())
+                id=idTerakhir+1
+                Log.d("dataSplit1",id.toString())
+                dokument= "a $id"
+                Log.d("dataSplit2",dokument.toString())
+            }
+
+            Log.d("dokument",dokument.toString())
         })
         val upArrow =resources.getDrawable(R.drawable.ic_baseline_arrow_back_ios_24)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setHomeAsUpIndicator(upArrow)
         supportActionBar?.title = Html.fromHtml("<font color=\"black\">" + "Postingan Baru" + "</font>")
+
+        val typeForm=intent.getStringExtra("type")
+        type=typeForm.toString()
         progressDialog = ProgressDialog(this)
         showFormContent()
         storageReference = FirebaseStorage.getInstance().getReference("Images")
@@ -300,18 +319,19 @@ class AdminAddActivity : AppCompatActivity() {
                     binding.urlpath.text=urlPathPublic
 
                     if(url!=null){
-                        val sdf = SimpleDateFormat("dd/M/yyyy hh:mm:ss")
+                        val sdf = SimpleDateFormat("E. dd MMMM, yyyy hh:mm", Locale.US)
                         val currentDate = sdf.format(Date())
                         val titleSplit = binding.edtTitleNews.getTextValue.split(" ").toTypedArray().toList()
                         val news = hashMapOf(
                             "imgNews" to urlPathPublic.toString(),
-                            "idNews" to id,
+                            "idNews" to dokument,
                             "titleNews" to binding.edtTitleNews.getTextValue,
                             "dateNews" to currentDate,
                             "contentNews" to mEditor.html,
-                            "titleSplit" to titleSplit
+                            "titleSplit" to titleSplit,
+                            "type" to type
                         )
-                        db?.collection("news")?.document(id.toString())
+                        db?.collection("news")?.document(dokument)
                             ?.set(news)
                             ?.addOnSuccessListener {
                                 Log.d(TAG, "DocumentSnapshot successfully written!")
