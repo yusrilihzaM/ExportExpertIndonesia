@@ -3,6 +3,7 @@ package com.app.eei.ui.admin.beranda.fragment
 import android.content.Intent
 import android.content.res.TypedArray
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -80,15 +81,16 @@ class BerandaFragment : Fragment() {
 //            }
 //            false
 //        })
+        Log.d("activty","Beranda")
         swipeContainer.setOnRefreshListener {
             swipeContainer.isRefreshing = true
             showData()
             berandaListAdapter.notifyDataSetChanged()
         }
-        binding.btnAdd.setOnClickListener {
-            startActivity(Intent(context,AdminAddActivity::class.java))
-            activity?.finish()
-        }
+//        binding.btnAdd.setOnClickListener {
+//            startActivity(Intent(context,AdminAddActivity::class.java))
+//            activity?.finish()
+//        }
         binding.btnLihata.setOnClickListener {
             startActivity(Intent(context, AdminNewsActivity::class.java))
             activity?.finish()
@@ -171,7 +173,6 @@ class BerandaFragment : Fragment() {
                     val intent= Intent(context, AdminDetailActivity::class.java)
                     intent.putExtra(EXTRA_DATA,data)
                     startActivity(intent)
-                    activity?.finish()
                 }
             })
 
@@ -192,26 +193,32 @@ class BerandaFragment : Fragment() {
                    getString(R.string.berita)->{
                        intent= Intent(context, AdminNewsActivity::class.java)
                        startActivity(intent)
+                       activity?.finish()
                    }
                    getString(R.string.event)->{
                        intent= Intent(context, AdminEventActivity::class.java)
                        startActivity(intent)
+                       activity?.finish()
                    }
                    getString(R.string.tipsdantricks)->{
                        intent= Intent(context, AdminTipsActivity::class.java)
                        startActivity(intent)
+                       activity?.finish()
                    }
                    getString(R.string.mitra)->{
                        intent= Intent(context, AdminMitraActivity::class.java)
                        startActivity(intent)
+                       activity?.finish()
                    }
                    getString(R.string.podcast)->{
                        intent= Intent(context, AdminPodcastActivity::class.java)
                        startActivity(intent)
+                       activity?.finish()
                    }
                    getString(R.string.komunitas)->{
                        intent= Intent(context, AdminKomunitasActivity::class.java)
                        startActivity(intent)
+                       activity?.finish()
                    }
 
                }

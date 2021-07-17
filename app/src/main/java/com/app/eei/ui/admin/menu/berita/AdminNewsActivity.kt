@@ -121,7 +121,7 @@ class AdminNewsActivity : AppCompatActivity() {
                     val intent = Intent(this@AdminNewsActivity, AdminDetailActivity::class.java)
                     intent.putExtra(AdminDetailActivity.EXTRA_DATA, data)
                     startActivity(intent)
-//                    finish()
+                    finish()
                 }
             })
 
@@ -140,6 +140,11 @@ class AdminNewsActivity : AppCompatActivity() {
         }
     }
 
+    override fun onBackPressed() {
+        super.onBackPressed()
+        startActivity(Intent(this, MainActivity::class.java))
+        finish()
+    }
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             16908332 -> {
@@ -150,4 +155,5 @@ class AdminNewsActivity : AppCompatActivity() {
             else -> true
         }
     }
+
 }

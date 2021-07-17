@@ -124,14 +124,18 @@ class AdminTipsActivity : AppCompatActivity() {
                     val intent = Intent(this@AdminTipsActivity, AdminDetailActivity::class.java)
                     intent.putExtra(AdminDetailActivity.EXTRA_DATA, data)
                     startActivity(intent)
-//                    finish()
+                    finish()
                 }
             })
 
         })
     }
 
-
+    override fun onBackPressed() {
+        super.onBackPressed()
+        startActivity(Intent(this, MainActivity::class.java))
+        finish()
+    }
     private fun showShimmer(boolean: Boolean) {
         if (boolean) {
             binding.shimmer.startShimmer()

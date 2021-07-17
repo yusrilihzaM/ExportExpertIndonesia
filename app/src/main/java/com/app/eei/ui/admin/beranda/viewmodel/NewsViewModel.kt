@@ -46,13 +46,16 @@ class NewsViewModel:ViewModel() {
                         val imgNews=document["imgNews"].toString()
                         val dateNews=document["dateNews"].toString()
                         val contentNews=document["contentNews"].toString()
-
+                        val type=document["type"].toString()
+                        val titleSplit=document["titleSplit"].toString().toList()
                         val app= News(
                             idNews,
                             titleNews,
                             imgNews,
                             dateNews,
-                            contentNews
+                            contentNews,
+                            type,
+                            titleSplit
                         )
                         listItems.add(app)
                     }
@@ -81,13 +84,16 @@ class NewsViewModel:ViewModel() {
                         val imgNews=document["imgNews"].toString()
                         val dateNews=document["dateNews"].toString()
                         val contentNews=document["contentNews"].toString()
-
+                        val type=document["type"].toString()
+                        val titleSplit=document["titleSplit"].toString().toList()
                         val app= News(
                             idNews,
                             titleNews,
                             imgNews,
                             dateNews,
-                            contentNews
+                            contentNews,
+                            type,
+                            titleSplit
                         )
                         listItems.add(app)
                     }
@@ -124,13 +130,16 @@ class NewsViewModel:ViewModel() {
                             val imgNews=task.result?.documents?.get(document)?.get("imgNews").toString()
                             val dateNews=task.result?.documents?.get(document)?.get("dateNews").toString()
                             val contentNews=task.result?.documents?.get(document)?.get("contentNews").toString()
-
+                            val type=task.result?.documents?.get(document)?.get("type").toString()
+                            val titleSplit=task.result?.documents?.get(document)?.get("titleSplit").toString().toList()
                         val app= News(
                             idNews,
                             titleNews,
                             imgNews,
                             dateNews,
-                            contentNews
+                            contentNews,
+                            type,
+                            titleSplit
                         )
                         listItems.add(app)
                         }

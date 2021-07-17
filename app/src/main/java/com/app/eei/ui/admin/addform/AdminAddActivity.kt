@@ -336,7 +336,7 @@ class AdminAddActivity : AppCompatActivity() {
                             ?.addOnSuccessListener {
                                 Log.d(TAG, "DocumentSnapshot successfully written!")
                                 AestheticDialog.Builder(this, DialogStyle.FLAT, DialogType.SUCCESS)
-                                    .setTitle("Tambah Postingan")
+                                    .setTitle(type)
                                     .setMessage("Berhasil Di Simpan")
                                     .setCancelable(false)
                                     .setDarkMode(false)

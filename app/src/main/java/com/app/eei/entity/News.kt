@@ -10,5 +10,7 @@ data class News (
         val title:String,
         val imgNews:String,
         val dateNews:String,
-        val contentNews:String
+        val contentNews:String,
+        val type:String,
+        val titleSplit:List<Char>
         ):Parcelable

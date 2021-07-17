@@ -1,33 +1,45 @@
 package com.app.eei.ui.guest.beranda
 
 import android.content.Intent
+import android.content.res.TypedArray
 import android.os.Bundle
 import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.annotation.Nullable
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.app.eei.R
 import com.app.eei.adapter.BerandaLimitListAdapter
-import com.app.eei.adapter.BerandaListAdapter
+import com.app.eei.adapter.MenuListAdapter
 import com.app.eei.databinding.FragmentGuestBerandaBinding
+import com.app.eei.entity.Menu
 import com.app.eei.entity.News
 import com.app.eei.ui.admin.beranda.viewmodel.NewsViewModel
+import com.app.eei.ui.admin.menu.berita.AdminNewsActivity
+import com.app.eei.ui.admin.menu.event.AdminEventActivity
+import com.app.eei.ui.admin.menu.komunitas.AdminKomunitasActivity
+import com.app.eei.ui.admin.menu.mitra.AdminMitraActivity
+import com.app.eei.ui.admin.menu.podcast.AdminPodcastActivity
+import com.app.eei.ui.admin.menu.tips.AdminTipsActivity
 import com.app.eei.ui.guest.detail.GuestDetailActivity
-import com.app.eei.ui.guest.news.GuestNewsActivity
+import com.app.eei.ui.guest.menu.berita.GuestNewsActivity
+import com.app.eei.ui.guest.menu.event.GuestEventActivity
+import com.app.eei.ui.guest.menu.komunitas.GuestKomunitasActivity
+import com.app.eei.ui.guest.menu.mitra.GuestMitraActivity
+import com.app.eei.ui.guest.menu.podcast.GuestPodcastActivity
+import com.app.eei.ui.guest.menu.tips.GuestTipsActivity
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.load.resource.gif.GifDrawable
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
-import com.facebook.shimmer.Shimmer
 
 
 class GuestBerandaFragment : Fragment() {
@@ -36,6 +48,10 @@ class GuestBerandaFragment : Fragment() {
     private lateinit var viewmodel: NewsViewModel
     private lateinit var swipeContainer: SwipeRefreshLayout
     private lateinit var berandaListAdapter: BerandaLimitListAdapter
+    private lateinit var dataTitle: Array<String>
+    private lateinit var dataIc: TypedArray
+    private var list: ArrayList<Menu> = arrayListOf()
+    private lateinit var menuAdapter: MenuListAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -56,28 +72,30 @@ class GuestBerandaFragment : Fragment() {
         swipeContainer=binding.swipeContainer
 
         showData()
-        binding.btnSearch.setOnClickListener {
-
-            val dataSearch=binding.edtSearch.text.toString()
-            Toast.makeText(context, dataSearch, Toast.LENGTH_SHORT).show()
-            showSearch(dataSearch)
-        }
-        binding.edtSearch.setOnKeyListener(View.OnKeyListener { v, keyCode, event ->
-            if (keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_UP) {
-                val dataSearch=binding.edtSearch.text.toString()
-                Toast.makeText(context, dataSearch, Toast.LENGTH_SHORT).show()
-                showSearch(dataSearch)
-                return@OnKeyListener true
-            }
-            false
-        })
+        showMenu()
+//        binding.btnSearch.setOnClickListener {
+//
+//            val dataSearch=binding.edtSearch.text.toString()
+//            Toast.makeText(context, dataSearch, Toast.LENGTH_SHORT).show()
+//            showSearch(dataSearch)
+//        }
+//        binding.edtSearch.setOnKeyListener(View.OnKeyListener { v, keyCode, event ->
+//            if (keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_UP) {
+//                val dataSearch=binding.edtSearch.text.toString()
+//                Toast.makeText(context, dataSearch, Toast.LENGTH_SHORT).show()
+//                showSearch(dataSearch)
+//                return@OnKeyListener true
+//            }
+//            false
+//        })
         swipeContainer.setOnRefreshListener {
             swipeContainer.isRefreshing = true
             showData()
             berandaListAdapter.notifyDataSetChanged()
         }
         binding.btnLihata.setOnClickListener {
-            startActivity(Intent(context,GuestNewsActivity::class.java))
+            startActivity(Intent(context, GuestNewsActivity::class.java))
+            activity?.finish()
         }
     }
     private fun showSearch(title:String){
@@ -180,5 +198,67 @@ class GuestBerandaFragment : Fragment() {
             binding.shimmer.showShimmer(false)
             binding.shimmer.visibility=View.GONE
         }
+    }
+
+    private fun getListMenu(): ArrayList<Menu> {
+        val listMenu= ArrayList<Menu>()
+        dataTitle = resources.getStringArray(R.array.data_title_menu)
+        dataIc = resources.obtainTypedArray(R.array.data_ic_menu)
+        for(position in dataTitle.indices){
+            val menu= Menu(
+                dataTitle[position],
+                dataIc.getResourceId(position, -1)
+            )
+            listMenu.add(menu)
+        }
+        return listMenu
+    }
+
+    private  fun showMenu(){
+
+        binding.rvMenu.setHasFixedSize(true)
+        binding.rvMenu.layoutManager= GridLayoutManager(context,3)
+        list.addAll(getListMenu())
+        menuAdapter = MenuListAdapter(list)
+        binding.rvMenu.adapter=menuAdapter
+
+        menuAdapter.setOnItemClickCallback(object : MenuListAdapter.OnItemClickCallback{
+            override fun onItemClicked(data: Menu) {
+                val intent: Intent
+                when(data.title){
+                    getString(R.string.berita)->{
+                        intent= Intent(context, GuestNewsActivity::class.java)
+                        startActivity(intent)
+                        activity?.finish()
+                    }
+                    getString(R.string.event)->{
+                        intent= Intent(context, GuestEventActivity::class.java)
+                        startActivity(intent)
+                        activity?.finish()
+                    }
+                    getString(R.string.tipsdantricks)->{
+                        intent= Intent(context, GuestTipsActivity::class.java)
+                        startActivity(intent)
+                        activity?.finish()
+                    }
+                    getString(R.string.mitra)->{
+                        intent= Intent(context, GuestMitraActivity::class.java)
+                        startActivity(intent)
+                        activity?.finish()
+                    }
+                    getString(R.string.podcast)->{
+                        intent= Intent(context, GuestPodcastActivity::class.java)
+                        startActivity(intent)
+                        activity?.finish()
+                    }
+                    getString(R.string.komunitas)->{
+                        intent= Intent(context, GuestKomunitasActivity::class.java)
+                        startActivity(intent)
+                        activity?.finish()
+                    }
+
+                }
+            }
+        })
     }
 }

@@ -41,6 +41,31 @@
                     android:fontFamily="@font/poppins"
                     android:layout_gravity="center"
                     android:gravity="center"
+                    android:text="@string/tipe_postingan"/>
+                <Spinner
+                    android:id="@+id/type"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/m_16"
+                 />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/m_16"
+            android:padding="@dimen/m_8">
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins"
+                    android:layout_gravity="center"
+                    android:gravity="center"
                     android:text="@string/gambar_poster"/>
                 <androidx.cardview.widget.CardView
                     android:id="@+id/btnBrowse"

@@ -15,17 +15,26 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.webkit.MimeTypeMap
-import android.widget.EditText
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AlertDialog
+import androidx.core.view.get
 import androidx.lifecycle.ViewModelProvider
 import com.app.eei.R
 import com.app.eei.databinding.ActivityAdminAddBinding
 import com.app.eei.databinding.ActivityAdminEditBinding
+import com.app.eei.databinding.ActivityAdminPodcastBinding
+import com.app.eei.databinding.ActivityAdminTipsBinding
 import com.app.eei.entity.News
+import com.app.eei.extensions.Extensions.toast
 import com.app.eei.ui.admin.beranda.MainActivity
 import com.app.eei.ui.admin.beranda.viewmodel.NewsViewModel
 import com.app.eei.ui.admin.detail.AdminDetailActivity
+import com.app.eei.ui.admin.menu.berita.AdminNewsActivity
+import com.app.eei.ui.admin.menu.event.AdminEventActivity
+import com.app.eei.ui.admin.menu.komunitas.AdminKomunitasActivity
+import com.app.eei.ui.admin.menu.mitra.AdminMitraActivity
+import com.app.eei.ui.admin.menu.podcast.AdminPodcastActivity
+import com.app.eei.ui.admin.menu.tips.AdminTipsActivity
 import com.bumptech.glide.Glide
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.firestore.FirebaseFirestore
@@ -38,9 +47,10 @@ import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.HashMap
 
-class AdminEditActivity : AppCompatActivity() {
+class AdminEditActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
     private lateinit var binding: ActivityAdminEditBinding
     private lateinit var mEditor: RichEditor
+    private lateinit var spinner: Spinner
     var Image_Request_Code = 7
     var FilePathUri: Uri? = null
     var storageReference: StorageReference? = null
@@ -51,6 +61,7 @@ class AdminEditActivity : AppCompatActivity() {
     var dokument:String=""
     var news =hashMapOf<String, Any?>()
     var status:String=""
+    var type:String=""
     private lateinit var viewmodel: NewsViewModel
     companion object {
         const val EXTRA_DATA_EDIT = "extra_data"
@@ -64,7 +75,7 @@ class AdminEditActivity : AppCompatActivity() {
         viewmodel= ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(NewsViewModel::class.java)
         val data=intent.getParcelableExtra<News>(EXTRA_DATA_EDIT) as News
         dokument=data.id.toString()
-
+        Log.d("activty","AdminEditActivity")
         binding.edtTitleNews.setTextValue(data.title)
         Glide.with(this)
             .load(data.imgNews)
@@ -85,7 +96,7 @@ class AdminEditActivity : AppCompatActivity() {
             intent.action = Intent.ACTION_GET_CONTENT
             startActivityForResult(Intent.createChooser(intent, "Select Image"), Image_Request_Code)
         }
-
+        spinnerType(data.type)
     }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -266,7 +277,7 @@ class AdminEditActivity : AppCompatActivity() {
                 true
             }
             16908332->{
-                startActivity(Intent(this, MainActivity::class.java))
+                pindah()
                 true
             }
             else -> true
@@ -289,21 +300,24 @@ class AdminEditActivity : AppCompatActivity() {
                     binding.urlpath.text=urlPathPublic
 
                     if(url!=null){
-                        val sdf = SimpleDateFormat("dd/M/yyyy hh:mm:ss")
+                        val sdf = SimpleDateFormat("E. dd MMMM, yyyy hh:mm", Locale.US)
                         val currentDate = sdf.format(Date())
+                        val titleSplit = binding.edtTitleNews.getTextValue.split(" ").toTypedArray().toList()
                         news = hashMapOf(
                             "imgNews" to urlPathPublic.toString(),
                             "idNews" to dokument,
                             "titleNews" to binding.edtTitleNews.getTextValue,
-                            "dateNews" to currentDate,
-                            "contentNews" to mEditor.html
+//                            "dateNews" to currentDate,
+                            "contentNews" to mEditor.html,
+                            "titleSplit" to titleSplit,
+                            "type" to type
                         )
                         db?.collection("news")?.document(dokument)
                             ?.update(news)
                             ?.addOnSuccessListener {
                                 Log.d("edit", news.toString())
                                 AestheticDialog.Builder(this, DialogStyle.FLAT, DialogType.SUCCESS)
-                                    .setTitle("Postingan")
+                                    .setTitle(type)
                                     .setMessage("Perubahan Berhasil Di Simpan")
                                     .setCancelable(false)
                                     .setDarkMode(false)
@@ -312,7 +326,7 @@ class AdminEditActivity : AppCompatActivity() {
                                     .setOnClickListener(object : OnDialogClickListener {
                                         override fun onClick(dialog: AestheticDialog.Builder) {
                                             dialog.dismiss()
-                                            startActivity(Intent(this@AdminEditActivity,MainActivity::class.java))
+                                            pindah()
                                             finish()
                                             //actions...
                                         }
@@ -339,18 +353,35 @@ class AdminEditActivity : AppCompatActivity() {
 
                 }
         } else {
-            val sdf = SimpleDateFormat("dd/M/yyyy hh:mm:ss")
+            val sdf = SimpleDateFormat("E. dd MMMM, yyyy hh:mm", Locale.US)
             val currentDate = sdf.format(Date())
+            val titleSplit = binding.edtTitleNews.getTextValue.split(" ").toTypedArray().toList()
             news = hashMapOf(
                 "titleNews" to binding.edtTitleNews.getTextValue,
-                "dateNews" to currentDate,
-                "contentNews" to mEditor.html)
+//                "dateNews" to currentDate,
+                "contentNews" to mEditor.html,
+                "titleSplit" to titleSplit,
+                "type" to type
+            )
             db?.collection("news")?.document(dokument)
                 ?.update(news)
                 ?.addOnSuccessListener {
-                    Log.d("edit", news.toString())
-                    startActivity(Intent(this,MainActivity::class.java))
-                    finish()
+                    AestheticDialog.Builder(this, DialogStyle.FLAT, DialogType.SUCCESS)
+                        .setTitle(type)
+                        .setMessage("Perubahan Berhasil Di Simpan")
+                        .setCancelable(false)
+                        .setDarkMode(false)
+                        .setGravity(Gravity.CENTER)
+                        .setAnimation(DialogAnimation.SHRINK)
+                        .setOnClickListener(object : OnDialogClickListener {
+                            override fun onClick(dialog: AestheticDialog.Builder) {
+                                dialog.dismiss()
+                                pindah()
+                                finish()
+                                //actions...
+                            }
+                        })
+                        .show()
                 }
                 ?.addOnFailureListener { e -> Log.w("edit", "Error writing document", e) }
         }
@@ -358,5 +389,100 @@ class AdminEditActivity : AppCompatActivity() {
     override fun onBackPressed() {
         super.onBackPressed()
         startActivity(Intent(this, MainActivity::class.java))
+    }
+    private fun spinnerType(ty:String){
+        spinner=binding.type
+
+
+        ArrayAdapter.createFromResource(
+            this,
+            R.array.type_array,
+            android.R.layout.simple_spinner_item
+        ).also { adapter ->
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            spinner.adapter = adapter
+            when(ty){
+                getString(R.string.podcast)->{
+                    spinner.setSelection(adapter.getPosition(getString(R.string.podcast)))
+                }
+                getString(R.string.tipsdantricks)->{
+                    spinner.setSelection(adapter.getPosition(getString(R.string.tipsdantricks)))
+                }
+                getString(R.string.berita)->{
+                    spinner.setSelection(adapter.getPosition(getString(R.string.berita)))
+                }
+                getString(R.string.event)->{
+                    spinner.setSelection(adapter.getPosition(getString(R.string.event)))
+                }
+                getString(R.string.mitra)->{
+                    spinner.setSelection(adapter.getPosition(getString(R.string.mitra)))
+                }
+                getString(R.string.komunitas)->{
+                    spinner.setSelection(adapter.getPosition(getString(R.string.komunitas)))
+                }
+            }
+        }
+        spinner.onItemSelectedListener = this
+
+    }
+
+    override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+
+        type=spinner.selectedItem.toString()
+
+        toast(type)
+//        when(position){
+//            0->{
+//                type=getString(R.string.podcast)
+//            }
+//            1->{
+//                type=getString(R.string.tipsdantricks)
+//            }
+//            2->{
+//                type=getString(R.string.berita)
+//            }
+//            3->{
+//                type=getString(R.string.event)
+//            }
+//            4->{
+//                type=getString(R.string.mitra)
+//            }
+//            5->{
+//                type=getString(R.string.komunitas)
+//            }
+//        }
+    }
+
+    override fun onNothingSelected(parent: AdapterView<*>?) {
+        TODO("Not yet implemented")
+    }
+
+    private fun pindah(){
+        when(type){
+            getString(R.string.podcast)->{
+                startActivity(Intent(this,AdminPodcastActivity::class.java))
+                finish()
+            }
+            getString(R.string.tipsdantricks)->{
+                startActivity(Intent(this,AdminTipsActivity::class.java))
+                finish()
+            }
+            getString(R.string.berita)->{
+                startActivity(Intent(this,AdminNewsActivity::class.java))
+                finish()
+            }
+            getString(R.string.event)->{
+                startActivity(Intent(this,AdminEventActivity::class.java))
+                finish()
+            }
+            getString(R.string.mitra)->{
+                startActivity(Intent(this,AdminMitraActivity::class.java))
+                finish()
+            }
+            getString(R.string.komunitas)->{
+                startActivity(Intent(this,AdminKomunitasActivity::class.java))
+                finish()
+            }
+        }
     }
 }

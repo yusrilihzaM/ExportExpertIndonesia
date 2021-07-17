@@ -1,4 +1,4 @@
-package com.app.eei.ui.guest.news
+package com.app.eei.ui.guest.menu.berita
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -12,12 +12,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.app.eei.R
-import com.app.eei.adapter.BerandaLimitListAdapter
 import com.app.eei.adapter.BerandaListAdapter
 import com.app.eei.databinding.ActivityGuestNewsBinding
-import com.app.eei.databinding.FragmentGuestBerandaBinding
 import com.app.eei.entity.News
+import com.app.eei.ui.admin.beranda.MainActivity
 import com.app.eei.ui.admin.beranda.viewmodel.NewsViewModel
+import com.app.eei.ui.guest.GuestMainActivity
 import com.app.eei.ui.guest.detail.GuestDetailActivity
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
@@ -134,11 +134,16 @@ class GuestNewsActivity : AppCompatActivity() {
             binding.shimmer.visibility = View.GONE
         }
     }
-
+    override fun onBackPressed() {
+        super.onBackPressed()
+        startActivity(Intent(this, GuestMainActivity::class.java))
+        finish()
+    }
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             16908332 -> {
-                this.finish()
+                startActivity(Intent(this, GuestMainActivity::class.java))
+                finish()
                 true
             }
             else -> true
