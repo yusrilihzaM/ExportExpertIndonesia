@@ -40,7 +40,6 @@ class GuestAkunFragment : Fragment() {
         }
 
         binding.btnMasuk.setOnClickListener {
-            Toast.makeText(context, "Masuk", Toast.LENGTH_SHORT).show()
             startActivity(Intent(context,LoginActivity::class.java))
             activity?.finish()
         }

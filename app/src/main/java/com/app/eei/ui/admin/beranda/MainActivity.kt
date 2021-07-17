@@ -1,13 +1,17 @@
 package com.app.eei.ui.admin.beranda
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.app.eei.R
 import com.app.eei.databinding.ActivityMainBinding
+import com.app.eei.extensions.Extensions.toast
 import com.app.eei.ui.admin.akun.fragment.AdminAkunFragment
 import com.app.eei.ui.admin.beranda.fragment.BerandaFragment
 import com.app.eei.ui.admin.settingapp.fragment.AdminSettingFragment
+import com.app.eei.utils.FirebaseUtils
+import com.google.firebase.auth.FirebaseUser
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding

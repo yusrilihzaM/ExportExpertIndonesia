@@ -14,6 +14,7 @@ import com.app.eei.ui.admin.beranda.fragment.BerandaFragment
 import com.app.eei.ui.admin.settingapp.fragment.AdminSettingFragment
 import com.app.eei.ui.guest.akun.GuestAkunFragment
 import com.app.eei.ui.guest.beranda.GuestBerandaFragment
+import com.app.eei.utils.FirebaseUtils
 import com.app.eei.utils.FirebaseUtils.firebaseAuth
 import com.google.firebase.auth.FirebaseUser
 
@@ -25,7 +26,12 @@ class GuestMainActivity : AppCompatActivity() {
         supportActionBar?.hide()
         binding = ActivityGuestMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        val user: FirebaseUser? = FirebaseUtils.firebaseAuth.currentUser
+        if(user!=null){
+            user?.let {
+                startActivity(Intent(this, MainActivity::class.java))
+            }
+        }
 
         val fragmentManager = supportFragmentManager
         val berandaFragment = GuestBerandaFragment()

@@ -8,7 +8,10 @@ import com.app.eei.entity.Menu
 import com.bumptech.glide.Glide
 
 class MenuListAdapter(private val List: ArrayList<Menu>): RecyclerView.Adapter<MenuListAdapter.ListViewHolder>() {
-
+    fun clear() {
+        List.clear()
+        notifyDataSetChanged()
+    }
     private var onItemClickCallback: OnItemClickCallback? = null
 
     fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {

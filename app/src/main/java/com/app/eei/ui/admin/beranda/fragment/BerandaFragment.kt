@@ -1,12 +1,15 @@
 package com.app.eei.ui.admin.beranda.fragment
 
+import android.content.Context
 import android.content.Intent
 import android.content.res.TypedArray
 import android.os.Bundle
 import android.util.Log
+import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -16,15 +19,16 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.app.eei.R
 import com.app.eei.adapter.BerandaLimitListAdapter
+import com.app.eei.adapter.BerandaListAdapter
+import com.app.eei.adapter.BerandaListSearchAdapter
 import com.app.eei.adapter.MenuListAdapter
 import com.app.eei.databinding.FragmentBerandaBinding
 import com.app.eei.entity.Menu
 import com.app.eei.entity.News
-import com.app.eei.ui.admin.addform.AdminAddActivity
-import com.app.eei.ui.admin.menu.berita.AdminNewsActivity
 import com.app.eei.ui.admin.beranda.viewmodel.NewsViewModel
 import com.app.eei.ui.admin.detail.AdminDetailActivity
 import com.app.eei.ui.admin.detail.AdminDetailActivity.Companion.EXTRA_DATA
+import com.app.eei.ui.admin.menu.berita.AdminNewsActivity
 import com.app.eei.ui.admin.menu.event.AdminEventActivity
 import com.app.eei.ui.admin.menu.komunitas.AdminKomunitasActivity
 import com.app.eei.ui.admin.menu.mitra.AdminMitraActivity
@@ -47,7 +51,9 @@ class BerandaFragment : Fragment() {
     private lateinit var shimmer: Shimmer
     private var username: String? = null
     private lateinit var swipeContainer: SwipeRefreshLayout
+    private lateinit var swipeContainerSearch: SwipeRefreshLayout
     private lateinit var berandaListAdapter: BerandaLimitListAdapter
+    private lateinit var mberandaListAdapter: BerandaListAdapter
     private lateinit var dataTitle: Array<String>
     private lateinit var dataIc: TypedArray
     private lateinit var menuAdapter: MenuListAdapter
@@ -66,50 +72,58 @@ class BerandaFragment : Fragment() {
 
         showData()
         showMenu()
-//        binding.btnSearch.setOnClickListener {
-//
-//            val dataSearch=binding.edtSearch.text.toString()
-//            Toast.makeText(context, dataSearch, Toast.LENGTH_SHORT).show()
-//            showSearch(dataSearch)
-//        }
-//        binding.edtSearch.setOnKeyListener(View.OnKeyListener { v, keyCode, event ->
-//            if (keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_UP) {
-//                val dataSearch=binding.edtSearch.text.toString()
-//                Toast.makeText(context, dataSearch, Toast.LENGTH_SHORT).show()
-//                showSearch(dataSearch)
-//                return@OnKeyListener true
-//            }
-//            false
-//        })
+        binding.btnSearch.setOnClickListener {
+            binding.edtSearch.hideKeyboard()
+            binding.btnClose.visibility=View.VISIBLE
+            val dataSearch=binding.edtSearch.text.toString()
+            showSearch(dataSearch)
+
+        }
+        binding.edtSearch.setOnKeyListener(View.OnKeyListener { v, keyCode, event ->
+            if (keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_UP) {
+                binding.edtSearch.hideKeyboard()
+                binding.btnClose.visibility=View.VISIBLE
+                val dataSearch=binding.edtSearch.text.toString()
+                showSearch(dataSearch)
+                return@OnKeyListener true
+            }
+            false
+        })
         Log.d("activty","Beranda")
         swipeContainer.setOnRefreshListener {
             swipeContainer.isRefreshing = true
-            showData()
+//            showData()
             berandaListAdapter.notifyDataSetChanged()
         }
-//        binding.btnAdd.setOnClickListener {
-//            startActivity(Intent(context,AdminAddActivity::class.java))
-//            activity?.finish()
-//        }
+        binding.btnClose.setOnClickListener {
+            binding.edtSearch.text.clear()
+            mberandaListAdapter.clear()
+            showView(true)
+        }
+
         binding.btnLihata.setOnClickListener {
+
             startActivity(Intent(context, AdminNewsActivity::class.java))
             activity?.finish()
         }
 
     }
+    fun View.hideKeyboard() {
+        val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(windowToken, 0)
+    }
     private fun showSearch(title:String){
         showShimmer(true)
-        recyclerView=binding.rvNews
-        recyclerView.setHasFixedSize(true)
-        recyclerView.layoutManager= LinearLayoutManager(context)
+        showView(false)
+
+        binding.rvNews.setHasFixedSize(true)
+        binding.rvNews.layoutManager= LinearLayoutManager(context)
         viewmodel.setSearchNews(title)
         viewmodel.getNews().observe(viewLifecycleOwner,{data->
-            showShimmer(false)
-            berandaListAdapter=BerandaLimitListAdapter(data)
-            berandaListAdapter.notifyDataSetChanged()
-            recyclerView.adapter=berandaListAdapter
-            swipeContainer.isRefreshing = false
-            berandaListAdapter.setOnItemClickCallback(object :BerandaLimitListAdapter.OnItemClickCallback{
+            mberandaListAdapter= BerandaListAdapter(data)
+            mberandaListAdapter.notifyDataSetChanged()
+            binding.rvNews.adapter=mberandaListAdapter
+            mberandaListAdapter.setOnItemClickCallback(object :BerandaListAdapter.OnItemClickCallback{
                 override fun onItemClicked(data: News) {
                     Toast.makeText(context, data.title, Toast.LENGTH_SHORT).show()
                     val intent= Intent(context, AdminDetailActivity::class.java)
@@ -130,6 +144,7 @@ class BerandaFragment : Fragment() {
         viewmodel.getNews().observe(viewLifecycleOwner,{data->
             showShimmer(false)
             berandaListAdapter=BerandaLimitListAdapter(data)
+
             berandaListAdapter.notifyDataSetChanged()
             recyclerView.adapter=berandaListAdapter
 
@@ -249,5 +264,19 @@ class BerandaFragment : Fragment() {
             listMenu.add(menu)
         }
         return listMenu
+    }
+    private fun showView(boolean: Boolean){
+        if (boolean){
+            binding.rvMenu.visibility=View.VISIBLE
+            binding.tvwhatnew.visibility=View.VISIBLE
+            showData()
+            showMenu()
+        }
+        else{
+            binding.rvMenu.visibility=View.GONE
+            binding.tvwhatnew.visibility=View.GONE
+
+        }
+
     }
 }

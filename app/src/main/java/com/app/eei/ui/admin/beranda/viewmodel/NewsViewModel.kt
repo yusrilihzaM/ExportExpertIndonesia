@@ -33,7 +33,7 @@ class NewsViewModel:ViewModel() {
         val db = FirebaseFirestore.getInstance()
         FirebaseFirestore.setLoggingEnabled(true)
         db.collection("news")
-            .whereEqualTo("titleNews", title)
+            .whereArrayContains("titleSplit",title)
             .get()
             .addOnCompleteListener { task ->
                 Log.d("news", "Suksess")

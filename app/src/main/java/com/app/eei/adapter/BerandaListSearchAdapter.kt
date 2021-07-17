@@ -1,20 +1,21 @@
 package com.app.eei.adapter
 
 import android.content.Context
-import android.text.Html
+import android.content.Intent
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.core.content.ContextCompat.startActivity
+import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.RecyclerView
 import com.app.eei.databinding.ItemCardBigBinding
-import com.app.eei.databinding.ItemCardBinding
 
 import com.app.eei.entity.News
+import com.app.eei.ui.admin.detail.AdminDetailActivity
 import com.bumptech.glide.Glide
-import kotlinx.coroutines.withContext
 
 
-class BerandaListAdapter(private val List: ArrayList<News>): RecyclerView.Adapter<BerandaListAdapter.ListViewHolder>() {
+class BerandaListSearchAdapter(private val List: ArrayList<News>): RecyclerView.Adapter<BerandaListSearchAdapter.ListViewHolder>() {
     private var onItemClickCallback: OnItemClickCallback? = null
 
     fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
@@ -36,10 +37,15 @@ class BerandaListAdapter(private val List: ArrayList<News>): RecyclerView.Adapte
                         .load(news.imgNews)
                         .into(it)
                 }
+                val bundle=Bundle()
                 titleNews.text=news.title
                 dateNews.text=news.dateNews
+                binding.card.setOnClickListener {
+                    val intent= Intent(itemView.context, AdminDetailActivity::class.java)
+                    intent.putExtra(AdminDetailActivity.EXTRA_DATA,news)
+                    startActivity(itemView.context,intent,bundle)
+                }
 //                contentNews.text= Html.fromHtml(news.contentNews)
-
                 itemView.setOnClickListener{
                     onItemClickCallback?.onItemClicked(news)
                 }
