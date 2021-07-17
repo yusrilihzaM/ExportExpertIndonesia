@@ -16,6 +16,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.app.eei.R
 import com.app.eei.databinding.ActivityAdminDetailBinding
 import com.app.eei.entity.News
+import com.app.eei.extensions.Extensions.toast
 import com.app.eei.ui.admin.beranda.MainActivity
 import com.app.eei.ui.admin.beranda.viewmodel.NewsViewModel
 import com.app.eei.ui.admin.editform.AdminEditActivity
@@ -40,6 +41,7 @@ class AdminDetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAdminDetailBinding
     private lateinit var viewmodel: NewsViewModel
     private var typeData:String=""
+    private var letak:String=""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_admin_detail)
@@ -50,6 +52,8 @@ class AdminDetailActivity : AppCompatActivity() {
         supportActionBar?.hide()
 
         val data=intent.getParcelableExtra<News>(EXTRA_DATA) as News
+        val dataletak=intent.getStringExtra("data").toString()
+        letak=dataletak
         val contentString=data.contentNews
         val htmlAsSpanned:Spanned=Html.fromHtml(contentString)
         typeData=data.type.toString()
@@ -156,31 +160,38 @@ class AdminDetailActivity : AppCompatActivity() {
         alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(getColor(R.color.bg_del))
     }
     private fun pindah(){
-        when(typeData){
-            getString(R.string.podcast)->{
-                startActivity(Intent(this, AdminPodcastActivity::class.java))
-                finish()
-            }
-            getString(R.string.tipsdantricks)->{
-                startActivity(Intent(this, AdminTipsActivity::class.java))
-                finish()
-            }
-            getString(R.string.berita)->{
-                startActivity(Intent(this, AdminNewsActivity::class.java))
-                finish()
-            }
-            getString(R.string.event)->{
-                startActivity(Intent(this, AdminEventActivity::class.java))
-                finish()
-            }
-            getString(R.string.mitra)->{
-                startActivity(Intent(this, AdminMitraActivity::class.java))
-                finish()
-            }
-            getString(R.string.komunitas)->{
-                startActivity(Intent(this, AdminKomunitasActivity::class.java))
-                finish()
+
+        if(letak=="beranda"){
+            startActivity(Intent(this, MainActivity::class.java))
+        }else{
+            when(typeData){
+                getString(R.string.podcast)->{
+                    startActivity(Intent(this, AdminPodcastActivity::class.java))
+                    finish()
+                }
+                getString(R.string.tipsdantricks)->{
+                    startActivity(Intent(this, AdminTipsActivity::class.java))
+                    finish()
+                }
+                getString(R.string.berita)->{
+                    startActivity(Intent(this, AdminNewsActivity::class.java))
+                    finish()
+                }
+                getString(R.string.event)->{
+                    startActivity(Intent(this, AdminEventActivity::class.java))
+                    finish()
+                }
+                getString(R.string.mitra)->{
+                    startActivity(Intent(this, AdminMitraActivity::class.java))
+                    finish()
+                }
+                getString(R.string.komunitas)->{
+                    startActivity(Intent(this, AdminKomunitasActivity::class.java))
+                    finish()
+                }
             }
         }
+
     }
+
 }

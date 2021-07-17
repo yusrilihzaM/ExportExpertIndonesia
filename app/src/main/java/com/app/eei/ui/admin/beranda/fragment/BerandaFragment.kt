@@ -125,7 +125,6 @@ class BerandaFragment : Fragment() {
             binding.rvNews.adapter=mberandaListAdapter
             mberandaListAdapter.setOnItemClickCallback(object :BerandaListAdapter.OnItemClickCallback{
                 override fun onItemClicked(data: News) {
-                    Toast.makeText(context, data.title, Toast.LENGTH_SHORT).show()
                     val intent= Intent(context, AdminDetailActivity::class.java)
                     intent.putExtra(EXTRA_DATA,data)
                     startActivity(intent)
@@ -184,9 +183,9 @@ class BerandaFragment : Fragment() {
             }
             berandaListAdapter.setOnItemClickCallback(object :BerandaLimitListAdapter.OnItemClickCallback{
                 override fun onItemClicked(data: News) {
-                    Toast.makeText(context, data.title, Toast.LENGTH_SHORT).show()
                     val intent= Intent(context, AdminDetailActivity::class.java)
                     intent.putExtra(EXTRA_DATA,data)
+                    intent.putExtra("data","beranda")
                     startActivity(intent)
                 }
             })
