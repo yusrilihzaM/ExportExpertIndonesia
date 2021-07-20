@@ -1,5 +1,6 @@
 package com.app.eei.ui.guest.beranda
 
+import android.content.Context
 import android.content.Intent
 import android.content.res.TypedArray
 import android.os.Bundle
@@ -7,6 +8,7 @@ import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -16,11 +18,13 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.app.eei.R
 import com.app.eei.adapter.BerandaLimitListAdapter
+import com.app.eei.adapter.BerandaListAdapter
 import com.app.eei.adapter.MenuListAdapter
 import com.app.eei.databinding.FragmentGuestBerandaBinding
 import com.app.eei.entity.Menu
 import com.app.eei.entity.News
 import com.app.eei.ui.admin.beranda.viewmodel.NewsViewModel
+import com.app.eei.ui.admin.detail.AdminDetailActivity
 import com.app.eei.ui.admin.menu.berita.AdminNewsActivity
 import com.app.eei.ui.admin.menu.event.AdminEventActivity
 import com.app.eei.ui.admin.menu.komunitas.AdminKomunitasActivity
@@ -48,6 +52,7 @@ class GuestBerandaFragment : Fragment() {
     private lateinit var viewmodel: NewsViewModel
     private lateinit var swipeContainer: SwipeRefreshLayout
     private lateinit var berandaListAdapter: BerandaLimitListAdapter
+    private lateinit var mberandaListAdapter: BerandaListAdapter
     private lateinit var dataTitle: Array<String>
     private lateinit var dataIc: TypedArray
     private var list: ArrayList<Menu> = arrayListOf()
@@ -73,21 +78,29 @@ class GuestBerandaFragment : Fragment() {
 
         showData()
         showMenu()
-//        binding.btnSearch.setOnClickListener {
-//
-//            val dataSearch=binding.edtSearch.text.toString()
-//            Toast.makeText(context, dataSearch, Toast.LENGTH_SHORT).show()
-//            showSearch(dataSearch)
-//        }
-//        binding.edtSearch.setOnKeyListener(View.OnKeyListener { v, keyCode, event ->
-//            if (keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_UP) {
-//                val dataSearch=binding.edtSearch.text.toString()
-//                Toast.makeText(context, dataSearch, Toast.LENGTH_SHORT).show()
-//                showSearch(dataSearch)
-//                return@OnKeyListener true
-//            }
-//            false
-//        })
+        binding.btnClose.setOnClickListener {
+            binding.edtSearch.text.clear()
+            mberandaListAdapter.clear()
+            showView(true)
+        }
+        binding.btnSearch.setOnClickListener {
+            binding.edtSearch.hideKeyboard()
+            binding.btnClose.visibility=View.VISIBLE
+            val dataSearch=binding.edtSearch.text.toString()
+            Toast.makeText(context, dataSearch, Toast.LENGTH_SHORT).show()
+            showSearch(dataSearch)
+        }
+        binding.edtSearch.setOnKeyListener(View.OnKeyListener { v, keyCode, event ->
+            if (keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_UP) {
+                binding.edtSearch.hideKeyboard()
+                binding.btnClose.visibility=View.VISIBLE
+                val dataSearch=binding.edtSearch.text.toString()
+                Toast.makeText(context, dataSearch, Toast.LENGTH_SHORT).show()
+                showSearch(dataSearch)
+                return@OnKeyListener true
+            }
+            false
+        })
         swipeContainer.setOnRefreshListener {
             swipeContainer.isRefreshing = true
             showData()
@@ -98,40 +111,75 @@ class GuestBerandaFragment : Fragment() {
             activity?.finish()
         }
     }
+    fun View.hideKeyboard() {
+        val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(windowToken, 0)
+    }
     private fun showSearch(title:String){
         showShimmer(true)
+        showView(false)
         recyclerView=binding.rvNews
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager= LinearLayoutManager(context)
         viewmodel.setSearchNews(title)
         viewmodel.getNews().observe(viewLifecycleOwner,{data->
-            showShimmer(false)
-            berandaListAdapter= BerandaLimitListAdapter(data)
-            berandaListAdapter.notifyDataSetChanged()
-            recyclerView.adapter=berandaListAdapter
+            if(data.size!=0){
+                mberandaListAdapter= BerandaListAdapter(data)
+                mberandaListAdapter.notifyDataSetChanged()
+                binding.rvNews.adapter=mberandaListAdapter
+                swipeContainer.isRefreshing = false
+                mberandaListAdapter.setOnItemClickCallback(object :BerandaListAdapter.OnItemClickCallback{
+                    override fun onItemClicked(data: News) {
+                        val intent= Intent(context, GuestDetailActivity::class.java)
+                        intent.putExtra(GuestDetailActivity.EXTRA_DATA,data)
+                        intent.putExtra("data","beranda")
+                        startActivity(intent)
+                        activity?.finish()
+                    }
+                })
+            }else{
 
-            swipeContainer.isRefreshing = false
-            berandaListAdapter.setOnItemClickCallback(object :BerandaLimitListAdapter.OnItemClickCallback{
-                override fun onItemClicked(data: News) {
-                    Toast.makeText(context, data.title, Toast.LENGTH_SHORT).show()
-                    val intent= Intent(context, GuestDetailActivity::class.java)
-                    intent.putExtra(GuestDetailActivity.EXTRA_DATA,data)
-                    startActivity(intent)
-                    activity?.finish()
-                }
-            })
+            }
+
         })
     }
+    private fun showView(boolean: Boolean){
+        if (boolean){
+            binding.rvMenu.visibility=View.VISIBLE
+            binding.tvwhatnew.visibility=View.VISIBLE
+            binding.rvNews.visibility=View.VISIBLE
+            binding.rvSearch.visibility=View.GONE
+            showData()
+            showMenu()
+        }
+        else{
+            binding.rvMenu.visibility=View.GONE
+            binding.rvNews.visibility=View.GONE
+            binding.rvSearch.visibility=View.VISIBLE
+            binding.tvwhatnew.visibility=View.GONE
+            binding.noData.visibility=View.GONE
+            binding.tvnodata.visibility=View.GONE
+        }
 
+    }
+    private fun showShimmerSearch(boolean: Boolean){
+        if(boolean){
+            binding.shimmerSearch.startShimmer()
+            binding.shimmerSearch.showShimmer(true)
+            binding.shimmerSearch.visibility=View.INVISIBLE
+        }
+        else{
+            binding.shimmerSearch.stopShimmer()
+            binding.shimmerSearch.showShimmer(false)
+            binding.shimmerSearch.visibility=View.GONE
+        }
+    }
     override fun onPause() {
         super.onPause()
         berandaListAdapter.notifyDataSetChanged()
     }
     private fun showData(){
-        showShimmer(true)
-        recyclerView=binding.rvNews
-        recyclerView.setHasFixedSize(true)
-        recyclerView.layoutManager= LinearLayoutManager(context)
+
 
         viewmodel.setNews()
         viewmodel.getNews().observe(viewLifecycleOwner,{data->
@@ -172,13 +220,17 @@ class GuestBerandaFragment : Fragment() {
             }else{
                 binding.noData.visibility=View.GONE
                 binding.tvnodata.visibility=View.GONE
+                showShimmer(true)
+                recyclerView=binding.rvNews
+                recyclerView.setHasFixedSize(true)
+                recyclerView.layoutManager= LinearLayoutManager(context)
             }
 
             berandaListAdapter.setOnItemClickCallback(object :BerandaLimitListAdapter.OnItemClickCallback{
                 override fun onItemClicked(data: News) {
-                    Toast.makeText(context, data.title, Toast.LENGTH_SHORT).show()
                     val intent= Intent(context, GuestDetailActivity::class.java)
                     intent.putExtra(GuestDetailActivity.EXTRA_DATA,data)
+                    intent.putExtra("data","beranda")
                     startActivity(intent)
                     activity?.finish()
                 }

@@ -127,24 +127,23 @@
                 android:layout_marginBottom="@dimen/m_8"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_menu"
+                app:layout_constraintTop_toBottomOf="@+id/rvSearch"
                 tools:listitem="@layout/item_menu"
                 app:spanCount="3"
                 app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"/>
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_search"
+                android:id="@+id/rvSearch"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
+                android:visibility="gone"
                 android:layout_marginLeft="@dimen/m_16"
                 android:layout_marginRight="@dimen/m_16"
-                android:layout_marginTop="@dimen/m_32"
-                android:layout_marginBottom="@dimen/m_8"
+                android:layout_marginTop="@dimen/m_16"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_menu"
-                tools:listitem="@layout/item_card_big"
-                android:visibility="gone"
-                />
+                tools:listitem="@layout/item_card_big" />
             <TextView
                 android:id="@+id/tvwhatnew"
                 android:layout_width="wrap_content"
@@ -160,7 +159,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/rv_menu"
                 app:layout_constraintVertical_bias="0.0" />
             <ImageView
-                android:visibility="invisible"
+                android:visibility="gone"
                 android:id="@+id/noData"
                 android:layout_width="match_parent"
                 android:layout_height="350dp"
@@ -176,9 +175,10 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:fontFamily="@font/poppins"
+                android:layout_marginTop="@dimen/m_16"
                 android:gravity="center"
                 android:text="@string/tidak_ada_data"
-                android:visibility="invisible"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/noData" />
@@ -227,7 +227,35 @@
                     tools:listitem="@layout/item_card" />
 
             </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-
+            <com.facebook.shimmer.ShimmerFrameLayout
+                android:id="@+id/shimmerSearch"
+                android:layout_width="match_parent"
+                android:layout_height="450dp"
+                android:visibility="gone"
+                android:layout_marginRight="@dimen/m_16"
+                android:layout_marginLeft="@dimen/m_16"
+                android:layout_marginTop="@dimen/m_8"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.187"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_lihata"
+                app:layout_constraintVertical_bias="0.0">
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <include layout="@layout/shimmer_item_card_big"/>
+                    <include layout="@layout/shimmer_item_card_big"/>
+                    <include layout="@layout/shimmer_item_card_big"/>
+                    <include layout="@layout/shimmer_item_card_big"/>
+                    <include layout="@layout/shimmer_item_card_big"/>
+                    <include layout="@layout/shimmer_item_card_big"/>
+                    <include layout="@layout/shimmer_item_card_big"/>
+                    <include layout="@layout/shimmer_item_card_big"/>
+                    <include layout="@layout/shimmer_item_card_big"/>
+                </LinearLayout>
+            </com.facebook.shimmer.ShimmerFrameLayout>
             <com.facebook.shimmer.ShimmerFrameLayout
                 android:id="@+id/shimmer"
                 android:layout_width="match_parent"

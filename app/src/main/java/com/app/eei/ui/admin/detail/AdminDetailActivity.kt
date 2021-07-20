@@ -92,7 +92,6 @@ class AdminDetailActivity : AppCompatActivity() {
 
         binding.btnBack.setOnClickListener {
             pindah()
-            finish()
         }
         binding.btnEdit.setOnClickListener {
             val intent= Intent(this, AdminEditActivity::class.java)
@@ -108,7 +107,7 @@ class AdminDetailActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         super.onBackPressed()
-        finish()
+        pindah()
     }
     private fun delData(type: Int,id:String) {
         val isDialogClose = type == ALERT_DIALOG_CLOSE
@@ -163,6 +162,7 @@ class AdminDetailActivity : AppCompatActivity() {
 
         if(letak=="beranda"){
             startActivity(Intent(this, MainActivity::class.java))
+            finish()
         }else{
             when(typeData){
                 getString(R.string.podcast)->{

@@ -1,6 +1,5 @@
 package com.app.eei.adapter
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -15,19 +14,26 @@ import com.app.eei.ui.admin.detail.AdminDetailActivity
 import com.bumptech.glide.Glide
 
 
-class BerandaListSearchAdapter(private val List: ArrayList<News>): RecyclerView.Adapter<BerandaListSearchAdapter.ListViewHolder>() {
+class BerandaListSearchAdapter: RecyclerView.Adapter<BerandaListSearchAdapter.ListViewHolder>() {
     private var onItemClickCallback: OnItemClickCallback? = null
+    private val List= arrayListOf<News>()
 
-    fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
+
+    fun setOnItemClickCallback(onItemClickCallback: BerandaListSearchAdapter.OnItemClickCallback) {
         this.onItemClickCallback = onItemClickCallback
     }
     fun clear() {
         List.clear()
         notifyDataSetChanged()
+        notifyItemInserted(List.size)
     }
     fun addAll(tweetList: List<News>) {
         List.addAll(tweetList)
         notifyDataSetChanged()
+        notifyItemInserted(List.size)
+    }
+    fun sizeData(): Int {
+        return List.size
     }
     inner class ListViewHolder(private val binding: ItemCardBigBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(news: News){

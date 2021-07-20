@@ -44,7 +44,7 @@ class AdminAddActivity : AppCompatActivity() {
     var db: FirebaseFirestore? = null
     var progressDialog: ProgressDialog? = null
     var urlPathPublic: String? = null
-    var id:Int=1
+    var id:Int=111111
     var type:String=""
     var dokument:String=""
     private lateinit var viewmodel: NewsViewModel
@@ -60,20 +60,25 @@ class AdminAddActivity : AppCompatActivity() {
         setContentView(binding.root)
         viewmodel= ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(NewsViewModel::class.java)
 
-        viewmodel.setNews()
+        viewmodel.setNewsID()
         viewmodel.getNews().observe(this,{data->
 //            id=data.size-1
-            val idTerakhir:Int=data.size.toInt()
-            Log.d("idTerakhir",idTerakhir.toString())
+
+
             if(data.size==0){
-                dokument="a 1"
+                id=111111
             } else {
-                val dataSplit=data[idTerakhir-1].id.split(" ").toTypedArray().toList()
-                Log.d("dataSplit",dataSplit.toString())
+                val jumlah:Int=data.size.toInt()-1
+                val idTerakhir:Int=data[jumlah].id.toInt()
+                Log.d("idTerakhir",idTerakhir.toString())
                 id=idTerakhir+1
-                Log.d("dataSplit1",id.toString())
-                dokument= "a $id"
-                Log.d("dataSplit2",dokument.toString())
+                Log.d("idSekarang",id.toString())
+//                val dataSplit=data[idTerakhir-1].id.split(" ").toTypedArray().toList()
+//                Log.d("dataSplit",dataSplit.toString())
+//                id=idTerakhir+1
+//                Log.d("dataSplit1",id.toString())
+//                dokument= "a $id"
+//                Log.d("dataSplit2",dokument.toString())
             }
 
             Log.d("dokument",dokument.toString())
@@ -316,22 +321,28 @@ class AdminAddActivity : AppCompatActivity() {
                 ref.downloadUrl.addOnSuccessListener { uri ->
                     val url = uri.toString()
                     urlPathPublic = url
-                    binding.urlpath.text=urlPathPublic
 
                     if(url!=null){
                         val sdf = SimpleDateFormat("E. dd MMMM, yyyy hh:mm", Locale.US)
                         val currentDate = sdf.format(Date())
                         val titleSplit = binding.edtTitleNews.getTextValue.split(" ").toTypedArray().toList()
+                        val hastag=binding.edtHastag.text.split(" ").toTypedArray().toList()
+                        val tagConv=binding.edtHastag.text.split(" ","#").toTypedArray().toMutableList()
+                        tagConv.remove("")
+                        val tag=tagConv.toList()
+                        Log.d("tagSplit",tag.toString())
                         val news = hashMapOf(
                             "imgNews" to urlPathPublic.toString(),
-                            "idNews" to dokument,
+                            "idNews" to id,
                             "titleNews" to binding.edtTitleNews.getTextValue,
                             "dateNews" to currentDate,
                             "contentNews" to mEditor.html,
                             "titleSplit" to titleSplit,
-                            "type" to type
+                            "type" to type,
+                            "hastag" to hastag,
+                            "tag" to tag
                         )
-                        db?.collection("news")?.document(dokument)
+                        db?.collection("news")?.document(id.toString())
                             ?.set(news)
                             ?.addOnSuccessListener {
                                 Log.d(TAG, "DocumentSnapshot successfully written!")

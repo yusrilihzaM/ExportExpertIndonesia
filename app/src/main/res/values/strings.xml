@@ -46,6 +46,7 @@
     <string name="berita">Berita</string>
     <string name="komunitas">Komunitas</string>
     <string name="tipe_postingan">Tipe Postingan</string>
+    <string name="hastag">Hastag</string>
 
     <string-array name="type_array">
         <item>@string/podcast</item>
