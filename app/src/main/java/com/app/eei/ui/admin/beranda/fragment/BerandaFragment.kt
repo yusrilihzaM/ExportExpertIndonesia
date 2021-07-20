@@ -122,7 +122,6 @@ class BerandaFragment : Fragment() {
         viewmodel.getNewsSearch().observe(viewLifecycleOwner,{data->
             binding.tvnodata.visibility=View.GONE
             binding.rvSearch.visibility=View.VISIBLE
-            Toast.makeText(context, data.size.toString(), Toast.LENGTH_SHORT).show()
             if(data.size!=0){
                     showShimmerSearch(false)
                     mberandaListAdapter.clear()
