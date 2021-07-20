@@ -339,8 +339,7 @@ class AdminAddActivity : AppCompatActivity() {
                             "contentNews" to mEditor.html,
                             "titleSplit" to titleSplit,
                             "type" to type,
-                            "hastag" to hastag,
-                            "tag" to tag
+                            "hastag" to hastag
                         )
                         db?.collection("news")?.document(id.toString())
                             ?.set(news)

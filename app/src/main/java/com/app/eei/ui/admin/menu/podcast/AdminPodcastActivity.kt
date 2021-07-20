@@ -64,10 +64,6 @@ class AdminPodcastActivity : AppCompatActivity() {
             finish()
         }
     }
-    override fun onPause() {
-        super.onPause()
-        berandaListAdapter.notifyDataSetChanged()
-    }
 
     private fun showData() {
         showShimmer(true)

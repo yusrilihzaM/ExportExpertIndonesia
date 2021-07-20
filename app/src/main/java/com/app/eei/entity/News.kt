@@ -13,6 +13,6 @@ data class News (
         val contentNews:String,
         val type:String,
         val titleSplit: ArrayList<String> = ArrayList(),
-        var hastag: ArrayList<String> = ArrayList(),
-        var tag: ArrayList<String> = ArrayList()
+        var hastag: ArrayList<String> = ArrayList()
+
         ):Parcelable

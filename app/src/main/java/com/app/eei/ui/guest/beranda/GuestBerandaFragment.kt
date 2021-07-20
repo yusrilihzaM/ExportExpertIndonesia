@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.res.TypedArray
 import android.os.Bundle
+import android.util.Log
 import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
@@ -19,6 +20,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.app.eei.R
 import com.app.eei.adapter.BerandaLimitListAdapter
 import com.app.eei.adapter.BerandaListAdapter
+import com.app.eei.adapter.BerandaListSearchAdapter
 import com.app.eei.adapter.MenuListAdapter
 import com.app.eei.databinding.FragmentGuestBerandaBinding
 import com.app.eei.entity.Menu
@@ -52,7 +54,7 @@ class GuestBerandaFragment : Fragment() {
     private lateinit var viewmodel: NewsViewModel
     private lateinit var swipeContainer: SwipeRefreshLayout
     private lateinit var berandaListAdapter: BerandaLimitListAdapter
-    private lateinit var mberandaListAdapter: BerandaListAdapter
+    private lateinit var mberandaListAdapter: BerandaListSearchAdapter
     private lateinit var dataTitle: Array<String>
     private lateinit var dataIc: TypedArray
     private var list: ArrayList<Menu> = arrayListOf()
@@ -78,16 +80,21 @@ class GuestBerandaFragment : Fragment() {
 
         showData()
         showMenu()
+        mberandaListAdapter=BerandaListSearchAdapter()
         binding.btnClose.setOnClickListener {
             binding.edtSearch.text.clear()
-            mberandaListAdapter.clear()
+            binding.tvnodata.visibility=View.GONE
+            binding.noData.visibility=View.GONE
             showView(true)
+            showData()
+            showMenu()
+            binding.btnClose.visibility=View.GONE
+
         }
         binding.btnSearch.setOnClickListener {
             binding.edtSearch.hideKeyboard()
             binding.btnClose.visibility=View.VISIBLE
             val dataSearch=binding.edtSearch.text.toString()
-            Toast.makeText(context, dataSearch, Toast.LENGTH_SHORT).show()
             showSearch(dataSearch)
         }
         binding.edtSearch.setOnKeyListener(View.OnKeyListener { v, keyCode, event ->
@@ -95,7 +102,6 @@ class GuestBerandaFragment : Fragment() {
                 binding.edtSearch.hideKeyboard()
                 binding.btnClose.visibility=View.VISIBLE
                 val dataSearch=binding.edtSearch.text.toString()
-                Toast.makeText(context, dataSearch, Toast.LENGTH_SHORT).show()
                 showSearch(dataSearch)
                 return@OnKeyListener true
             }
@@ -116,32 +122,43 @@ class GuestBerandaFragment : Fragment() {
         imm.hideSoftInputFromWindow(windowToken, 0)
     }
     private fun showSearch(title:String){
-        showShimmer(true)
         showView(false)
-        recyclerView=binding.rvNews
-        recyclerView.setHasFixedSize(true)
-        recyclerView.layoutManager= LinearLayoutManager(context)
-        viewmodel.setSearchNews(title)
-        viewmodel.getNews().observe(viewLifecycleOwner,{data->
+        showShimmerSearch(true)
+        binding.rvSearch.layoutManager= LinearLayoutManager(context)
+        viewmodel.setSearch(title)
+        Log.d("searchlog",    viewmodel.setSearch(title).toString())
+        viewmodel.getNewsSearch().observe(viewLifecycleOwner,{data->
+            binding.tvnodata.visibility=View.GONE
+            binding.rvSearch.visibility=View.VISIBLE
             if(data.size!=0){
-                mberandaListAdapter= BerandaListAdapter(data)
-                mberandaListAdapter.notifyDataSetChanged()
-                binding.rvNews.adapter=mberandaListAdapter
-                swipeContainer.isRefreshing = false
-                mberandaListAdapter.setOnItemClickCallback(object :BerandaListAdapter.OnItemClickCallback{
+                showShimmerSearch(false)
+                mberandaListAdapter.clear()
+                mberandaListAdapter.addAll(data)
+                binding.noData.visibility=View.GONE
+                binding.tvnodata.visibility=View.GONE
+                binding.rvSearch.adapter=mberandaListAdapter
+                binding.rvSearch.itemAnimator=null
+                mberandaListAdapter.setOnItemClickCallback(object :BerandaListSearchAdapter.OnItemClickCallback{
                     override fun onItemClicked(data: News) {
-                        val intent= Intent(context, GuestDetailActivity::class.java)
-                        intent.putExtra(GuestDetailActivity.EXTRA_DATA,data)
+                        val intent= Intent(context, AdminDetailActivity::class.java)
+                        intent.putExtra(AdminDetailActivity.EXTRA_DATA,data)
                         intent.putExtra("data","beranda")
                         startActivity(intent)
                         activity?.finish()
                     }
-                })
-            }else{
+                }
+                )
 
+            }
+            else if (mberandaListAdapter.sizeData()==0 && data.size==0){
+                mberandaListAdapter.clear()
+                binding.rvSearch.visibility=View.GONE
+                binding.tvnodata.visibility=View.VISIBLE
+                binding.tvnodata.text="Pencarian tidak ditemukan"
             }
 
         })
+
     }
     private fun showView(boolean: Boolean){
         if (boolean){
@@ -179,53 +196,31 @@ class GuestBerandaFragment : Fragment() {
         berandaListAdapter.notifyDataSetChanged()
     }
     private fun showData(){
-
+        binding.noData.visibility=View.GONE
+        binding.tvnodata.visibility=View.GONE
+        showShimmer(true)
+        recyclerView=binding.rvNews
+        recyclerView.setHasFixedSize(true)
+        recyclerView.layoutManager= LinearLayoutManager(context)
 
         viewmodel.setNews()
         viewmodel.getNews().observe(viewLifecycleOwner,{data->
             showShimmer(false)
-            berandaListAdapter=BerandaLimitListAdapter(data)
-            recyclerView.adapter=berandaListAdapter
-            berandaListAdapter.notifyDataSetChanged()
-            swipeContainer.isRefreshing = false
-            if (data.size==0){
-                binding.noData.visibility=View.VISIBLE
-                binding.tvnodata.visibility=View.VISIBLE
-                Glide.with(this)
-                    .asGif()
-                    .load(R.drawable.nodatagif) // Replace with a valid url
-                    .addListener(object : RequestListener<GifDrawable?> {
-                        override fun onLoadFailed(
-                            e: GlideException?,
-                            model: Any?,
-                            target: Target<GifDrawable?>?,
-                            isFirstResource: Boolean
-                        ): Boolean {
-                            return false
-                        }
-                        override fun onResourceReady(
-                            resource: GifDrawable?,
-                            model: Any?,
-                            target: Target<GifDrawable?>?,
-                            dataSource: DataSource?,
-                            isFirstResource: Boolean
-                        ): Boolean {
-                            resource?.setLoopCount(1)
-                            return false
-                        }
 
-                    })
-                    .into(binding.noData)
+            if (data.size!=0){
 
-            }else{
                 binding.noData.visibility=View.GONE
                 binding.tvnodata.visibility=View.GONE
-                showShimmer(true)
-                recyclerView=binding.rvNews
-                recyclerView.setHasFixedSize(true)
-                recyclerView.layoutManager= LinearLayoutManager(context)
-            }
+                berandaListAdapter=BerandaLimitListAdapter(data)
 
+                berandaListAdapter.notifyDataSetChanged()
+                recyclerView.adapter=berandaListAdapter
+
+                swipeContainer.isRefreshing = false
+            }
+            else if (data.size==0){
+                binding.tvnodata.visibility=View.VISIBLE
+            }
             berandaListAdapter.setOnItemClickCallback(object :BerandaLimitListAdapter.OnItemClickCallback{
                 override fun onItemClicked(data: News) {
                     val intent= Intent(context, GuestDetailActivity::class.java)
@@ -238,6 +233,43 @@ class GuestBerandaFragment : Fragment() {
 
         })
     }
+//    private fun showData(){
+//        binding.noData.visibility=View.GONE
+//        binding.tvnodata.visibility=View.GONE
+//        showShimmer(true)
+//        recyclerView=binding.rvNews
+//
+//        viewmodel.setNews()
+//        viewmodel.getNews().observe(viewLifecycleOwner,{data->
+//            showShimmer(false)
+//            berandaListAdapter=BerandaLimitListAdapter(data)
+//            recyclerView.adapter=berandaListAdapter
+//            berandaListAdapter.notifyDataSetChanged()
+//            swipeContainer.isRefreshing = false
+//            if (data.size==0){
+//                binding.tvnodata.visibility=View.VISIBLE
+//
+//            }else{
+//                binding.noData.visibility=View.GONE
+//                binding.tvnodata.visibility=View.GONE
+//                showShimmer(true)
+//                recyclerView=binding.rvNews
+//                recyclerView.setHasFixedSize(true)
+//                recyclerView.layoutManager= LinearLayoutManager(context)
+//            }
+//
+//            berandaListAdapter.setOnItemClickCallback(object :BerandaLimitListAdapter.OnItemClickCallback{
+//                override fun onItemClicked(data: News) {
+//                    val intent= Intent(context, GuestDetailActivity::class.java)
+//                    intent.putExtra(GuestDetailActivity.EXTRA_DATA,data)
+//                    intent.putExtra("data","beranda")
+//                    startActivity(intent)
+//                    activity?.finish()
+//                }
+//            })
+//
+//        })
+//    }
 
 
     private fun showShimmer(boolean: Boolean){

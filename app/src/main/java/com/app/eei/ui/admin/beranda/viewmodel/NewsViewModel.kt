@@ -73,8 +73,8 @@ class NewsViewModel:ViewModel() {
                             contentNews,
                             type,
                             titleSplit as ArrayList<String>,
-                            hastag as ArrayList<String>,
-                            tag as ArrayList<String>
+                            hastag as ArrayList<String>
+
                         )
                         listItems.add(app)
                     }
@@ -124,8 +124,7 @@ class NewsViewModel:ViewModel() {
                             contentNews,
                             type,
                             titleSplit as ArrayList<String>,
-                            hastag as ArrayList<String>,
-                            tag as ArrayList<String>
+                            hastag as ArrayList<String>
                         )
                         listItems.add(app)
                     }
@@ -175,8 +174,7 @@ class NewsViewModel:ViewModel() {
                             contentNews,
                             type,
                             titleSplit as ArrayList<String>,
-                            hastag as ArrayList<String>,
-                            tag as ArrayList<String>
+                            hastag as ArrayList<String>
                         )
                         listItems.add(app)
                     }
@@ -230,8 +228,7 @@ class NewsViewModel:ViewModel() {
                             contentNews,
                             type,
                             titleSplit as ArrayList<String>,
-                            hastag as ArrayList<String>,
-                            tag as ArrayList<String>
+                            hastag as ArrayList<String>
                         )
                         listItems.add(app)
                     }
@@ -272,8 +269,7 @@ class NewsViewModel:ViewModel() {
                             contentNews,
                             type,
                             titleSplit as ArrayList<String>,
-                            hastag as ArrayList<String>,
-                            tag as ArrayList<String>
+                            hastag as ArrayList<String>
                         )
                         listItems.add(app)
                     }
@@ -315,7 +311,6 @@ class NewsViewModel:ViewModel() {
                             val type=task.result?.documents?.get(document)?.get("type").toString()
                             val titleSplit=arrayOf(task.result?.documents?.get(document)?.get("titleSplit"))[0]
                             val hastag=arrayOf(task.result?.documents?.get(document)?.get("hastag"))[0]
-                            val tag=arrayOf(task.result?.documents?.get(document)?.get("tag"))[0]
 
 //                                val tag=arrayOf(task.result?.documents?.get(document)?.get("tag").toString().toList()
 
@@ -327,8 +322,8 @@ class NewsViewModel:ViewModel() {
                             contentNews,
                             type,
                             titleSplit as ArrayList<String>,
-                            hastag as ArrayList<String>,
-                            tag as ArrayList<String>
+                            hastag as ArrayList<String>
+
                         )
                         listItems.add(app)
                         }

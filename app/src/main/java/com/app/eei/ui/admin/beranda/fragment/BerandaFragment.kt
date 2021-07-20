@@ -293,56 +293,5 @@ class BerandaFragment : Fragment() {
         }
 
     }
-    private fun noData(n:Boolean){
-        if(n){
-            binding.rvMenu.visibility=View.GONE
-            binding.rvNews.visibility=View.GONE
-            binding.rvSearch.visibility=View.GONE
-            binding.noData.visibility=View.VISIBLE
-            binding.tvnodata.visibility=View.VISIBLE
-            Glide.with(this)
-                .asGif()
-                .load(R.drawable.nodatagif)
-                .addListener(object : RequestListener<GifDrawable?> {
-                    override fun onLoadFailed(
-                        e: GlideException?,
-                        model: Any?,
-                        target: Target<GifDrawable?>?,
-                        isFirstResource: Boolean
-                    ): Boolean {
-                        return false
-                    }
-                    override fun onResourceReady(
-                        resource: GifDrawable?,
-                        model: Any?,
-                        target: Target<GifDrawable?>?,
-                        dataSource: DataSource?,
-                        isFirstResource: Boolean
-                    ): Boolean {
-                        resource?.setLoopCount(0)
-                        return false
-                    }
 
-                })
-                .into(binding.noData)
-        }
-        else if(!n){
-            binding.noData.visibility=View.GONE
-            binding.tvnodata.visibility=View.GONE
-        }
-    }
-    private fun noDataSearch(n:Boolean){
-        if(n){
-            binding.rvMenu.visibility=View.GONE
-            binding.rvNews.visibility=View.GONE
-            binding.rvSearch.visibility=View.GONE
-            binding.noData.visibility=View.GONE
-            binding.tvnodata.visibility=View.VISIBLE
-            binding.tvnodata.text="Pencarian tidak ditemukan"
-        }
-        else{
-            binding.noData.visibility=View.GONE
-            binding.tvnodata.visibility=View.GONE
-        }
-    }
 }

@@ -74,6 +74,10 @@ class AdminEditActivity : AppCompatActivity(), AdapterView.OnItemSelectedListene
         setContentView(binding.root)
         viewmodel= ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(NewsViewModel::class.java)
         val data=intent.getParcelableExtra<News>(EXTRA_DATA_EDIT) as News
+        val list=data.hastag
+        val separator = " "
+        val hastag = list.joinToString(separator)
+        binding.edtHastag.setText(hastag)
         dokument=data.id.toString()
         Log.d("activty","AdminEditActivity")
         binding.edtTitleNews.setTextValue(data.title)
@@ -297,12 +301,12 @@ class AdminEditActivity : AppCompatActivity(), AdapterView.OnItemSelectedListene
                 ref.downloadUrl.addOnSuccessListener { uri ->
                     val url = uri.toString()
                     urlPathPublic = url
-                    binding.urlpath.text=urlPathPublic
 
                     if(url!=null){
                         val sdf = SimpleDateFormat("E. dd MMMM, yyyy hh:mm", Locale.US)
                         val currentDate = sdf.format(Date())
                         val titleSplit = binding.edtTitleNews.getTextValue.split(" ").toTypedArray().toList()
+                        val hastag=binding.edtHastag.text.split(" ").toTypedArray().toList()
                         news = hashMapOf(
                             "imgNews" to urlPathPublic.toString(),
                             "idNews" to dokument,
@@ -310,7 +314,8 @@ class AdminEditActivity : AppCompatActivity(), AdapterView.OnItemSelectedListene
 //                            "dateNews" to currentDate,
                             "contentNews" to mEditor.html,
                             "titleSplit" to titleSplit,
-                            "type" to type
+                            "type" to type,
+                            "hastag" to hastag
                         )
                         db?.collection("news")?.document(dokument)
                             ?.update(news)
@@ -356,12 +361,14 @@ class AdminEditActivity : AppCompatActivity(), AdapterView.OnItemSelectedListene
             val sdf = SimpleDateFormat("E. dd MMMM, yyyy hh:mm", Locale.US)
             val currentDate = sdf.format(Date())
             val titleSplit = binding.edtTitleNews.getTextValue.split(" ").toTypedArray().toList()
+            val hastag=binding.edtHastag.text.split(" ").toTypedArray().toList()
             news = hashMapOf(
                 "titleNews" to binding.edtTitleNews.getTextValue,
 //                "dateNews" to currentDate,
                 "contentNews" to mEditor.html,
                 "titleSplit" to titleSplit,
-                "type" to type
+                "type" to type,
+                "hastag" to hastag
             )
             db?.collection("news")?.document(dokument)
                 ?.update(news)
