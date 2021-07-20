@@ -49,6 +49,10 @@ class GuestDetailActivity : AppCompatActivity() {
         val data=intent.getParcelableExtra<News>(EXTRA_DATA) as News
         val dataletak=intent.getStringExtra("data").toString()
         letak=dataletak
+        val list=data.hastag
+        val separator = "\n"
+        val hastag = list.joinToString(separator)
+        binding.hastag.text=hastag
         typeData=data.type.toString()
         val contentString=data.contentNews
         val htmlAsSpanned: Spanned = Html.fromHtml(contentString)

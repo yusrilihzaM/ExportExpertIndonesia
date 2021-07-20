@@ -72,7 +72,7 @@
                    android:layout_height="wrap_content"
                    android:layout_gravity="center"
                    android:layout_margin="@dimen/m_8"
-                   android:src="@drawable/ic_baseline_close_24" />
+                   android:src="@drawable/ic_baseline_close_24_white" />
            </androidx.cardview.widget.CardView>
 
        </androidx.constraintlayout.widget.ConstraintLayout>
@@ -136,5 +136,19 @@
            android:layout_marginRight="@dimen/m_12"
            android:layout_marginBottom="@dimen/m_12"
            app:layout_constraintTop_toBottomOf="@+id/titleNews" />
+       <TextView
+           android:id="@+id/hastag"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:fontFamily="@font/poppins"
+           android:textColor="@color/black"
+           android:textSize="14sp"
+           android:layout_marginRight="@dimen/m_16"
+           android:layout_marginLeft="@dimen/m_16"
+           android:layout_marginBottom="@dimen/m_12"
+           app:layout_constraintEnd_toEndOf="parent"
+           app:layout_constraintStart_toStartOf="parent"
+           app:layout_constraintTop_toBottomOf="@+id/webview"
+           />
    </LinearLayout>
 </ScrollView>

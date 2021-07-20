@@ -54,6 +54,10 @@ class AdminDetailActivity : AppCompatActivity() {
         val data=intent.getParcelableExtra<News>(EXTRA_DATA) as News
         val dataletak=intent.getStringExtra("data").toString()
         letak=dataletak
+        val list=data.hastag
+        val separator = "\n"
+        val hastag = list.joinToString(separator)
+        binding.hastag.text=hastag
         val contentString=data.contentNews
         val htmlAsSpanned:Spanned=Html.fromHtml(contentString)
         typeData=data.type.toString()
