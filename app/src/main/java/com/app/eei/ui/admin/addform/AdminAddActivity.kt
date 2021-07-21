@@ -86,9 +86,10 @@ class AdminAddActivity : AppCompatActivity() {
         val upArrow =resources.getDrawable(R.drawable.ic_baseline_arrow_back_ios_24)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setHomeAsUpIndicator(upArrow)
-        supportActionBar?.title = Html.fromHtml("<font color=\"black\">" + "Postingan Baru" + "</font>")
+//        supportActionBar?.title = Html.fromHtml("<font color=\"black\">" + "Postingan Baru" + "</font>")
 
         val typeForm=intent.getStringExtra("type")
+        supportActionBar?.title = Html.fromHtml("<font color=\"black\">$typeForm Baru</font>")
         type=typeForm.toString()
         progressDialog = ProgressDialog(this)
         showFormContent()

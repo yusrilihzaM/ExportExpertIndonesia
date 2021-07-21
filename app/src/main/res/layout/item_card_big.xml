@@ -22,7 +22,7 @@
             android:layout_width="match_parent"
             android:layout_height="230dp"
             android:background="@color/shimmer_color"
-            android:scaleType="fitXY"
+            android:scaleType="centerCrop"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
         <TextView

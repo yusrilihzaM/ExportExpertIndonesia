@@ -1,26 +1,16 @@
 package com.app.eei.ui.guest.detail
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Html
 import android.text.Spanned
 import android.util.Base64
 import android.webkit.WebChromeClient
 import android.webkit.WebSettings
+import androidx.appcompat.app.AppCompatActivity
 import com.app.eei.R
-import com.app.eei.databinding.ActivityAdminDetailBinding
 import com.app.eei.databinding.ActivityGuestDetail2Binding
 import com.app.eei.entity.News
-import com.app.eei.extensions.Extensions.toast
-import com.app.eei.ui.admin.beranda.MainActivity
-import com.app.eei.ui.admin.detail.AdminDetailActivity
-import com.app.eei.ui.admin.menu.berita.AdminNewsActivity
-import com.app.eei.ui.admin.menu.event.AdminEventActivity
-import com.app.eei.ui.admin.menu.komunitas.AdminKomunitasActivity
-import com.app.eei.ui.admin.menu.mitra.AdminMitraActivity
-import com.app.eei.ui.admin.menu.podcast.AdminPodcastActivity
-import com.app.eei.ui.admin.menu.tips.AdminTipsActivity
 import com.app.eei.ui.guest.GuestMainActivity
 import com.app.eei.ui.guest.menu.berita.GuestNewsActivity
 import com.app.eei.ui.guest.menu.event.GuestEventActivity
@@ -72,7 +62,7 @@ class GuestDetailActivity : AppCompatActivity() {
                     "  bottom: 0;\n" +
                     "  right: 0;\n" +
                     "  width: 100%;\n" +
-                    "  height: 30%;\n" +
+                    "  height: 250px;\n" +
                     "}" +
                     "</style><body ><div class=\"\">"+data.contentNews +"</div></body></html>";
         val encodedHtml = Base64.encodeToString(unencodedHtml.toByteArray(), Base64.NO_PADDING)

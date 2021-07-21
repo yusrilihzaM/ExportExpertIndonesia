@@ -19,6 +19,7 @@ import com.app.eei.ui.admin.settingapp.fragment.bgsplashapp.BgSplashActivity
 import com.app.eei.ui.admin.settingapp.fragment.descapp.DescAppActivity
 import com.app.eei.ui.admin.settingapp.fragment.logoapp.LogoAppActivity
 import com.app.eei.ui.admin.settingapp.fragment.namaapp.NameAppActivity
+import com.app.eei.ui.admin.settingapp.fragment.sosmed.SosmedActivity
 
 
 class AdminSettingFragment : Fragment() {
@@ -75,7 +76,11 @@ class AdminSettingFragment : Fragment() {
                         intent= Intent(context, BgSplashActivity::class.java)
                         startActivity(intent)
                     }
+                    getString(R.string.sosial_media)->{
 
+                        intent= Intent(context, SosmedActivity::class.java)
+                        startActivity(intent)
+                    }
                 }
 
             }

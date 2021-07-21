@@ -47,7 +47,16 @@
     <string name="komunitas">Komunitas</string>
     <string name="tipe_postingan">Tipe Postingan</string>
     <string name="hastag">Hastag</string>
-
+    <string name="hubungi_kami">Hubungi Kami</string>
+    <string name="temukan_kami_di">Temukan kami di</string>
+    <string name="sosial_media">Sosial Media</string>
+    <string name="Whatsapp">Whatsapp</string>
+    <string name="Telegram">Telegram</string>
+    <string name="Instagram">Instagram</string>
+    <string name="Tiktok">Tiktok</string>
+    <string name="Facebook">Facebook</string>
+    <string name="Linkedn">Linkedn</string>
+    <string name="Email">Email</string>
     <string-array name="type_array">
         <item>@string/podcast</item>
         <item>@string/tipsdantricks</item>
@@ -78,6 +87,7 @@
         <item>@string/logo_aplikasi</item>
         <item>@string/desc_app</item>
         <item>@string/bg_splash</item>
+        <item>@string/sosial_media</item>
     </string-array>
 
     <array name="data_ic">
@@ -85,5 +95,6 @@
         <item>@drawable/ic_slogo</item>
         <item>@drawable/ic_sdesc</item>
         <item>@drawable/ic_sscreen</item>
+        <item>@drawable/social_media</item>
     </array>
 </resources>

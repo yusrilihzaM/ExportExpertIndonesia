@@ -67,8 +67,8 @@ class AdminAkunFragment : Fragment() {
             .into(binding.icProfile)
 
         binding.nameUser.text=email
-        binding.btnPersonal.setOnClickListener {
-            Toast.makeText(context, "Personal", Toast.LENGTH_SHORT).show()
+        binding.btnHub.setOnClickListener {
+            Toast.makeText(context, "Hub", Toast.LENGTH_SHORT).show()
         }
 
         binding.btnTentang.setOnClickListener {

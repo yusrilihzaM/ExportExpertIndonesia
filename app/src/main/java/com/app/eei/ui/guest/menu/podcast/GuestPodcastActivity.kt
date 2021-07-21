@@ -20,6 +20,7 @@ import com.app.eei.ui.admin.beranda.MainActivity
 import com.app.eei.ui.admin.beranda.viewmodel.NewsViewModel
 import com.app.eei.ui.admin.detail.AdminDetailActivity
 import com.app.eei.ui.guest.GuestMainActivity
+import com.app.eei.ui.guest.detail.GuestDetailActivity
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
@@ -114,8 +115,8 @@ class GuestPodcastActivity : AppCompatActivity() {
                 BerandaListAdapter.OnItemClickCallback {
                 override fun onItemClicked(data: News) {
                     Toast.makeText(this@GuestPodcastActivity, data.title, Toast.LENGTH_SHORT).show()
-                    val intent = Intent(this@GuestPodcastActivity, AdminDetailActivity::class.java)
-                    intent.putExtra(AdminDetailActivity.EXTRA_DATA, data)
+                    val intent = Intent(this@GuestPodcastActivity, GuestDetailActivity::class.java)
+                    intent.putExtra(GuestDetailActivity.EXTRA_DATA, data)
                     startActivity(intent)
                     finish()
                 }

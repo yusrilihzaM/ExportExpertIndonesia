@@ -89,7 +89,7 @@ class AdminEditActivity : AppCompatActivity(), AdapterView.OnItemSelectedListene
         val upArrow =resources.getDrawable(R.drawable.ic_baseline_arrow_back_ios_24)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setHomeAsUpIndicator(upArrow)
-        supportActionBar?.title = Html.fromHtml("<font color=\"black\">" + "Edit postingan" + "</font>")
+        supportActionBar?.title = Html.fromHtml("<font color=\"black\">" + "Edit" + "</font>")
         progressDialog = ProgressDialog(this)
         showFormContent()
         storageReference = FirebaseStorage.getInstance().getReference("Images")

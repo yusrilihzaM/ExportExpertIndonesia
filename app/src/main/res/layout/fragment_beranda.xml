@@ -73,7 +73,7 @@
                         android:inputType="text"
                         android:singleLine="true"
                         android:hint="@string/cari_berita"
-
+                        android:textSize="14sp"
                         android:paddingLeft="@dimen/m_16"
                         android:paddingTop="@dimen/m_8"
                         android:paddingRight="@dimen/m_16"

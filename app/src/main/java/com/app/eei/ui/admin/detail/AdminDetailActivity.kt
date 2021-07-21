@@ -75,7 +75,7 @@ class AdminDetailActivity : AppCompatActivity() {
                     "  bottom: 0;\n" +
                     "  right: 0;\n" +
                     "  width: 100%;\n" +
-                    "  height: 30%;\n" +
+                    "  height: 250px;\n" +
                     "}" +
                     "</style><body ><div class=\"\">"+data.contentNews +"</div></body></html>";
         val encodedHtml = Base64.encodeToString(unencodedHtml.toByteArray(), Base64.NO_PADDING)

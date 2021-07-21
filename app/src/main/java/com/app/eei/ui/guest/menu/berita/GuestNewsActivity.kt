@@ -17,6 +17,7 @@ import com.app.eei.databinding.ActivityGuestNewsBinding
 import com.app.eei.entity.News
 import com.app.eei.ui.admin.beranda.MainActivity
 import com.app.eei.ui.admin.beranda.viewmodel.NewsViewModel
+import com.app.eei.ui.admin.detail.AdminDetailActivity
 import com.app.eei.ui.guest.GuestMainActivity
 import com.app.eei.ui.guest.detail.GuestDetailActivity
 import com.bumptech.glide.Glide
@@ -67,8 +68,8 @@ class GuestNewsActivity : AppCompatActivity() {
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager = LinearLayoutManager(this)
 
-        viewmodel.setNews()
-        viewmodel.getNews().observe(this, { data ->
+        viewmodel.setNewsByType("Berita")
+        viewmodel.getNewsByType().observe(this, { data ->
             showShimmer(false)
             berandaListAdapter = BerandaListAdapter(data)
             recyclerView.adapter = berandaListAdapter
@@ -113,7 +114,7 @@ class GuestNewsActivity : AppCompatActivity() {
                 BerandaListAdapter.OnItemClickCallback {
                 override fun onItemClicked(data: News) {
                     Toast.makeText(this@GuestNewsActivity, data.title, Toast.LENGTH_SHORT).show()
-                    val intent = Intent(this@GuestNewsActivity, GuestDetailActivity::class.java)
+                    val intent = Intent(this@GuestNewsActivity,GuestDetailActivity::class.java)
                     intent.putExtra(GuestDetailActivity.EXTRA_DATA, data)
                     startActivity(intent)
                     finish()

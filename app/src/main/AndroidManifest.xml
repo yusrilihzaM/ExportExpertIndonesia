@@ -16,7 +16,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Eei">
-        <activity android:name=".ui.guest.menu.event.GuestEventActivity"></activity>
+        <activity android:name=".ui.tentang.EditSosmedActivity"></activity>
+        <activity android:name=".ui.admin.settingapp.fragment.sosmed.SosmedActivity" />
+        <activity android:name=".ui.guest.menu.event.GuestEventActivity" />
         <activity android:name=".ui.guest.menu.komunitas.GuestKomunitasActivity" />
         <activity android:name=".ui.guest.menu.mitra.GuestMitraActivity" />
         <activity android:name=".ui.guest.menu.tips.GuestTipsActivity" />
