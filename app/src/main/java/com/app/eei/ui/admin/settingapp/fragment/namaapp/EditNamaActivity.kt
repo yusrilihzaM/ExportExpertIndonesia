@@ -78,6 +78,7 @@ class EditNamaActivity : AppCompatActivity() {
                 true
             }
             16908332->{
+
                 finish()
                 true
             }

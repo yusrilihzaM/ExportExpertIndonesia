@@ -9,29 +9,224 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-    <androidx.cardview.widget.CardView
-        android:id="@+id/wa"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        <androidx.cardview.widget.CardView
+            android:visibility="gone"
+            android:id="@+id/wa"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="@dimen/m_16">
             <EditText
+                android:id="@+id/edtWa"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins"
                 android:textSize="14sp"
+                android:inputType="number"
                 android:hint="Nomor WA ex:08567898767"/>
-            <Button
-                android:id="@+id/btnWa"
-                android:text="Simpan Perubahan Whatsapp"
-                android:textColor="@color/black"
-                android:background="@drawable/bg_btn_login"
+            <br.com.simplepass.loadingbutton.customViews.CircularProgressButton
+                android:id="@+id/btn_wa"
+                android:textColor="@color/white"
+                android:text="@string/simpan"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_margin="@dimen/m_16"
+                android:textSize="16sp"
+                app:spinning_bar_color="@color/white"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="55dp"
+                android:background="@drawable/bg_btn_login" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
+        <androidx.cardview.widget.CardView
+            android:visibility="gone"
+            android:id="@+id/telegram"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/m_16">
+                <EditText
+                    android:id="@+id/edtTelegram"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins"
+                    android:textSize="14sp"
+                    android:hint="Username telegram ex:budi123 tanpa @"/>
+                <br.com.simplepass.loadingbutton.customViews.CircularProgressButton
+                    android:id="@+id/btn_tele"
+                    android:textColor="@color/white"
+                    android:text="@string/simpan"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_margin="@dimen/m_16"
+                    android:textSize="16sp"
+                    app:spinning_bar_color="@color/white"
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:background="@drawable/bg_btn_login" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+        <androidx.cardview.widget.CardView
+            android:visibility="gone"
+            android:id="@+id/ig"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/m_16">
+                <EditText
+                    android:id="@+id/edtIg"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins"
+
+                    android:textSize="14sp"
+                    android:hint="Username Instagram"/>
+                <br.com.simplepass.loadingbutton.customViews.CircularProgressButton
+                    android:id="@+id/btn_ig"
+                    android:textColor="@color/white"
+                    android:text="@string/simpan"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_margin="@dimen/m_16"
+                    android:textSize="16sp"
+                    app:spinning_bar_color="@color/white"
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:background="@drawable/bg_btn_login" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+        <androidx.cardview.widget.CardView
+            android:visibility="gone"
+            android:id="@+id/tiktok"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/m_16">
+                <EditText
+                    android:id="@+id/edtTiktok"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins"
+                    android:textSize="14sp"
+                    android:hint="Username tiktok ex:@Username"/>
+                <br.com.simplepass.loadingbutton.customViews.CircularProgressButton
+                    android:id="@+id/btn_tiktok"
+                    android:textColor="@color/white"
+                    android:text="@string/simpan"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_margin="@dimen/m_16"
+                    android:textSize="16sp"
+                    app:spinning_bar_color="@color/white"
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:background="@drawable/bg_btn_login" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+        <androidx.cardview.widget.CardView
+            android:visibility="gone"
+            android:id="@+id/fb"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/m_16">
+                <EditText
+                    android:id="@+id/edtFb"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins"
+                    android:textSize="14sp"
+                    android:hint="Username url facebook"/>
+                <br.com.simplepass.loadingbutton.customViews.CircularProgressButton
+                    android:id="@+id/btn_fb"
+                    android:textColor="@color/white"
+                    android:text="@string/simpan"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_margin="@dimen/m_16"
+                    android:textSize="16sp"
+                    app:spinning_bar_color="@color/white"
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:background="@drawable/bg_btn_login" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+        <androidx.cardview.widget.CardView
+            android:visibility="gone"
+            android:id="@+id/likedin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/m_16">
+                <EditText
+                    android:id="@+id/edtLikedin"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins"
+                    android:textSize="14sp"
+                    android:hint="Username linkedin"/>
+                <br.com.simplepass.loadingbutton.customViews.CircularProgressButton
+                    android:id="@+id/btn_likedin"
+                    android:textColor="@color/white"
+                    android:text="@string/simpan"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_margin="@dimen/m_16"
+                    android:textSize="16sp"
+                    app:spinning_bar_color="@color/white"
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:background="@drawable/bg_btn_login" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+        <androidx.cardview.widget.CardView
+            android:visibility="gone"
+            android:id="@+id/email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/m_16">
+                <EditText
+                    android:id="@+id/edtEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins"
+                    android:textSize="14sp"
+                    android:hint="@string/Email"/>
+                <br.com.simplepass.loadingbutton.customViews.CircularProgressButton
+                    android:id="@+id/btn_email"
+                    android:textColor="@color/white"
+                    android:text="@string/simpan"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_margin="@dimen/m_16"
+                    android:textSize="16sp"
+                    app:spinning_bar_color="@color/white"
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:background="@drawable/bg_btn_login" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
     </LinearLayout>
 </ScrollView>

@@ -45,50 +45,58 @@ class SosmedActivity : AppCompatActivity() {
 
             binding.btnWA.setOnClickListener {
                 val intent= Intent(this, EditSosmedActivity::class.java)
-                intent.putExtra(EditSosmedActivity.EXTRA_SOSMED,data)
+                intent.putExtra(EditSosmedActivity.EXTRA_SOSMED,data[0])
                 intent.putExtra("data",getString(R.string.Whatsapp))
                 startActivity(intent)
+                finish()
             }
 
             binding.btnTelegram.setOnClickListener {
                 val intent= Intent(this, EditSosmedActivity::class.java)
-                intent.putExtra(EditSosmedActivity.EXTRA_SOSMED,data)
+                intent.putExtra(EditSosmedActivity.EXTRA_SOSMED,data[0])
                 intent.putExtra("data",getString(R.string.Telegram))
+
                 startActivity(intent)
+                finish()
             }
 
             binding.btnig.setOnClickListener {
                 val intent= Intent(this, EditSosmedActivity::class.java)
-                intent.putExtra(EditSosmedActivity.EXTRA_SOSMED,data)
+                intent.putExtra(EditSosmedActivity.EXTRA_SOSMED,data[0])
                 intent.putExtra("data",getString(R.string.Instagram))
                 startActivity(intent)
+                finish()
             }
 
             binding.btntiktok.setOnClickListener {
                 val intent= Intent(this, EditSosmedActivity::class.java)
-                intent.putExtra(EditSosmedActivity.EXTRA_SOSMED,data)
+                intent.putExtra(EditSosmedActivity.EXTRA_SOSMED,data[0])
                 intent.putExtra("data",getString(R.string.Tiktok))
                 startActivity(intent)
+                finish()
             }
 
             binding.btnfacebook.setOnClickListener {
                 val intent= Intent(this, EditSosmedActivity::class.java)
-                intent.putExtra(EditSosmedActivity.EXTRA_SOSMED,data)
+                intent.putExtra(EditSosmedActivity.EXTRA_SOSMED,data[0])
                 intent.putExtra("data",getString(R.string.Facebook))
                 startActivity(intent)
+                finish()
             }
 
             binding.btnlinkedn.setOnClickListener {
                 val intent= Intent(this, EditSosmedActivity::class.java)
-                intent.putExtra(EditSosmedActivity.EXTRA_SOSMED,data)
+                intent.putExtra(EditSosmedActivity.EXTRA_SOSMED,data[0])
                 intent.putExtra("data",getString(R.string.Linkedn))
                 startActivity(intent)
+                finish()
             }
             binding.btnemail.setOnClickListener {
                 val intent= Intent(this, EditSosmedActivity::class.java)
-                intent.putExtra(EditSosmedActivity.EXTRA_SOSMED,data)
+                intent.putExtra(EditSosmedActivity.EXTRA_SOSMED,data[0])
                 intent.putExtra("data",getString(R.string.Email))
                 startActivity(intent)
+                finish()
             }
         })
     }
